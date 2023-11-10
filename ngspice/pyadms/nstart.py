@@ -158,6 +158,9 @@ class nature(admst):
         for x in ('abstol', 'base', 'ddt_nature', 'idt_nature'):
             self.move_up_reference(x, True)
 
+class nilled(admst):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 class node(admst):
     def __init__(self, **kwargs):
@@ -187,6 +190,14 @@ class probe(admst):
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
 
+class range(admst):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        for x in ('module', 'infexpr', 'supexpr'):
+            self.move_up_reference(x, True)
+        for x in ('name', 'infboundtype', 'supboundtype', 'type'):
+            self.move_up_parameter(x)
+
 class simulator(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -211,6 +222,13 @@ class variableprototype(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('instance')
+        self.move_up_reference('range')
+
+class whileloop(admst):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        for x in ('while', 'whileblock',):
+            self.move_up_reference(x, True)
 
 constructor_table = {
     'admsmain' : globals()['admsmain'],
@@ -230,15 +248,18 @@ constructor_table = {
     'mapply_unary' : globals()['mapply_unary'],
     'module' : globals()['module'],
     'nature' : globals()['nature'],
+    'nilled' : globals()['nilled'],
     'node' : globals()['node'],
     'nodealias' : globals()['nodealias'],
     'number' : globals()['number'],
     'probe' : globals()['probe'],
+    'range' : globals()['range'],
     'simulator' : globals()['simulator'],
     'source' : globals()['source'],
     'string' : globals()['string'],
     'variable' : globals()['variable'],
     'variableprototype' : globals()['variableprototype'],
+    'whileloop' : globals()['whileloop'],
 }
 
 

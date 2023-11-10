@@ -1,13 +1,33 @@
 
 
+class admst_reference:
+    def __init__(self, index):
+        self.index = index
+
+    def __call__(self):
+        return admst.all_data[self.index]
+
+class admst_reference_list:
+    def __init__(self, reference_list):
+        self.reference_list = reference_list
+
+    # TODO: figure out how to do read-only decorator
+    def get_list(self):
+        for x in self.reference_list:
+            yield admst.all_data[x]
+
 class admst:
     all_data = None
+    module_ = None
 
     def __init__(self, **kwargs):
         for x in ['datatypename', 'id', 'uid', 'attributes', 'parameters', 'references']:
             self.__dict__[x] = kwargs[x]
             del kwargs[x]
         self.kwargs = kwargs
+
+    def get_module():
+        return admst.all_data[admst.module_]
 
     def move_up_parameter(self, kw):
         self.__dict__[kw] = self.parameters.pop(kw)
@@ -22,11 +42,21 @@ class admst:
             elif slen == 0:
                 self.__dict__[kw] = None
             else:
-                self.__dict__[kw] = self.references.pop(kw)[0]
+                self.__dict__[kw] = admst_reference(self.references.pop(kw)[0])
         else:
-            self.__dict__[kw] = self.references.pop(kw)
+            self.__dict__[kw] = admst_reference_list(self.references.pop(kw))
         if len(self.references) == 0:
             self.references = None
+
+    def visit_implemented(self, visitor):
+        getattr(visitor, 'visit_' + self.__class__.__name__)(self)
+
+    def visit(self, visitor):
+        self.visit_implemented(visitor)
+
+    def get_datatypename(self):
+        return self.__class__.__name__
+
 
 class admsmain(admst):
     def __init__(self, **kwargs):
@@ -35,7 +65,7 @@ class admsmain(admst):
 class analog(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.move_up_reference('code')
+        self.move_up_reference('code', True)
 
 class assignment(admst):
     def __init__(self, **kwargs):
@@ -106,19 +136,19 @@ class lexval(admst):
 class mapply_binary(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.args = [self.references[x][0] for x in ['arg1', 'arg2']]
+        self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2']])
         self.move_up_parameter('name')
 
 class mapply_ternary(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.args = [self.references[x][0] for x in ['arg1', 'arg2', 'arg3']]
+        self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2', 'arg3']])
         self.move_up_parameter('name')
 
 class mapply_unary(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.args = [self.references[x][0] for x in ['arg1',]]
+        self.args = admst_reference_list([self.references[x][0] for x in ['arg1']])
         self.move_up_parameter('name')
 
 class module(admst):
@@ -222,7 +252,22 @@ class variableprototype(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('instance')
-        self.move_up_reference('range')
+        self.move_up_reference('range', True)
+        self.move_up_reference('default', True)
+        self.dependency = None
+        self.input = None
+        self.setinmodel = False
+        self.usedinmodel = False
+        self.setininstance = False
+        self.usedininstance = False
+        self.setininitial_step = False
+        self.usedininitial_step = False
+        self.setinevaluate = False
+        self.usedinevaluate = False
+        self.setinnoise = False
+        self.usedinnoise = False
+        self.setinfinal = False
+        self.usedinfinal = False
 
 class whileloop(admst):
     def __init__(self, **kwargs):
@@ -267,6 +312,7 @@ dataarray = None
 
 import json
 import sys
+import adms_implicit
 if __name__ == "__main__":
     with open(sys.argv[1]) as inputfile:
         data = json.load(inputfile)
@@ -274,5 +320,17 @@ if __name__ == "__main__":
     print(n)
     admst.all_data = [None] * n
     for x in data:
-        admst.all_data[x['id']] = constructor_table[x['datatypename']](**x)
+        dtname = x['datatypename']
+        admst.all_data[x['id']] = constructor_table[dtname](**x)
+        if dtname == 'module':
+            if admst.module_ == None:
+                admst.module_ = x['id']
+            else:
+                raise RuntimeError("Expecting only 1 module")
+
+    dv = adms_implicit.dependency_visitor()
+    admst.get_module().visit(dv)
+
+
+
 

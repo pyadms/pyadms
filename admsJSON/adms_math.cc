@@ -569,7 +569,7 @@ void s_expression::get_attribute_list_implemented(attributes_list_t &alist)
 void s_expression::get_string_list_implemented(strings_list_t &slist)
 {
   slist = {
-    mytup2{"hasspecialnumber", _hasspecialnumber},
+    mytup2{"hasspecialnumber", get_admse_string(_hasspecialnumber)},
     mytup2{"infinity", get_admse_string(_infinity)},
   };
 }

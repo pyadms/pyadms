@@ -1241,7 +1241,7 @@ R_interval__inf
             mc.gModule->_expression.push_back(myexpression); 
             $$=adms_yaccval_new("unknown source file");
             myexpression->_infinity=admse_minus;
-            myexpression->_hasspecialnumber="YES";
+            myexpression->_hasspecialnumber=admse_yes;
             $$->set_p(myexpression);
           }
         ;
@@ -1258,7 +1258,7 @@ R_interval__sup
             mc.gModule->_expression.push_back(myexpression); 
             $$=adms_yaccval_new("unknown source file");
             myexpression->_infinity=admse_plus;
-            myexpression->_hasspecialnumber="YES";
+            myexpression->_hasspecialnumber=admse_yes;
             $$->set_p(myexpression);
           }
         | '+' tk_inf
@@ -1269,7 +1269,7 @@ R_interval__sup
             mc.gModule->_expression.push_back(myexpression); 
             $$=adms_yaccval_new("unknown source file");
             myexpression->_infinity=admse_plus;
-            myexpression->_hasspecialnumber="YES";
+            myexpression->_hasspecialnumber=admse_yes;
             $$->set_p(myexpression);
           }
         ;

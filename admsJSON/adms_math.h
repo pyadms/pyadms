@@ -191,7 +191,7 @@ struct s_expression : public s_math {
   s_expression (p_module mymodule,p_adms mytree)
     : s_math(admse_expression)
   , _tree(mytree),
-    _hasspecialnumber("NO"),
+    _hasspecialnumber(admse_no),
     _infinity(admse_no)
   {}
 
@@ -201,7 +201,7 @@ struct s_expression : public s_math {
   void get_string_list_implemented(strings_list_t &slist);
 
   p_adms _tree;
-  std::string _hasspecialnumber;
+  admse _hasspecialnumber;
   admse _infinity;
 };
 

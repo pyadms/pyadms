@@ -10,8 +10,14 @@ class admst_reference:
 class admst_reference_list:
     def __init__(self, reference_list):
         self.reference_list = reference_list
+        if not all(isinstance(x, int) for x in self.reference_list):
+            raise RuntimeError("mismatch type")
 
-    # TODO: figure out how to do read-only decorator
+    def append(self, x, ignore_duplicate = False):
+        self.reference_list.append(x)
+        if not isinstance(x, int):
+            raise RuntimeError("mismatch type")
+
     def get_list(self):
         for x in self.reference_list:
             yield admst.all_data[x]
@@ -97,7 +103,11 @@ class branchalias(admst):
 class conditional(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        for x in ('module', 'if', 'then', 'else'):
+
+        self.references['If'] = self.references.pop('if')
+        self.references['Then'] = self.references.pop('then')
+        self.references['Else'] = self.references.pop('else')
+        for x in ('module', 'If', 'Then', 'Else'):
             self.move_up_reference(x, True)
 
 class contribution(admst):
@@ -237,6 +247,7 @@ class source(admst):
         super().__init__(**kwargs)
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
+        self.probe = admst_reference_list([])
 
 class string(admst):
     def __init__(self, **kwargs):
@@ -247,6 +258,7 @@ class variable(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('prototype', True)
+        self.probe = admst_reference_list([])
 
 class variableprototype(admst):
     def __init__(self, **kwargs):
@@ -272,7 +284,8 @@ class variableprototype(admst):
 class whileloop(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        for x in ('while', 'whileblock',):
+        self.references['While'] = self.references.pop('while')
+        for x in ('While', 'whileblock',):
             self.move_up_reference(x, True)
 
 constructor_table = {

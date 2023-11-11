@@ -235,7 +235,7 @@ class dependency_visitor:
             if name in ('ddt', '$ddt', 'idt', '$idt'):
                 function.dependency = 'nonlinear'
 
-            deps = [x.dependency for x in args]
+            deps = set([x.dependency for x in args])
             if 'nonlinear' in deps:
                 function.dependency = 'nonlinear'
             elif 'linear' in deps:
@@ -276,8 +276,9 @@ class dependency_visitor:
         number.dependency = 'constant'
         scalingunit = self.scalingunits[number.scalingunit]
         number.value = number.lexval().string + scalingunit
+
     def visit_string(self, string):
-        pass
+        string.dependency = 'constant'
 
 #  <admst:choose>
     def visit_callfunction(self, callfunction):
@@ -286,6 +287,7 @@ class dependency_visitor:
 #      <admst:apply-templates select="function/arguments" match="e:dependency"/>
 #      <admst:value-to select="dependency" path="function/dependency"/>
 #    </admst:when>
+    def visit_whileloop(self, whileloop):
 #    <admst:when test="[datatypename='whileloop']">
 #      <!--
 #        w, logic(D,while.d)            , d=wb.d
@@ -293,16 +295,17 @@ class dependency_visitor:
 #           c  wb,w,!c?(D,wb,!D) D,wb,!D
 #           !c wb                wb
 #      -->
-#      <admst:apply-templates select="while" match="e:dependency"/>
-#      <admst:apply-templates select="[$globalopdependent='yes' or while/dependency='constant']/whileblock" match="dependency"/>
-#      <admst:if test="[$globalopdependent='no']">
-#        <admst:apply-templates select="while[dependency='constant']" match="e:dependency"/>
-#        <admst:if test="[while/dependency!='constant']">
-#          <admst:variable name="globalopdependent" string="yes"/>
-#          <admst:apply-templates select="whileblock" match="dependency"/>
-#          <admst:variable name="globalopdependent" string="no"/>
-#        </admst:if>
-#      </admst:if>
+        While = whileloop.While()
+        While.visit(self)
+        if self.globalopdependent or While.dependency == 'constant':
+            whileloop.whileblock().visit(self)
+        if not self.globalopdependent:
+            if While.dependency == 'constant':
+                whileloop.While.visit(self)
+            if While.dependency != 'constant':
+                self.globalopdependent = True
+                whileloop.whileblock().visit(self)
+                self.globalopdependent = False
 #      <!--
 #          wl:  w=c          w!=c
 #               c  np l  nl  np np l  nl
@@ -310,21 +313,12 @@ class dependency_visitor:
 #               l  l  l  nl  l  l  l  nl
 #               nl nl nl nl  nl nl nl nl
 #      -->
-#      <admst:choose>
-#        <admst:when test="[whileblock/dependency='nonlinear']">
-#          <admst:value-to select="dependency" string="nonlinear"/>
-#        </admst:when>
-#        <admst:when test="[whileblock/dependency='linear']">
-#          <admst:value-to select="dependency" string="linear"/>
-#        </admst:when>
-#        <admst:when test="[while/dependency!='constant' or whileblock/dependency='noprobe']">
-#          <admst:value-to select="dependency" string="noprobe"/>
-#        </admst:when>
-#        <admst:otherwise>
-#          <admst:value-to select="dependency" string="constant"/>
-#        </admst:otherwise>
-#      </admst:choose>
-#    </admst:when>
+        whileloop.dependency = 'constant'
+        for d in ('nonlinear', 'linear', 'noprobe'):
+            if d == whileloop.whileblock().dependency:
+                whileloop.dependency = d
+                break
+
     def visit_forloop(self, forloop):
         pass
 #    <admst:when test="[datatypename='forloop']">
@@ -362,8 +356,8 @@ class dependency_visitor:
 #        </admst:otherwise>
 #      </admst:choose>
 #    </admst:when>
-    def visit_case(self, Case):
-        pass
+#    def visit_case(self, Case):
+#        pass
 #    <admst:when test="[datatypename='case']">
 #      <admst:variable name="globaltreenode" path="case"/>
 #      <admst:apply-templates select="case" match="e:dependency"/>
@@ -378,20 +372,18 @@ class dependency_visitor:
 #      </admst:for-each>
 #    </admst:when>
     def visit_conditional(self, conditional):
-        pass
-#    <admst:when test="[datatypename='conditional']">
-#      <admst:push into="$globalmodule/conditional" select="."/>
-#      <admst:apply-templates select="if" match="e:dependency"/>
-#      <admst:choose>
-#        <admst:when test="[$globalopdependent='no' and if/dependency!='constant']">
-#          <admst:variable name="globalopdependent" string="yes"/>
-#          <admst:apply-templates select="then|else" match="dependency"/>
-#          <admst:variable name="globalopdependent" string="no"/>
-#        </admst:when>
-#        <admst:otherwise>
-#          <admst:apply-templates select="then|else" match="dependency"/>
-#        </admst:otherwise>
-#      </admst:choose>
+        self.globalmodule.conditional.append(conditional.id)
+        conditional.If().visit(self)
+        if (not self.globalopdependent) and conditional.If().dependency != 'constant':
+            self.globalopdependent = True
+            conditional.Then().visit(self)
+            if conditional.Else:
+                conditional.Else().visit(self)
+            self.globalopdependent = False
+        else:
+            conditional.Then().visit(self)
+            if conditional.Else:
+                conditional.Else().visit(self)
 #      <!--
 #          cd:  i=c          i!=c
 #               c  np l  nl  np np l  nl
@@ -399,30 +391,26 @@ class dependency_visitor:
 #               l  l  l  nl  l  l  l  nl
 #               nl nl nl nl  nl nl nl nl
 #      -->
-#      <admst:choose>
-#        <admst:when test="[then/dependency='nonlinear' or else/dependency='nonlinear']">
-#          <admst:value-to select="dependency" string="nonlinear"/>
-#        </admst:when>
-#        <admst:when test="[then/dependency='linear' or else/dependency='linear']">
-#          <admst:value-to select="dependency" string="linear"/>
-#        </admst:when>
-#        <admst:when test="[if/dependency!='constant' or then/dependency='noprobe' or else/dependency='noprobe']">
-#          <admst:value-to select="dependency" string="noprobe"/>
-#        </admst:when>
-#        <admst:otherwise>
-#          <admst:value-to select="dependency" string="constant"/>
-#        </admst:otherwise>
-#      </admst:choose>
-#    </admst:when>
+
+        if conditional.Else:
+            deps = [conditional.Then().dependency, conditional.Else().dependency]
+        else:
+            deps = [conditional.Then().dependency,]
+        conditional.dependency = 'constant'
+        for d in ('nonlinear', 'linear', 'noprobe',):
+            if d in deps:
+                conditional.dependency = d
+                break
+
     def visit_contribution(self, contribution):
-        pass
-#    <admst:when test="[datatypename='contribution']">
-#      <admst:variable name="globalcontribution" path="."/>
-#      <admst:apply-templates select="rhs" match="e:dependency"/>
-#      <admst:variable name="globalcontribution"/>
-#      <admst:push into="lhs/probe" select="rhs/probe" onduplicate="ignore"/>
-#      <admst:value-to select="dependency" string="nonlinear"/>
-#    </admst:when>
+        self.globalcontribution = contribution
+        contribution.rhs().visit(self)
+        self.globalcontribution = None
+        contribution.lhs().probe
+        for probe in contribution.rhs().probe:
+            contribution.lhs().probe.append(probe)
+        contribution.dependency = 'nonlinear'
+
     def visit_assignment(self, assignment):
         assignment.TemperatureDependent = False
         ldn = assignment.get_datatypename()
@@ -432,17 +420,17 @@ class dependency_visitor:
             lhs = assignment.lhs()
 
         if self.globalpartitionning == 'initial_model':
-            lhs.setinmodel = True
+            lhs.prototype().setinmodel = True
         elif self.globalpartitionning == 'initial_instance':
-            lhs.setininstance = True
+            lhs.prototype().setininstance = True
         elif self.globalpartitionning == 'initial_step':
-            lhs.setininitial_step = True
+            lhs.prototype().setininitial_step = True
         elif self.globalpartitionning == 'noise':
-            lhs.setinnoise = True
+            lhs.prototype().setinnoise = True
         elif self.globalpartitionning == 'final_step':
-            lhs.setinfinal = True
+            lhs.prototype().setinfinal = True
         else:
-            lhs.setinevaluate = True
+            lhs.prototype().setinevaluate = True
 
         self.globalassignment = assignment
         rhs = assignment.rhs()
@@ -458,10 +446,6 @@ class dependency_visitor:
                 lhs.variable.append(x)
                 if rhs.TemperatureDependent:
                     lhs.TemperatureDependent = rhs.TemperatureDependent
-
-
-
-
 #      <!--
 #        d=rhs.d,d=(c and D)?np
 #        l(l,r,$globalopdependent)
@@ -471,20 +455,25 @@ class dependency_visitor:
 #        l  l  l  nl               l  l  l  nl
 #        nl nl nl nl               nl nl nl nl
 #      -->
-#      <admst:value-to select="dependency" path="rhs/dependency"/>
-#      <admst:choose>
-#        <admst:when test="[$lhs/prototype/dependency='nonlinear' or rhs/dependency='nonlinear']">
-#          <admst:value-to select="$lhs/(.|prototype)/dependency" string="nonlinear"/>
-#        </admst:when>
-#        <admst:when test="[$lhs/prototype/dependency='linear' or rhs/dependency='linear']">
-#          <admst:value-to select="$lhs/(.|prototype)/dependency" string="linear"/>
-#        </admst:when>
-#        <admst:when test="[$globalopdependent='yes' or $lhs/prototype/dependency='noprobe' or rhs/dependency='noprobe']">
-#          <admst:value-to select="$lhs/(.|prototype)/dependency" string="noprobe"/>
-#        </admst:when>
-#        <admst:otherwise>
-#          <admst:value-to select="$lhs/(.|prototype)/dependency" string="constant"/>
-#        </admst:otherwise>
+        assignment.dependency = rhs.dependency
+
+        deps = [lhs.prototype().dependency, rhs.dependency]
+
+        lhs.dependency = 'constant'
+        lhs.prototype().dependency = 'constant'
+        isset = False
+        for d in ('nonlinear', 'linear', 'noprobe'):
+            if d in deps:
+                lhs.dependency = d
+                lhs.prototype().dependency = d
+                isset = True
+                break
+
+        if (not isset) and self.globalopdependent:
+            lhs.dependency = 'noprobe'
+            lhs.prototype().dependency = 'noprobe'
+        for probe in rhs.probe:
+            lhs.probe.append(probe, True)
 #      </admst:choose>
 #      <admst:push into="$lhs/probe" select="rhs/probe" onduplicate="ignore"/>
 #    </admst:when>
@@ -500,26 +489,19 @@ class dependency_visitor:
         for item in block.item.get_list():
             item.visit(self)
 
-#      <admst:apply-templates select="item" match="dependency"/>
-#      <admst:variable test="[$forcepartitionning='yes']" name="globalpartitionning"/>
-#      <admst:choose>
-#        <admst:when test="item[dependency='nonlinear']">
-#          <admst:value-to select="dependency" string="nonlinear"/>
-#        </admst:when>
-#        <admst:when test="item[dependency='linear']">
-#          <admst:value-to select="dependency" string="linear"/>
-#        </admst:when>
-#        <admst:when test="item[dependency='noprobe']">
-#          <admst:value-to select="dependency" string="noprobe"/>
-#        </admst:when>
-#        <admst:otherwise>
-#          <admst:value-to select="dependency" string="constant"/>
-#        </admst:otherwise>
-#      </admst:choose>
-#    </admst:when>
+        if forcepartitionning:
+            self.globalpartitionning = ''
+
+        deps = set([x.dependency for x in block.item.get_list()])
+        block.dependency = 'constant'
+        for d in ('nonlinear', 'linear', 'noprobe'):
+            if d in deps:
+                block.dependency = d
+                break
+
     def visit_nilled(self, nilled):
-        pass
-#    <admst:when test="[datatypename='nilled']"/>
+        nilled.dependency = 'constant'
+
     def visit_blockvariable(self, blockvariable):
         pass
 #
@@ -532,20 +514,6 @@ class dependency_visitor:
 #  </admst:for-each>
 #</admst:template>
 #
-#<admst:template match="adms.implicit.xml">
-#  <admst:apply-templates select="." match="adms.implicit.xml.nature"/>
-#  <admst:apply-templates select="/module" match="adms.implicit.xml.module"/>
-#</admst:template>
-#
-#<admst:apply-templates select="." match="adms.implicit.xml"/>
-#
-#<!--admst:sendmail>
-#  <admst:subject>automatic mailing from %(/simulator/fullname)</admst:subject>
-#  <admst:arguments recipient="%(/simulator/fullname)"/>
-#  <admst:to recipient="r29173@freescale.com"/>
-#  <admst:message>
-#  </admst:message>
-#</admst:sendmail-->
 #
 #
 #</admst>

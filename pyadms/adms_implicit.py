@@ -5,7 +5,7 @@ class dependency_visitor:
         self.globalassignment = None
         self.globalcontribution = None
         self.globalexpression = None
-        self.globalopdependent = None
+        self.globalopdependent = False
         self.globalpartitionning = None
         self.globaltreenode = None
 
@@ -119,31 +119,23 @@ class dependency_visitor:
         tree = expression.tree()
         tree.visit(self)
         self.globalexpression = None
+
         expression.dependency = tree.dependency
-#      <admst:value-to select="dependency[.='constant' and $globalopdependent='yes']" string="noprobe"/>
-#      <admst:choose>
-#        <admst:when test="[nilled($globalpartitionning)]">
-#          <admst:value-to select="variable/usedinevaluate" string="yes"/>
-#        </admst:when>
-#        <admst:when test="[$globalpartitionning='initial_model']">
-#          <admst:value-to select="variable/usedinmodel" string="yes"/>
-#        </admst:when>
-#        <admst:when test="[$globalpartitionning='initial_instance']">
-#          <admst:value-to select="variable/usedininstance" string="yes"/>
-#        </admst:when>
-#        <admst:when test="[$globalpartitionning='initial_step']">
-#          <admst:value-to select="variable/usedininitial_step" string="yes"/>
-#        </admst:when>
-#        <admst:when test="[$globalpartitionning='noise']">
-#          <admst:value-to select="variable/usedinnoise" string="yes"/>
-#        </admst:when>
-#        <admst:when test="[$globalpartitionning='final_step']">
-#          <admst:value-to select="variable/usedinfinal" string="yes"/>
-#        </admst:when>
-#      </admst:choose>
-#      <admst:reverse select="function"/>
-#      <admst:value-to select="math/value" path="tree/math/value"/>
-#    </admst:when>
+        # this may be for each variable (see admst)
+        if expression.dependency == 'constant' and self.globalopdependent:
+            expression.dependency = 'constant'
+        if self.globalpartitionning is None:
+            self.usedinevaluate = True
+        elif self.globalpartitionning == 'initial_model':
+            self.usedinmodel = True
+        elif self.globalpartitionning == 'initial_instance':
+            self.usedininstance = True
+        elif self.globalpartitionning == 'initial_step':
+            self.usedininitial_step = True
+        elif self.globalpartitionning == 'noise':
+            self.usedinnoise = True
+        elif self.globalpartitionning == 'final_step':
+            self.usedinfinal = True
 
     def visit_probe(self, probe):
         probe.dependency = 'linear'
@@ -157,11 +149,9 @@ class dependency_visitor:
 #      <admst:value-to select="dependency" path="variable/dependency"/>
 #    </admst:when>
     def visit_variable(self, variable):
-        #for probe in variable.probe:
-        #    if probe not in self.globalexpression.probe:
-        #        self.globalexpression.probe.append(probe)
-        if variable not in self.globalexpression.variable:
-            self.globalexpression.variable.append(variable)
+        for probe in variable.probe.get_list():
+            self.globalexpression.probe.append(probe, True)
+        self.globalexpression.variable.append(variable)
 #      <admst:push into="$globaltreenode/@variable" select="." onduplicate="ignore"/>
         variable.dependency = variable.prototype().dependency
 
@@ -320,7 +310,7 @@ class dependency_visitor:
                 break
 
     def visit_forloop(self, forloop):
-        pass
+        raise RuntimeError("implement forloop")
 #    <admst:when test="[datatypename='forloop']">
 #      <admst:apply-templates select="initial|update" match="dependency"/>
 #      <admst:apply-templates select="condition" match="e:dependency"/>
@@ -356,9 +346,10 @@ class dependency_visitor:
 #        </admst:otherwise>
 #      </admst:choose>
 #    </admst:when>
-#    def visit_case(self, Case):
+    def visit_case(self, Case):
 #        pass
 #    <admst:when test="[datatypename='case']">
+        raise RuntimeError("implement case")
 #      <admst:variable name="globaltreenode" path="case"/>
 #      <admst:apply-templates select="case" match="e:dependency"/>
 #      <admst:variable name="globaltreenode"/>
@@ -490,7 +481,7 @@ class dependency_visitor:
             item.visit(self)
 
         if forcepartitionning:
-            self.globalpartitionning = ''
+            self.globalpartitionning = None
 
         deps = set([x.dependency for x in block.item.get_list()])
         block.dependency = 'constant'

@@ -157,7 +157,7 @@ static p_variable variable_recursive_lookup_by_id (p_adms myadms,p_lexval mylexv
     
     for (auto l : b->_variable)
     {
-      if (b->_lexval->_string == mylexval->_string)
+      if (l->_lexval->_string == mylexval->_string)
       {
         p_variableprototype myvariableprototype=l;
         p_variable myvariable=adms_variable_new(myvariableprototype);

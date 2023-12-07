@@ -15,9 +15,12 @@ class admst_reference_list:
             raise RuntimeError("mismatch type")
 
     def append(self, x, ignore_duplicate = False):
-        self.reference_list.append(x)
         if not isinstance(x, int):
             raise RuntimeError("mismatch type")
+        if ignore_duplicate and x not in self.reference_list:
+            self.reference_list.append(x)
+        else:
+            self.reference_list.append(x)
 
     def get_list(self):
         for x in self.reference_list:
@@ -71,6 +74,8 @@ class admst:
     def get_datatypename(self):
         return self.__class__.__name__
 
+    def create_reference_list(self):
+        return admst_reference_list([])
 
 class admsmain(admst):
     def __init__(self, **kwargs):

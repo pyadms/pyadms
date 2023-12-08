@@ -22,12 +22,26 @@ class admst_reference_list:
         else:
             self.reference_list.append(x)
 
+    def extend(self, other, ignore_duplicate = False):
+        if not isinstance(x, admst_reference_list):
+            raise RuntimeError("mismatch type")
+
+        # TODO: consider using set for large reference list check
+        for o in other.reference_list:
+            self.append(o, ignore_duplicate)
+
     def get_list(self):
         for x in self.reference_list:
             yield admst.all_data[x]
 
+    def get_item(self, i):
+        return admst.all_data[self.reference_list[i]]
+
     def size(self):
         return len(self.reference_list)
+
+    def get_head(self):
+        return self.get_item(0)
 
 class admst:
     all_data = None

@@ -15,18 +15,26 @@ class admst_reference_list:
             raise RuntimeError("mismatch type")
 
     def append(self, x, ignore_duplicate = False):
-        if not isinstance(x, int):
-            raise RuntimeError("mismatch type")
-        if ignore_duplicate and x not in self.reference_list:
-            self.reference_list.append(x)
+        #print(type(x))
+        if isinstance(x, int):
+            y = x
+        elif isinstance(x, admst):
+            y = x.id
         else:
-            self.reference_list.append(x)
+            #print(type(x))
+            raise RuntimeError("mismatch type")
+
+        if ignore_duplicate:
+            # linear scan
+            if y not in self.reference_list:
+                self.reference_list.append(y)
+        else:
+            self.reference_list.append(y)
 
     def extend(self, other, ignore_duplicate = False):
-        if not isinstance(x, admst_reference_list):
+        if not isinstance(other, admst_reference_list):
             raise RuntimeError("mismatch type")
 
-        # TODO: consider using set for large reference list check
         for o in other.reference_list:
             self.append(o, ignore_duplicate)
 
@@ -79,11 +87,11 @@ class admst:
         if len(self.references) == 0:
             self.references = None
 
-    def visit_implemented(self, visitor):
-        getattr(visitor, 'visit_' + self.__class__.__name__)(self)
+    def visit_implemented(self, visitor, *arg, **kwarg):
+        return getattr(visitor, 'visit_' + self.__class__.__name__)(self)
 
-    def visit(self, visitor):
-        self.visit_implemented(visitor)
+    def visit(self, visitor, *arg, **kwarg):
+        return self.visit_implemented(visitor, *arg, **kwarg)
 
     def get_datatypename(self):
         return self.__class__.__name__

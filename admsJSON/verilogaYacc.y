@@ -384,6 +384,13 @@ R_discipline_member
             adms_admsmain_list_discipline_prepend_once_or_abort(root(),mc.gDiscipline);
             mc.gDiscipline=nullptr;
           }
+        | tk_discipline R_discipline_name ';' R_l__discipline_assignment tk_enddiscipline
+          {
+            // LRM 2.4 optional ';'
+            adms_admsmain_list_discipline_prepend_once_or_abort(root(),mc.gDiscipline);
+            mc.gDiscipline=nullptr;
+          }
+
         ;
 R_discipline_name
         : tk_ident
@@ -456,8 +463,13 @@ R_nature_member
             mc.gNatureddt.clear();
           }
         ;
+
 R_l__nature_assignment
-        : R_s__nature_assignment
+        : ';'
+          {
+            // LRM 2.4 optional ';'
+          }
+        | R_s__nature_assignment
           {
           }
         | R_l__nature_assignment R_s__nature_assignment

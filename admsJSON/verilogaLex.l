@@ -71,6 +71,15 @@ void TKRETURN(const char*myyytext, const int myyyleng)
   verilogalval._lexval=adms_lexval_new(myyytext,root()->_curfilename,root()->_curline,root()->_fpos+1);
   POS_UPDATE(myyyleng,myyytext);
 }
+
+void TKRETURN_ESC(const char*myyytext, const int myyyleng)
+{
+  // LRM 2.4 escaped identifier
+  verilogalval._lexval=adms_lexval_new(myyytext+1,root()->_curfilename,root()->_curline,root()->_fpos+1);
+  verilogalval._lexval->_string.pop_back();
+  POS_UPDATE(myyyleng,myyytext);
+}
+
 void TKSTRIPPEDRETURN(const char*myyytext, const int myyyleng)
 {
   int mynewlen=strlen(myyytext)-2;
@@ -99,7 +108,8 @@ newline    \r?\n
 wn [ \t\v\f\r?\n]
 wn0 [ \t\v\f\r?\n]*
 wn1 [ \t\v\f\r?\n]+
-ident      [A-Za-z_][A-Za-z0-9_]*
+ident      [A-Za-z_][A-Za-z0-9_$]*
+escaped_ident \\[\x21-\x7e]+[ \t\v\f]
 attribute  [A-Za-z_][A-Za-z0-9_:.]*
 attributevalue {wn0}={wn0}{anystring} 
 anystring  \"[^\"]*\"
@@ -262,6 +272,7 @@ inf {TKRETURN(yytext,yyleng); return tk_inf;}
 INF {TKRETURN(yytext,yyleng); return tk_inf;}
 
 {ident} {TKRETURN(yytext,yyleng); return tk_ident;}
+{escaped_ident} {TKRETURN_ESC(yytext,yyleng); return tk_ident;}
 
 \>\> {TKRETURN(yytext,yyleng); return tk_op_shr;}
 \<\< {TKRETURN(yytext,yyleng); return tk_op_shl;}

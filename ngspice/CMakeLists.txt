@@ -16,7 +16,7 @@ ENDMACRO(adms_build_test)
 MACRO(adms_build_json arg1)
 ADD_TEST(NAME ${arg1}_build_json
 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-COMMAND ${CMAKE_BINARY_DIR}/admsJSON/admsJSON -I ../include  -o${arg1}.json -f${arg1}
+COMMAND ${CMAKE_BINARY_DIR}/admsJSON/admsJSON -I ../../include  -o${arg1}.json -f${arg1}
 )
 ENDMACRO(adms_build_json)
 

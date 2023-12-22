@@ -21,8 +21,8 @@
 "references" : {
 "simulator" : [1],
 "module" : [2],
-"discipline" : [5900, 2151, 5901, 5902, 5903, 5910, 5917, 5924, 5928, 5935],
-"nature" : [2152, 5939, 2155, 5904, 5907, 5914, 5911, 5921, 5925, 5942, 5945, 5918, 5932, 5936, 5948, 5929]
+"discipline" : [5900, 5901, 2151, 5902, 5903, 5904, 5911, 5918, 5925, 5929, 5936],
+"nature" : [2152, 5940, 2155, 5905, 5908, 5915, 5912, 5922, 5926, 5943, 5946, 5919, 5933, 5937, 5949, 5930]
 }
 },
 {
@@ -413,7 +413,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "265",
-"c" : "22"
+"c" : "23"
 },
 "references" : {}
 },
@@ -439,7 +439,7 @@
 "string" : "11.7",
 "f" : "ekv.va",
 "l" : "265",
-"c" : "38"
+"c" : "39"
 },
 "references" : {}
 },
@@ -805,7 +805,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "101",
-"c" : "37"
+"c" : "38"
 },
 "references" : {}
 },
@@ -831,7 +831,7 @@
 "string" : "3.9",
 "f" : "ekv.va",
 "l" : "101",
-"c" : "53"
+"c" : "54"
 },
 "references" : {}
 },
@@ -857,7 +857,7 @@
 "string" : "0.7",
 "f" : "ekv.va",
 "l" : "101",
-"c" : "64"
+"c" : "65"
 },
 "references" : {}
 },
@@ -913,7 +913,7 @@
 "string" : "0",
 "f" : "ekv.va",
 "l" : "101",
-"c" : "76"
+"c" : "77"
 },
 "references" : {}
 },
@@ -952,7 +952,7 @@
 "string" : "+inf",
 "f" : "ekv.va",
 "l" : "101",
-"c" : "78"
+"c" : "79"
 },
 "references" : {}
 },
@@ -7777,7 +7777,7 @@
 "string" : "1.3806503e-23",
 "f" : "ekv.va",
 "l" : "294",
-"c" : "18"
+"c" : "19"
 },
 "references" : {}
 },
@@ -7803,7 +7803,7 @@
 "string" : "1.602176462e-19",
 "f" : "ekv.va",
 "l" : "294",
-"c" : "39"
+"c" : "41"
 },
 "references" : {}
 },
@@ -9907,7 +9907,7 @@
 "string" : "1.3806503e-23",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "41"
+"c" : "42"
 },
 "references" : {}
 },
@@ -10344,7 +10344,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "61"
+"c" : "62"
 },
 "references" : {}
 },
@@ -10370,7 +10370,7 @@
 "string" : "1.602176462e-19",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "70"
+"c" : "72"
 },
 "references" : {}
 },
@@ -10397,7 +10397,7 @@
 "string" : "ln",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "87"
+"c" : "89"
 },
 "references" : {}
 },
@@ -10450,7 +10450,7 @@
 "string" : "max",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "90"
+"c" : "92"
 },
 "references" : {}
 },
@@ -10476,7 +10476,7 @@
 "string" : "1",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "99"
+"c" : "101"
 },
 "references" : {}
 },
@@ -10502,7 +10502,7 @@
 "string" : "1e6",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "102"
+"c" : "104"
 },
 "references" : {}
 },
@@ -10554,7 +10554,7 @@
 "string" : "1.45e16",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "108"
+"c" : "110"
 },
 "references" : {}
 },
@@ -10606,7 +10606,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "123"
+"c" : "125"
 },
 "references" : {}
 },
@@ -10632,7 +10632,7 @@
 "string" : "300.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "132"
+"c" : "134"
 },
 "references" : {}
 },
@@ -10659,7 +10659,7 @@
 "string" : "exp",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "140"
+"c" : "142"
 },
 "references" : {}
 },
@@ -10724,7 +10724,7 @@
 "string" : "1.16",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "146"
+"c" : "148"
 },
 "references" : {}
 },
@@ -10776,7 +10776,7 @@
 "string" : "0.000702",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "151"
+"c" : "153"
 },
 "references" : {}
 },
@@ -10815,7 +10815,7 @@
 "string" : "300.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "164"
+"c" : "166"
 },
 "references" : {}
 },
@@ -10841,7 +10841,7 @@
 "string" : "300.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "174"
+"c" : "176"
 },
 "references" : {}
 },
@@ -10880,7 +10880,7 @@
 "string" : "300.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "185"
+"c" : "187"
 },
 "references" : {}
 },
@@ -10906,7 +10906,7 @@
 "string" : "1108",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "192"
+"c" : "194"
 },
 "references" : {}
 },
@@ -10945,7 +10945,7 @@
 "string" : "2",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "200"
+"c" : "202"
 },
 "references" : {}
 },
@@ -10997,7 +10997,7 @@
 "string" : "1.3806503e-23",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "205"
+"c" : "208"
 },
 "references" : {}
 },
@@ -11023,7 +11023,7 @@
 "string" : "300.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "220"
+"c" : "223"
 },
 "references" : {}
 },
@@ -11049,7 +11049,7 @@
 "string" : "1.602176462e-19",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "228"
+"c" : "232"
 },
 "references" : {}
 },
@@ -11101,7 +11101,7 @@
 "string" : "1.16",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "248"
+"c" : "252"
 },
 "references" : {}
 },
@@ -11153,7 +11153,7 @@
 "string" : "0.000702",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "253"
+"c" : "257"
 },
 "references" : {}
 },
@@ -11205,7 +11205,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "271"
+"c" : "275"
 },
 "references" : {}
 },
@@ -11244,7 +11244,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "287"
+"c" : "291"
 },
 "references" : {}
 },
@@ -11296,7 +11296,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "304"
+"c" : "308"
 },
 "references" : {}
 },
@@ -11322,7 +11322,7 @@
 "string" : "1108",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "312"
+"c" : "316"
 },
 "references" : {}
 },
@@ -11361,7 +11361,7 @@
 "string" : "2",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "320"
+"c" : "324"
 },
 "references" : {}
 },
@@ -11413,7 +11413,7 @@
 "string" : "1.3806503e-23",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "325"
+"c" : "330"
 },
 "references" : {}
 },
@@ -11452,7 +11452,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "345"
+"c" : "350"
 },
 "references" : {}
 },
@@ -11478,7 +11478,7 @@
 "string" : "1.602176462e-19",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "354"
+"c" : "360"
 },
 "references" : {}
 },
@@ -11504,7 +11504,7 @@
 "string" : "0.7",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "378"
+"c" : "384"
 },
 "references" : {}
 },
@@ -11560,7 +11560,7 @@
 "string" : "0.1",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "389"
+"c" : "395"
 },
 "references" : {}
 },
@@ -11599,7 +11599,7 @@
 "string" : "+inf",
 "f" : "ekv.va",
 "l" : "113",
-"c" : "393"
+"c" : "399"
 },
 "references" : {}
 },
@@ -11907,7 +11907,7 @@
 "string" : "1.602176462e-19",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "46"
+"c" : "47"
 },
 "references" : {}
 },
@@ -11933,7 +11933,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "64"
+"c" : "66"
 },
 "references" : {}
 },
@@ -11959,7 +11959,7 @@
 "string" : "11.7",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "80"
+"c" : "82"
 },
 "references" : {}
 },
@@ -11985,7 +11985,7 @@
 "string" : "1e6",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "90"
+"c" : "92"
 },
 "references" : {}
 },
@@ -12011,7 +12011,7 @@
 "string" : "1",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "102"
+"c" : "104"
 },
 "references" : {}
 },
@@ -12067,7 +12067,7 @@
 "string" : "0",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "111"
+"c" : "113"
 },
 "references" : {}
 },
@@ -12106,7 +12106,7 @@
 "string" : "+inf",
 "f" : "ekv.va",
 "l" : "111",
-"c" : "113"
+"c" : "115"
 },
 "references" : {}
 },
@@ -17682,7 +17682,7 @@
 "string" : "1.3806503e-23",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "88"
+"c" : "89"
 },
 "references" : {}
 },
@@ -17721,7 +17721,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "107"
+"c" : "108"
 },
 "references" : {}
 },
@@ -17747,7 +17747,7 @@
 "string" : "1.602176462e-19",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "115"
+"c" : "117"
 },
 "references" : {}
 },
@@ -17799,7 +17799,7 @@
 "string" : "1.16",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "134"
+"c" : "136"
 },
 "references" : {}
 },
@@ -17851,7 +17851,7 @@
 "string" : "0.000702",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "139"
+"c" : "141"
 },
 "references" : {}
 },
@@ -17903,7 +17903,7 @@
 "string" : "1108",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "174"
+"c" : "176"
 },
 "references" : {}
 },
@@ -17930,7 +17930,7 @@
 "string" : "pow",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "187"
+"c" : "189"
 },
 "references" : {}
 },
@@ -17982,7 +17982,7 @@
 "string" : "273.15",
 "f" : "ekv.va",
 "l" : "310",
-"c" : "203"
+"c" : "205"
 },
 "references" : {}
 },
@@ -27838,8 +27838,8 @@
 "parameters" : {
 "string" : "1e-12",
 "f" : "discipline.h",
-"l" : "29",
-"c" : "12"
+"l" : "44",
+"c" : "18"
 },
 "references" : {}
 },
@@ -27883,8 +27883,8 @@
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "51",
-"c" : "12"
+"l" : "68",
+"c" : "16"
 },
 "references" : {}
 },
@@ -29916,7 +29916,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "373",
-"c" : "32"
+"c" : "33"
 },
 "references" : {}
 },
@@ -29942,7 +29942,7 @@
 "string" : "11.7",
 "f" : "ekv.va",
 "l" : "373",
-"c" : "48"
+"c" : "49"
 },
 "references" : {}
 },
@@ -30204,7 +30204,7 @@
 "string" : "sqrt",
 "f" : "ekv.va",
 "l" : "373",
-"c" : "69"
+"c" : "70"
 },
 "references" : {}
 },
@@ -30231,7 +30231,7 @@
 "string" : "sqrt",
 "f" : "ekv.va",
 "l" : "373",
-"c" : "83"
+"c" : "84"
 },
 "references" : {}
 },
@@ -30365,7 +30365,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "369",
-"c" : "32"
+"c" : "33"
 },
 "references" : {}
 },
@@ -30391,7 +30391,7 @@
 "string" : "11.7",
 "f" : "ekv.va",
 "l" : "369",
-"c" : "48"
+"c" : "49"
 },
 "references" : {}
 },
@@ -30470,7 +30470,7 @@
 "string" : "sqrt",
 "f" : "ekv.va",
 "l" : "369",
-"c" : "69"
+"c" : "70"
 },
 "references" : {}
 },
@@ -30497,7 +30497,7 @@
 "string" : "sqrt",
 "f" : "ekv.va",
 "l" : "369",
-"c" : "83"
+"c" : "84"
 },
 "references" : {}
 },
@@ -30562,7 +30562,7 @@
 "string" : "3",
 "f" : "ekv.va",
 "l" : "369",
-"c" : "98"
+"c" : "99"
 },
 "references" : {}
 },
@@ -30775,7 +30775,7 @@
 "string" : "sqrt",
 "f" : "ekv.va",
 "l" : "369",
-"c" : "110"
+"c" : "111"
 },
 "references" : {}
 },
@@ -57212,7 +57212,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "512",
-"c" : "44"
+"c" : "45"
 },
 "references" : {}
 },
@@ -57238,7 +57238,7 @@
 "string" : "11.7",
 "f" : "ekv.va",
 "l" : "512",
-"c" : "60"
+"c" : "61"
 },
 "references" : {}
 },
@@ -57850,7 +57850,7 @@
 "string" : "8.854187817e-12",
 "f" : "ekv.va",
 "l" : "514",
-"c" : "43"
+"c" : "44"
 },
 "references" : {}
 },
@@ -57876,7 +57876,7 @@
 "string" : "11.7",
 "f" : "ekv.va",
 "l" : "514",
-"c" : "59"
+"c" : "60"
 },
 "references" : {}
 },
@@ -57903,7 +57903,7 @@
 "string" : "abs",
 "f" : "ekv.va",
 "l" : "514",
-"c" : "68"
+"c" : "69"
 },
 "references" : {}
 },
@@ -76311,6 +76311,20 @@
 },
 {
 "id" : 5901,
+"uid" : "ddiscrete",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "ddiscrete",
+"domain" : "discrete"
+},
+"references" : {
+"flow" : [],
+"potential" : []
+}
+},
+{
+"id" : 5902,
 "uid" : "voltage",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76324,7 +76338,7 @@
 }
 },
 {
-"id" : 5902,
+"id" : 5903,
 "uid" : "current",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76333,12 +76347,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [],
-"potential" : [2152]
+"flow" : [2152],
+"potential" : []
 }
 },
 {
-"id" : 5903,
+"id" : 5904,
 "uid" : "magnetic",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76347,12 +76361,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [5904],
-"potential" : [5907]
+"flow" : [5905],
+"potential" : [5908]
 }
 },
 {
-"id" : 5904,
+"id" : 5905,
 "uid" : "Phi",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76364,14 +76378,14 @@
 "units" : "Wb"
 },
 "references" : {
-"abstol" : [5905],
+"abstol" : [5906],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5905,
+"id" : 5906,
 "uid" : "1e-9",
 "datatypename" : "number",
 "attributes" : {},
@@ -76380,24 +76394,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5906]
+"lexval" : [5907]
 }
 },
 {
-"id" : 5906,
+"id" : 5907,
 "uid" : "1e-9",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-9",
 "f" : "discipline.h",
-"l" : "62",
-"c" : "12"
+"l" : "80",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5907,
+"id" : 5908,
 "uid" : "MMF",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76409,14 +76423,14 @@
 "units" : "A*turn"
 },
 "references" : {
-"abstol" : [5908],
+"abstol" : [5909],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5908,
+"id" : 5909,
 "uid" : "1e-12",
 "datatypename" : "number",
 "attributes" : {},
@@ -76425,24 +76439,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5909]
+"lexval" : [5910]
 }
 },
 {
-"id" : 5909,
+"id" : 5910,
 "uid" : "1e-12",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-12",
 "f" : "discipline.h",
-"l" : "85",
-"c" : "12"
+"l" : "108",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5910,
+"id" : 5911,
 "uid" : "thermal",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76451,12 +76465,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [5911],
-"potential" : [5914]
+"flow" : [5912],
+"potential" : [5915]
 }
 },
 {
-"id" : 5911,
+"id" : 5912,
 "uid" : "Pwr",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76468,14 +76482,14 @@
 "units" : "W"
 },
 "references" : {
-"abstol" : [5912],
+"abstol" : [5913],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5912,
+"id" : 5913,
 "uid" : "1e-9",
 "datatypename" : "number",
 "attributes" : {},
@@ -76484,24 +76498,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5913]
+"lexval" : [5914]
 }
 },
 {
-"id" : 5913,
+"id" : 5914,
 "uid" : "1e-9",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-9",
 "f" : "discipline.h",
-"l" : "111",
-"c" : "12"
+"l" : "138",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5914,
+"id" : 5915,
 "uid" : "Temp",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76513,14 +76527,14 @@
 "units" : "K"
 },
 "references" : {
-"abstol" : [5915],
+"abstol" : [5916],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5915,
+"id" : 5916,
 "uid" : "1e-4",
 "datatypename" : "number",
 "attributes" : {},
@@ -76529,24 +76543,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5916]
+"lexval" : [5917]
 }
 },
 {
-"id" : 5916,
+"id" : 5917,
 "uid" : "1e-4",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-4",
 "f" : "discipline.h",
-"l" : "101",
-"c" : "12"
+"l" : "127",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5917,
+"id" : 5918,
 "uid" : "kinematic",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76555,12 +76569,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [5918],
-"potential" : [5921]
+"flow" : [5919],
+"potential" : [5922]
 }
 },
 {
-"id" : 5918,
+"id" : 5919,
 "uid" : "F",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76572,14 +76586,14 @@
 "units" : "N"
 },
 "references" : {
-"abstol" : [5919],
+"abstol" : [5920],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5919,
+"id" : 5920,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76588,24 +76602,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5920]
+"lexval" : [5921]
 }
 },
 {
-"id" : 5920,
+"id" : 5921,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "173",
-"c" : "12"
+"l" : "207",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5921,
+"id" : 5922,
 "uid" : "Pos",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76617,14 +76631,14 @@
 "units" : "m"
 },
 "references" : {
-"abstol" : [5922],
+"abstol" : [5923],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5922,
+"id" : 5923,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76633,24 +76647,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5923]
+"lexval" : [5924]
 }
 },
 {
-"id" : 5923,
+"id" : 5924,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "128",
-"c" : "12"
+"l" : "158",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5924,
+"id" : 5925,
 "uid" : "kinematic_v",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76659,12 +76673,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [5918],
-"potential" : [5925]
+"flow" : [5919],
+"potential" : [5926]
 }
 },
 {
-"id" : 5925,
+"id" : 5926,
 "uid" : "Vel",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76676,14 +76690,14 @@
 "units" : "m/s"
 },
 "references" : {
-"abstol" : [5926],
+"abstol" : [5927],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5926,
+"id" : 5927,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76692,24 +76706,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5927]
+"lexval" : [5928]
 }
 },
 {
-"id" : 5927,
+"id" : 5928,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "140",
-"c" : "12"
+"l" : "171",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5928,
+"id" : 5929,
 "uid" : "rotational",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76718,12 +76732,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [5929],
-"potential" : [5932]
+"flow" : [5930],
+"potential" : [5933]
 }
 },
 {
-"id" : 5929,
+"id" : 5930,
 "uid" : "Tau",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76735,14 +76749,14 @@
 "units" : "N*m"
 },
 "references" : {
-"abstol" : [5930],
+"abstol" : [5931],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5930,
+"id" : 5931,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76751,24 +76765,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5931]
+"lexval" : [5932]
 }
 },
 {
-"id" : 5931,
+"id" : 5932,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "227",
-"c" : "12"
+"l" : "269",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5932,
+"id" : 5933,
 "uid" : "Theta",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76780,14 +76794,14 @@
 "units" : "rads"
 },
 "references" : {
-"abstol" : [5933],
+"abstol" : [5934],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5933,
+"id" : 5934,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76796,24 +76810,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5934]
+"lexval" : [5935]
 }
 },
 {
-"id" : 5934,
+"id" : 5935,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "194",
-"c" : "12"
+"l" : "233",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5935,
+"id" : 5936,
 "uid" : "rotational_omega",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -76822,12 +76836,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [5929],
-"potential" : [5936]
+"flow" : [5930],
+"potential" : [5937]
 }
 },
 {
-"id" : 5936,
+"id" : 5937,
 "uid" : "Omega",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76839,14 +76853,14 @@
 "units" : "rads/s"
 },
 "references" : {
-"abstol" : [5937],
+"abstol" : [5938],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5937,
+"id" : 5938,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76855,24 +76869,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5938]
+"lexval" : [5939]
 }
 },
 {
-"id" : 5938,
+"id" : 5939,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "206",
-"c" : "12"
+"l" : "246",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5939,
+"id" : 5940,
 "uid" : "Q",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76884,14 +76898,14 @@
 "units" : "coul"
 },
 "references" : {
-"abstol" : [5940],
+"abstol" : [5941],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5940,
+"id" : 5941,
 "uid" : "1e-14",
 "datatypename" : "number",
 "attributes" : {},
@@ -76900,24 +76914,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5941]
+"lexval" : [5942]
 }
 },
 {
-"id" : 5941,
+"id" : 5942,
 "uid" : "1e-14",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-14",
 "f" : "discipline.h",
-"l" : "40",
-"c" : "12"
+"l" : "56",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5942,
+"id" : 5943,
 "uid" : "Acc",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76929,14 +76943,14 @@
 "units" : "m/s^2"
 },
 "references" : {
-"abstol" : [5943],
+"abstol" : [5944],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5943,
+"id" : 5944,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76945,24 +76959,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5944]
+"lexval" : [5945]
 }
 },
 {
-"id" : 5944,
+"id" : 5945,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "152",
-"c" : "12"
+"l" : "184",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5945,
+"id" : 5946,
 "uid" : "Imp",
 "datatypename" : "nature",
 "attributes" : {},
@@ -76974,14 +76988,14 @@
 "units" : "m/s^3"
 },
 "references" : {
-"abstol" : [5946],
+"abstol" : [5947],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5946,
+"id" : 5947,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -76990,24 +77004,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5947]
+"lexval" : [5948]
 }
 },
 {
-"id" : 5947,
+"id" : 5948,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "163",
-"c" : "12"
+"l" : "196",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 5948,
+"id" : 5949,
 "uid" : "Alpha",
 "datatypename" : "nature",
 "attributes" : {},
@@ -77019,14 +77033,14 @@
 "units" : "rads/s^2"
 },
 "references" : {
-"abstol" : [5949],
+"abstol" : [5950],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 5949,
+"id" : 5950,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -77035,19 +77049,19 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [5950]
+"lexval" : [5951]
 }
 },
 {
-"id" : 5950,
+"id" : 5951,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "217",
-"c" : "12"
+"l" : "258",
+"c" : "16"
 },
 "references" : {}
 }

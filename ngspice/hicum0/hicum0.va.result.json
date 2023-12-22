@@ -21,8 +21,8 @@
 "references" : {
 "simulator" : [1],
 "module" : [2],
-"discipline" : [6552, 102, 6553, 6554, 6555, 6562, 6569, 6576, 6580, 6587],
-"nature" : [103, 6591, 106, 6556, 6559, 6566, 6563, 6573, 6577, 6594, 6597, 6570, 6584, 6588, 6600, 6581]
+"discipline" : [6552, 6553, 102, 6554, 6555, 6556, 6563, 6570, 6577, 6581, 6588],
+"nature" : [103, 6592, 106, 6557, 6560, 6567, 6564, 6574, 6578, 6595, 6598, 6571, 6585, 6589, 6601, 6582]
 }
 },
 {
@@ -1389,8 +1389,8 @@
 "parameters" : {
 "string" : "1e-12",
 "f" : "discipline.h",
-"l" : "29",
-"c" : "12"
+"l" : "44",
+"c" : "18"
 },
 "references" : {}
 },
@@ -1434,8 +1434,8 @@
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "51",
-"c" : "12"
+"l" : "68",
+"c" : "16"
 },
 "references" : {}
 },
@@ -4608,7 +4608,7 @@
 "string" : "1.3806503e-23",
 "f" : "hicum0.va",
 "l" : "504",
-"c" : "13"
+"c" : "14"
 },
 "references" : {}
 },
@@ -4634,7 +4634,7 @@
 "string" : "1.602176462e-19",
 "f" : "hicum0.va",
 "l" : "504",
-"c" : "34"
+"c" : "36"
 },
 "references" : {}
 },
@@ -5305,7 +5305,7 @@
 "string" : "1.3806503e-23",
 "f" : "hicum0.va",
 "l" : "505",
-"c" : "13"
+"c" : "14"
 },
 "references" : {}
 },
@@ -5331,7 +5331,7 @@
 "string" : "1.602176462e-19",
 "f" : "hicum0.va",
 "l" : "505",
-"c" : "34"
+"c" : "36"
 },
 "references" : {}
 },
@@ -8301,7 +8301,7 @@
 "string" : "1.602176462e-19",
 "f" : "hicum0.va",
 "l" : "515",
-"c" : "15"
+"c" : "16"
 },
 "references" : {}
 },
@@ -8327,7 +8327,7 @@
 "string" : "1.3806503e-23",
 "f" : "hicum0.va",
 "l" : "515",
-"c" : "37"
+"c" : "39"
 },
 "references" : {}
 },
@@ -83208,7 +83208,7 @@
 "string" : "1.3806503e-23",
 "f" : "hicum0.va",
 "l" : "835",
-"c" : "19"
+"c" : "20"
 },
 "references" : {}
 },
@@ -83950,7 +83950,7 @@
 "string" : "1.602176462e-19",
 "f" : "hicum0.va",
 "l" : "847",
-"c" : "16"
+"c" : "17"
 },
 "references" : {}
 },
@@ -85840,6 +85840,20 @@
 },
 {
 "id" : 6553,
+"uid" : "ddiscrete",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "ddiscrete",
+"domain" : "discrete"
+},
+"references" : {
+"flow" : [],
+"potential" : []
+}
+},
+{
+"id" : 6554,
 "uid" : "voltage",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -85853,7 +85867,7 @@
 }
 },
 {
-"id" : 6554,
+"id" : 6555,
 "uid" : "current",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -85862,12 +85876,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [],
-"potential" : [103]
+"flow" : [103],
+"potential" : []
 }
 },
 {
-"id" : 6555,
+"id" : 6556,
 "uid" : "magnetic",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -85876,12 +85890,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [6556],
-"potential" : [6559]
+"flow" : [6557],
+"potential" : [6560]
 }
 },
 {
-"id" : 6556,
+"id" : 6557,
 "uid" : "Phi",
 "datatypename" : "nature",
 "attributes" : {},
@@ -85893,14 +85907,14 @@
 "units" : "Wb"
 },
 "references" : {
-"abstol" : [6557],
+"abstol" : [6558],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6557,
+"id" : 6558,
 "uid" : "1e-9",
 "datatypename" : "number",
 "attributes" : {},
@@ -85909,24 +85923,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6558]
+"lexval" : [6559]
 }
 },
 {
-"id" : 6558,
+"id" : 6559,
 "uid" : "1e-9",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-9",
 "f" : "discipline.h",
-"l" : "62",
-"c" : "12"
+"l" : "80",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6559,
+"id" : 6560,
 "uid" : "MMF",
 "datatypename" : "nature",
 "attributes" : {},
@@ -85938,14 +85952,14 @@
 "units" : "A*turn"
 },
 "references" : {
-"abstol" : [6560],
+"abstol" : [6561],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6560,
+"id" : 6561,
 "uid" : "1e-12",
 "datatypename" : "number",
 "attributes" : {},
@@ -85954,24 +85968,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6561]
+"lexval" : [6562]
 }
 },
 {
-"id" : 6561,
+"id" : 6562,
 "uid" : "1e-12",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-12",
 "f" : "discipline.h",
-"l" : "85",
-"c" : "12"
+"l" : "108",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6562,
+"id" : 6563,
 "uid" : "thermal",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -85980,12 +85994,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [6563],
-"potential" : [6566]
+"flow" : [6564],
+"potential" : [6567]
 }
 },
 {
-"id" : 6563,
+"id" : 6564,
 "uid" : "Pwr",
 "datatypename" : "nature",
 "attributes" : {},
@@ -85997,14 +86011,14 @@
 "units" : "W"
 },
 "references" : {
-"abstol" : [6564],
+"abstol" : [6565],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6564,
+"id" : 6565,
 "uid" : "1e-9",
 "datatypename" : "number",
 "attributes" : {},
@@ -86013,24 +86027,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6565]
+"lexval" : [6566]
 }
 },
 {
-"id" : 6565,
+"id" : 6566,
 "uid" : "1e-9",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-9",
 "f" : "discipline.h",
-"l" : "111",
-"c" : "12"
+"l" : "138",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6566,
+"id" : 6567,
 "uid" : "Temp",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86042,14 +86056,14 @@
 "units" : "K"
 },
 "references" : {
-"abstol" : [6567],
+"abstol" : [6568],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6567,
+"id" : 6568,
 "uid" : "1e-4",
 "datatypename" : "number",
 "attributes" : {},
@@ -86058,24 +86072,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6568]
+"lexval" : [6569]
 }
 },
 {
-"id" : 6568,
+"id" : 6569,
 "uid" : "1e-4",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-4",
 "f" : "discipline.h",
-"l" : "101",
-"c" : "12"
+"l" : "127",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6569,
+"id" : 6570,
 "uid" : "kinematic",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -86084,12 +86098,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [6570],
-"potential" : [6573]
+"flow" : [6571],
+"potential" : [6574]
 }
 },
 {
-"id" : 6570,
+"id" : 6571,
 "uid" : "F",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86101,14 +86115,14 @@
 "units" : "N"
 },
 "references" : {
-"abstol" : [6571],
+"abstol" : [6572],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6571,
+"id" : 6572,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86117,24 +86131,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6572]
+"lexval" : [6573]
 }
 },
 {
-"id" : 6572,
+"id" : 6573,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "173",
-"c" : "12"
+"l" : "207",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6573,
+"id" : 6574,
 "uid" : "Pos",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86146,14 +86160,14 @@
 "units" : "m"
 },
 "references" : {
-"abstol" : [6574],
+"abstol" : [6575],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6574,
+"id" : 6575,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86162,24 +86176,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6575]
+"lexval" : [6576]
 }
 },
 {
-"id" : 6575,
+"id" : 6576,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "128",
-"c" : "12"
+"l" : "158",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6576,
+"id" : 6577,
 "uid" : "kinematic_v",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -86188,12 +86202,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [6570],
-"potential" : [6577]
+"flow" : [6571],
+"potential" : [6578]
 }
 },
 {
-"id" : 6577,
+"id" : 6578,
 "uid" : "Vel",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86205,14 +86219,14 @@
 "units" : "m/s"
 },
 "references" : {
-"abstol" : [6578],
+"abstol" : [6579],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6578,
+"id" : 6579,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86221,24 +86235,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6579]
+"lexval" : [6580]
 }
 },
 {
-"id" : 6579,
+"id" : 6580,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "140",
-"c" : "12"
+"l" : "171",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6580,
+"id" : 6581,
 "uid" : "rotational",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -86247,12 +86261,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [6581],
-"potential" : [6584]
+"flow" : [6582],
+"potential" : [6585]
 }
 },
 {
-"id" : 6581,
+"id" : 6582,
 "uid" : "Tau",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86264,14 +86278,14 @@
 "units" : "N*m"
 },
 "references" : {
-"abstol" : [6582],
+"abstol" : [6583],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6582,
+"id" : 6583,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86280,24 +86294,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6583]
+"lexval" : [6584]
 }
 },
 {
-"id" : 6583,
+"id" : 6584,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "227",
-"c" : "12"
+"l" : "269",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6584,
+"id" : 6585,
 "uid" : "Theta",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86309,14 +86323,14 @@
 "units" : "rads"
 },
 "references" : {
-"abstol" : [6585],
+"abstol" : [6586],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6585,
+"id" : 6586,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86325,24 +86339,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6586]
+"lexval" : [6587]
 }
 },
 {
-"id" : 6586,
+"id" : 6587,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "194",
-"c" : "12"
+"l" : "233",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6587,
+"id" : 6588,
 "uid" : "rotational_omega",
 "datatypename" : "discipline",
 "attributes" : {},
@@ -86351,12 +86365,12 @@
 "domain" : "continuous"
 },
 "references" : {
-"flow" : [6581],
-"potential" : [6588]
+"flow" : [6582],
+"potential" : [6589]
 }
 },
 {
-"id" : 6588,
+"id" : 6589,
 "uid" : "Omega",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86368,14 +86382,14 @@
 "units" : "rads/s"
 },
 "references" : {
-"abstol" : [6589],
+"abstol" : [6590],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6589,
+"id" : 6590,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86384,24 +86398,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6590]
+"lexval" : [6591]
 }
 },
 {
-"id" : 6590,
+"id" : 6591,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "206",
-"c" : "12"
+"l" : "246",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6591,
+"id" : 6592,
 "uid" : "Q",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86413,14 +86427,14 @@
 "units" : "coul"
 },
 "references" : {
-"abstol" : [6592],
+"abstol" : [6593],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6592,
+"id" : 6593,
 "uid" : "1e-14",
 "datatypename" : "number",
 "attributes" : {},
@@ -86429,24 +86443,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6593]
+"lexval" : [6594]
 }
 },
 {
-"id" : 6593,
+"id" : 6594,
 "uid" : "1e-14",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-14",
 "f" : "discipline.h",
-"l" : "40",
-"c" : "12"
+"l" : "56",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6594,
+"id" : 6595,
 "uid" : "Acc",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86458,14 +86472,14 @@
 "units" : "m/s^2"
 },
 "references" : {
-"abstol" : [6595],
+"abstol" : [6596],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6595,
+"id" : 6596,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86474,24 +86488,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6596]
+"lexval" : [6597]
 }
 },
 {
-"id" : 6596,
+"id" : 6597,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "152",
-"c" : "12"
+"l" : "184",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6597,
+"id" : 6598,
 "uid" : "Imp",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86503,14 +86517,14 @@
 "units" : "m/s^3"
 },
 "references" : {
-"abstol" : [6598],
+"abstol" : [6599],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6598,
+"id" : 6599,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86519,24 +86533,24 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6599]
+"lexval" : [6600]
 }
 },
 {
-"id" : 6599,
+"id" : 6600,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "163",
-"c" : "12"
+"l" : "196",
+"c" : "16"
 },
 "references" : {}
 },
 {
-"id" : 6600,
+"id" : 6601,
 "uid" : "Alpha",
 "datatypename" : "nature",
 "attributes" : {},
@@ -86548,14 +86562,14 @@
 "units" : "rads/s^2"
 },
 "references" : {
-"abstol" : [6601],
+"abstol" : [6602],
 "base" : [],
 "ddt_nature" : [],
 "idt_nature" : []
 }
 },
 {
-"id" : 6601,
+"id" : 6602,
 "uid" : "1e-6",
 "datatypename" : "number",
 "attributes" : {},
@@ -86564,19 +86578,19 @@
 "cast" : "d"
 },
 "references" : {
-"lexval" : [6602]
+"lexval" : [6603]
 }
 },
 {
-"id" : 6602,
+"id" : 6603,
 "uid" : "1e-6",
 "datatypename" : "lexval",
 "attributes" : {},
 "parameters" : {
 "string" : "1e-6",
 "f" : "discipline.h",
-"l" : "217",
-"c" : "12"
+"l" : "258",
+"c" : "16"
 },
 "references" : {}
 }

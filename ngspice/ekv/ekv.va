@@ -25,8 +25,8 @@
 //`include "compact.vams"
 
 //Spectre
-`include "constants.h"
-`include "discipline.h"
+`include "constants.vams"
+`include "disciplines.vams"
 
 `define NMOS 1
 `define PMOS -1

@@ -15,7 +15,7 @@
 // Further information can be found in the file readme.txt
 //
 
-`include "discipline.h"
+`include "disciplines.vams"
 
 `include "SIMKIT_macrodefs.include"
 

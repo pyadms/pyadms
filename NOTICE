@@ -16,8 +16,7 @@ Derivative work of ADMS and subject to the LGPL 2.1.
 ADMS
 ----
 
-Files in the xmlversion directory were forked from the ADMS project, and subject to the LGPL 2.1.
-
+Files in the archive/xmlversion directory were forked from the ADMS project, and subject to the LGPL 2.1.
 
 constants.vams
 --------------
@@ -49,3 +48,7 @@ disciplines.vams
 
     Version 2.4.0
 
+Third Party Documentation
+-------------------------
+
+Files in archive/docs are copyrighted according to the notices in the files.

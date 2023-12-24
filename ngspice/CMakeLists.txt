@@ -1,4 +1,4 @@
-ADD_SUBDIRECTORY(admst)
+#ADD_SUBDIRECTORY(admst)
 IF (WIN32)
 SET(DIFFCMD C:/cygwin/bin/diff)
 ELSE (WIN32)

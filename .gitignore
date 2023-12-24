@@ -1,0 +1,17 @@
+.*.va.adms
+.*.sw?
+ngspice/**/*.va.result.json
+ngspice/**/*.va.json
+xmlversion/admsXml/admstpathYacc.c
+xmlversion/admsXml/preprocessorLex.c
+xmlversion/admsXml/preprocessorYacc.c
+xmlversion/admsXml/preprocessorYacc.h
+xmlversion/admsXml/verilogaLex.c
+xmlversion/admsXml/verilogaYacc.c
+xmlversion/admsXml/verilogaYacc.h
+admsJSON/preprocessorLex.cc
+admsJSON/preprocessorYacc.cc
+admsJSON/preprocessorYacc.hh
+admsJSON/verilogaLex.cc
+admsJSON/verilogaYacc.cc
+admsJSON/verilogaYacc.hh

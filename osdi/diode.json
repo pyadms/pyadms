@@ -1,0 +1,6260 @@
+[
+{
+"id" : 0,
+"uid" : "admsmain",
+"datatypename" : "admsmain",
+"attributes" : {},
+"parameters" : {
+"name" : "admsmain",
+"fullfilename" : "diode.va",
+"filename" : "diode.va",
+"curfilename" : "diode.va",
+"curline" : "52",
+"fpos" : "0",
+"info" : true,
+"usage" : true,
+"verbose" : false,
+"warning" : true,
+"dbg_vla" : false,
+"fatal" : true
+},
+"references" : {
+"simulator" : [1],
+"module" : [2],
+"discipline" : [399, 400, 21, 401, 402, 403, 410, 417, 424, 428, 435],
+"nature" : [22, 439, 25, 404, 407, 414, 411, 421, 425, 442, 445, 418, 432, 436, 448, 429]
+}
+},
+{
+"id" : 1,
+"uid" : "admsJSON-2.3.0",
+"datatypename" : "simulator",
+"attributes" : {},
+"parameters" : {
+"name" : "admsJSON-2.3.0",
+"developer" : "admsJSON-2.3.0",
+"fullname" : "admsJSON-2.3.0",
+"package_name" : "",
+"package_tarname" : "",
+"package_version" : "",
+"package_string" : "",
+"package_bugreport" : ""
+},
+"references" : {}
+},
+{
+"id" : 2,
+"uid" : "diode_va",
+"datatypename" : "module",
+"attributes" : {},
+"parameters" : {
+"name" : "diode_va"
+},
+"references" : {
+"analog" : [3],
+"node" : [28, 140, 152, 20, 141],
+"nodealias" : [395, 396, 397, 398],
+"branch" : [139, 151, 19, 367],
+"branchalias" : [381, 394, 388],
+"analogfunction" : [],
+"instance" : [],
+"variable" : [164, 238, 254, 214, 331, 61, 87, 276, 292, 195, 180, 47, 145, 322, 156, 361, 32, 107, 119, 54, 8, 308, 231, 270],
+"block" : [4],
+"blockvariable" : [],
+"assignment" : [6, 30, 45, 143, 154, 229, 268, 306, 56, 109, 121, 49, 320, 359],
+"callfunction" : [],
+"contribution" : [369, 382, 389],
+"conditional" : [],
+"case" : [],
+"forloop" : [],
+"whileloop" : [],
+"expression" : [166, 170, 173, 240, 244, 247, 256, 260, 264, 216, 220, 223, 333, 337, 340, 63, 67, 70, 89, 93, 96, 278, 282, 285, 294, 298, 302, 197, 201, 205, 182, 186, 189, 14, 37, 137, 149, 160, 235, 273, 311, 58, 111, 123, 51, 326, 363, 371, 384, 391],
+"probe" : [18, 138, 150, 366],
+"source" : [370, 383, 390],
+"range" : [169, 243, 259, 219, 336, 66, 92, 281, 297, 200, 185],
+"attribute" : []
+}
+},
+{
+"id" : 3,
+"uid" : "analog begin :\nTdev=(($temperature()+V(dT,GND)));\nVT=(((1.3806503e-23*Tdev)/1.602176462e-19));\nVd=(V(A,CI));\nVr=(V(CI,C));\nId=(((Is*pow((Tdev/Tnom),zetais))*(limexp((Vd/(N*VT)))-1)));\nrs_t=((Rs*pow((Tdev/Tnom),zetars)));\nrth_t=((Rth*pow((Tdev/Tnom),zetarth)));\npterm=(((Id*Vd)+(pow(Vr,2.0)/rs_t)));\nvf=((Vj*(1-pow(3.0,((-1)/M)))));\nx=(((vf-Vd)/VT));\ny=(sqrt(((x*x)+1.92)));\nVd=((vf-((VT*(x+y))/2)));\nQd=((((Cj0*Vj)*(1-pow((1-(Vd/Vj)),(1-M))))/(1-M)));\nCd=(ddx(Qd,V(A,GND)));\nI(A,CI)<+(((Id+ddt(Qd))+($simparam(\"gmin\")*V(A,CI))));\nI(dT,GND)<+(((V(dT,GND)/rth_t)-pterm));\nI(CI,C)<+((Vr/rs_t));end\n",
+"datatypename" : "analog",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"code" : [4]
+}
+},
+{
+"id" : 4,
+"uid" : "begin :\nTdev=(($temperature()+V(dT,GND)));\nVT=(((1.3806503e-23*Tdev)/1.602176462e-19));\nVd=(V(A,CI));\nVr=(V(CI,C));\nId=(((Is*pow((Tdev/Tnom),zetais))*(limexp((Vd/(N*VT)))-1)));\nrs_t=((Rs*pow((Tdev/Tnom),zetars)));\nrth_t=((Rth*pow((Tdev/Tnom),zetarth)));\npterm=(((Id*Vd)+(pow(Vr,2.0)/rs_t)));\nvf=((Vj*(1-pow(3.0,((-1)/M)))));\nx=(((vf-Vd)/VT));\ny=(sqrt(((x*x)+1.92)));\nVd=((vf-((VT*(x+y))/2)));\nQd=((((Cj0*Vj)*(1-pow((1-(Vd/Vj)),(1-M))))/(1-M)));\nCd=(ddx(Qd,V(A,GND)));\nI(A,CI)<+(((Id+ddt(Qd))+($simparam(\"gmin\")*V(A,CI))));\nI(dT,GND)<+(((V(dT,GND)/rth_t)-pterm));\nI(CI,C)<+((Vr/rs_t));end\n",
+"datatypename" : "block",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lexval" : [5],
+"block" : [2],
+"item" : [6, 30, 45, 143, 154, 229, 268, 306, 56, 109, 121, 49, 320, 359, 369, 382, 389],
+"variable" : []
+}
+},
+{
+"id" : 5,
+"uid" : "",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "",
+"f" : "diode.va",
+"l" : "26",
+"c" : "8"
+},
+"references" : {}
+},
+{
+"id" : 6,
+"uid" : "Tdev=(($temperature()+V(dT,GND)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [7],
+"rhs" : [14],
+"lexval" : [29]
+}
+},
+{
+"id" : 7,
+"uid" : "Tdev",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [8]
+}
+},
+{
+"id" : 8,
+"uid" : "Tdev",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [9],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [6],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [7, 10, 11, 12, 13]
+}
+},
+{
+"id" : 9,
+"uid" : "Tdev",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Tdev",
+"f" : "diode.va",
+"l" : "25",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 10,
+"uid" : "Tdev",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [8]
+}
+},
+{
+"id" : 11,
+"uid" : "Tdev",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [8]
+}
+},
+{
+"id" : 12,
+"uid" : "Tdev",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [8]
+}
+},
+{
+"id" : 13,
+"uid" : "Tdev",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [8]
+}
+},
+{
+"id" : 14,
+"uid" : "(($temperature()+V(dT,GND)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [15]
+}
+},
+{
+"id" : 15,
+"uid" : "($temperature()+V(dT,GND))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addp"
+},
+"references" : {
+"arg1" : [16],
+"arg2" : [18]
+}
+},
+{
+"id" : 16,
+"uid" : "$temperature()",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "0"
+},
+"references" : {
+"lexval" : [17],
+"definition" : [],
+"arguments" : []
+}
+},
+{
+"id" : 17,
+"uid" : "$temperature",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "$temperature",
+"f" : "diode.va",
+"l" : "27",
+"c" : "8"
+},
+"references" : {}
+},
+{
+"id" : 18,
+"uid" : "V(dT,GND)",
+"datatypename" : "probe",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [19],
+"nature" : [25]
+}
+},
+{
+"id" : 19,
+"uid" : "dT,GND",
+"datatypename" : "branch",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"pnode" : [20],
+"nnode" : [28],
+"discipline" : []
+}
+},
+{
+"id" : 20,
+"uid" : "dT",
+"datatypename" : "node",
+"attributes" : {},
+"parameters" : {
+"name" : "dT",
+"direction" : "inout",
+"location" : "external"
+},
+"references" : {
+"module" : [2],
+"discipline" : [21]
+}
+},
+{
+"id" : 21,
+"uid" : "electrical",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "electrical",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [22],
+"potential" : [25]
+}
+},
+{
+"id" : 22,
+"uid" : "I",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "I",
+"name" : "Current",
+"ddt_name" : "",
+"idt_name" : "Charge",
+"units" : "A"
+},
+"references" : {
+"abstol" : [23],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 23,
+"uid" : "1e-12",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [24]
+}
+},
+{
+"id" : 24,
+"uid" : "1e-12",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-12",
+"f" : "disciplines.vams",
+"l" : "44",
+"c" : "18"
+},
+"references" : {}
+},
+{
+"id" : 25,
+"uid" : "V",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "V",
+"name" : "Voltage",
+"ddt_name" : "",
+"idt_name" : "Flux",
+"units" : "V"
+},
+"references" : {
+"abstol" : [26],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 26,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [27]
+}
+},
+{
+"id" : 27,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "68",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 28,
+"uid" : "GND",
+"datatypename" : "node",
+"attributes" : {},
+"parameters" : {
+"name" : "GND",
+"direction" : "inout",
+"location" : "ground"
+},
+"references" : {
+"module" : [2],
+"discipline" : []
+}
+},
+{
+"id" : 29,
+"uid" : "Tdev",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Tdev",
+"f" : "diode.va",
+"l" : "27",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 30,
+"uid" : "VT=(((1.3806503e-23*Tdev)/1.602176462e-19));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [31],
+"rhs" : [37],
+"lexval" : [44]
+}
+},
+{
+"id" : 31,
+"uid" : "VT",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [32]
+}
+},
+{
+"id" : 32,
+"uid" : "VT",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [33],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [30],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [31, 34, 35, 36]
+}
+},
+{
+"id" : 33,
+"uid" : "VT",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "VT",
+"f" : "diode.va",
+"l" : "25",
+"c" : "6"
+},
+"references" : {}
+},
+{
+"id" : 34,
+"uid" : "VT",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [32]
+}
+},
+{
+"id" : 35,
+"uid" : "VT",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [32]
+}
+},
+{
+"id" : 36,
+"uid" : "VT",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [32]
+}
+},
+{
+"id" : 37,
+"uid" : "(((1.3806503e-23*Tdev)/1.602176462e-19))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [38]
+}
+},
+{
+"id" : 38,
+"uid" : "((1.3806503e-23*Tdev)/1.602176462e-19)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [39],
+"arg2" : [42]
+}
+},
+{
+"id" : 39,
+"uid" : "(1.3806503e-23*Tdev)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [40],
+"arg2" : [10]
+}
+},
+{
+"id" : 40,
+"uid" : "1.3806503e-23",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [41]
+}
+},
+{
+"id" : 41,
+"uid" : "1.3806503e-23",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1.3806503e-23",
+"f" : "diode.va",
+"l" : "28",
+"c" : "8"
+},
+"references" : {}
+},
+{
+"id" : 42,
+"uid" : "1.602176462e-19",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [43]
+}
+},
+{
+"id" : 43,
+"uid" : "1.602176462e-19",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1.602176462e-19",
+"f" : "diode.va",
+"l" : "28",
+"c" : "29"
+},
+"references" : {}
+},
+{
+"id" : 44,
+"uid" : "VT",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "VT",
+"f" : "diode.va",
+"l" : "28",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 45,
+"uid" : "Vd=(V(A,CI));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [46],
+"rhs" : [137],
+"lexval" : [142]
+}
+},
+{
+"id" : 46,
+"uid" : "Vd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [47]
+}
+},
+{
+"id" : 47,
+"uid" : "Vd",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "2"
+},
+"references" : {
+"module" : [2],
+"lexval" : [48],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [49],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [46, 134, 135, 114, 50, 136]
+}
+},
+{
+"id" : 48,
+"uid" : "Vd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Vd",
+"f" : "diode.va",
+"l" : "22",
+"c" : "6"
+},
+"references" : {}
+},
+{
+"id" : 49,
+"uid" : "Vd=((vf-((VT*(x+y))/2)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [50],
+"rhs" : [51],
+"lexval" : [133]
+}
+},
+{
+"id" : 50,
+"uid" : "Vd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [47]
+}
+},
+{
+"id" : 51,
+"uid" : "((vf-((VT*(x+y))/2)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [52]
+}
+},
+{
+"id" : 52,
+"uid" : "(vf-((VT*(x+y))/2))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [53],
+"arg2" : [103]
+}
+},
+{
+"id" : 53,
+"uid" : "vf",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [54]
+}
+},
+{
+"id" : 54,
+"uid" : "vf",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [55],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [56],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [57, 102, 53]
+}
+},
+{
+"id" : 55,
+"uid" : "vf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "vf",
+"f" : "diode.va",
+"l" : "25",
+"c" : "13"
+},
+"references" : {}
+},
+{
+"id" : 56,
+"uid" : "vf=((Vj*(1-pow(3.0,((-1)/M)))));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [57],
+"rhs" : [58],
+"lexval" : [101]
+}
+},
+{
+"id" : 57,
+"uid" : "vf",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [54]
+}
+},
+{
+"id" : 58,
+"uid" : "((Vj*(1-pow(3.0,((-1)/M)))))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [59]
+}
+},
+{
+"id" : 59,
+"uid" : "(Vj*(1-pow(3.0,((-1)/M))))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [60],
+"arg2" : [75]
+}
+},
+{
+"id" : 60,
+"uid" : "Vj",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [61]
+}
+},
+{
+"id" : 61,
+"uid" : "Vj",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Junction potential",
+"units" : "V"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [62],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [63],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [66],
+"instance" : [60, 73, 74]
+}
+},
+{
+"id" : 62,
+"uid" : "Vj",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Vj",
+"f" : "diode.va",
+"l" : "15",
+"c" : "55"
+},
+"references" : {}
+},
+{
+"id" : 63,
+"uid" : "(1.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [64]
+}
+},
+{
+"id" : 64,
+"uid" : "1.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [65]
+}
+},
+{
+"id" : 65,
+"uid" : "1.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1.0",
+"f" : "diode.va",
+"l" : "15",
+"c" : "60"
+},
+"references" : {}
+},
+{
+"id" : 66,
+"uid" : "from [(0.2):(2)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [67],
+"supexpr" : [70]
+}
+},
+{
+"id" : 67,
+"uid" : "(0.2)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [68]
+}
+},
+{
+"id" : 68,
+"uid" : "0.2",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [69]
+}
+},
+{
+"id" : 69,
+"uid" : "0.2",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.2",
+"f" : "diode.va",
+"l" : "15",
+"c" : "70"
+},
+"references" : {}
+},
+{
+"id" : 70,
+"uid" : "(2)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [71]
+}
+},
+{
+"id" : 71,
+"uid" : "2",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [72]
+}
+},
+{
+"id" : 72,
+"uid" : "2",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "2",
+"f" : "diode.va",
+"l" : "15",
+"c" : "74"
+},
+"references" : {}
+},
+{
+"id" : 73,
+"uid" : "Vj",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [61]
+}
+},
+{
+"id" : 74,
+"uid" : "Vj",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [61]
+}
+},
+{
+"id" : 75,
+"uid" : "(1-pow(3.0,((-1)/M)))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [76],
+"arg2" : [78]
+}
+},
+{
+"id" : 76,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [77]
+}
+},
+{
+"id" : 77,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "38",
+"c" : "10"
+},
+"references" : {}
+},
+{
+"id" : 78,
+"uid" : "pow(3.0,((-1)/M))",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "6"
+},
+"references" : {
+"lexval" : [79],
+"definition" : [],
+"arguments" : [80, 82]
+}
+},
+{
+"id" : 79,
+"uid" : "pow",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pow",
+"f" : "diode.va",
+"l" : "38",
+"c" : "14"
+},
+"references" : {}
+},
+{
+"id" : 80,
+"uid" : "3.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [81]
+}
+},
+{
+"id" : 81,
+"uid" : "3.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "3.0",
+"f" : "diode.va",
+"l" : "38",
+"c" : "18"
+},
+"references" : {}
+},
+{
+"id" : 82,
+"uid" : "((-1)/M)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [83],
+"arg2" : [86]
+}
+},
+{
+"id" : 83,
+"uid" : "(-1)",
+"datatypename" : "mapply_unary",
+"attributes" : {},
+"parameters" : {
+"name" : "minus"
+},
+"references" : {
+"arg1" : [84]
+}
+},
+{
+"id" : 84,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [85]
+}
+},
+{
+"id" : 85,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "38",
+"c" : "24"
+},
+"references" : {}
+},
+{
+"id" : 86,
+"uid" : "M",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [87]
+}
+},
+{
+"id" : 87,
+"uid" : "M",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Grading coefficient"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [88],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [89],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [92],
+"instance" : [86, 99, 100]
+}
+},
+{
+"id" : 88,
+"uid" : "M",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "M",
+"f" : "diode.va",
+"l" : "16",
+"c" : "46"
+},
+"references" : {}
+},
+{
+"id" : 89,
+"uid" : "(0.5)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [90]
+}
+},
+{
+"id" : 90,
+"uid" : "0.5",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [91]
+}
+},
+{
+"id" : 91,
+"uid" : "0.5",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.5",
+"f" : "diode.va",
+"l" : "16",
+"c" : "50"
+},
+"references" : {}
+},
+{
+"id" : 92,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [93],
+"supexpr" : [96]
+}
+},
+{
+"id" : 93,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [94]
+}
+},
+{
+"id" : 94,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [95]
+}
+},
+{
+"id" : 95,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "16",
+"c" : "60"
+},
+"references" : {}
+},
+{
+"id" : 96,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [97]
+}
+},
+{
+"id" : 97,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [98]
+}
+},
+{
+"id" : 98,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "16",
+"c" : "62"
+},
+"references" : {}
+},
+{
+"id" : 99,
+"uid" : "M",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [87]
+}
+},
+{
+"id" : 100,
+"uid" : "M",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [87]
+}
+},
+{
+"id" : 101,
+"uid" : "vf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "vf",
+"f" : "diode.va",
+"l" : "38",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 102,
+"uid" : "vf",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [54]
+}
+},
+{
+"id" : 103,
+"uid" : "((VT*(x+y))/2)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [104],
+"arg2" : [131]
+}
+},
+{
+"id" : 104,
+"uid" : "(VT*(x+y))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [36],
+"arg2" : [105]
+}
+},
+{
+"id" : 105,
+"uid" : "(x+y)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addp"
+},
+"references" : {
+"arg1" : [106],
+"arg2" : [118]
+}
+},
+{
+"id" : 106,
+"uid" : "x",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [107]
+}
+},
+{
+"id" : 107,
+"uid" : "x",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [108],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [109],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [110, 116, 117, 106]
+}
+},
+{
+"id" : 108,
+"uid" : "x",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "x",
+"f" : "diode.va",
+"l" : "25",
+"c" : "9"
+},
+"references" : {}
+},
+{
+"id" : 109,
+"uid" : "x=(((vf-Vd)/VT));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [110],
+"rhs" : [111],
+"lexval" : [115]
+}
+},
+{
+"id" : 110,
+"uid" : "x",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [107]
+}
+},
+{
+"id" : 111,
+"uid" : "(((vf-Vd)/VT))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [112]
+}
+},
+{
+"id" : 112,
+"uid" : "((vf-Vd)/VT)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [113],
+"arg2" : [35]
+}
+},
+{
+"id" : 113,
+"uid" : "(vf-Vd)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [102],
+"arg2" : [114]
+}
+},
+{
+"id" : 114,
+"uid" : "Vd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [47]
+}
+},
+{
+"id" : 115,
+"uid" : "x",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "x",
+"f" : "diode.va",
+"l" : "39",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 116,
+"uid" : "x",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [107]
+}
+},
+{
+"id" : 117,
+"uid" : "x",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [107]
+}
+},
+{
+"id" : 118,
+"uid" : "y",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [119]
+}
+},
+{
+"id" : 119,
+"uid" : "y",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [120],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [121],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [122, 118]
+}
+},
+{
+"id" : 120,
+"uid" : "y",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "y",
+"f" : "diode.va",
+"l" : "25",
+"c" : "11"
+},
+"references" : {}
+},
+{
+"id" : 121,
+"uid" : "y=(sqrt(((x*x)+1.92)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [122],
+"rhs" : [123],
+"lexval" : [130]
+}
+},
+{
+"id" : 122,
+"uid" : "y",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [119]
+}
+},
+{
+"id" : 123,
+"uid" : "(sqrt(((x*x)+1.92)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [124]
+}
+},
+{
+"id" : 124,
+"uid" : "sqrt(((x*x)+1.92))",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "7"
+},
+"references" : {
+"lexval" : [125],
+"definition" : [],
+"arguments" : [126]
+}
+},
+{
+"id" : 125,
+"uid" : "sqrt",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "sqrt",
+"f" : "diode.va",
+"l" : "42",
+"c" : "3"
+},
+"references" : {}
+},
+{
+"id" : 126,
+"uid" : "((x*x)+1.92)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addp"
+},
+"references" : {
+"arg1" : [127],
+"arg2" : [128]
+}
+},
+{
+"id" : 127,
+"uid" : "(x*x)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [116],
+"arg2" : [117]
+}
+},
+{
+"id" : 128,
+"uid" : "1.92",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [129]
+}
+},
+{
+"id" : 129,
+"uid" : "1.92",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1.92",
+"f" : "diode.va",
+"l" : "42",
+"c" : "14"
+},
+"references" : {}
+},
+{
+"id" : 130,
+"uid" : "y",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "y",
+"f" : "diode.va",
+"l" : "41",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 131,
+"uid" : "2",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [132]
+}
+},
+{
+"id" : 132,
+"uid" : "2",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "2",
+"f" : "diode.va",
+"l" : "43",
+"c" : "21"
+},
+"references" : {}
+},
+{
+"id" : 133,
+"uid" : "Vd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Vd",
+"f" : "diode.va",
+"l" : "43",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 134,
+"uid" : "Vd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [47]
+}
+},
+{
+"id" : 135,
+"uid" : "Vd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [47]
+}
+},
+{
+"id" : 136,
+"uid" : "Vd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [47]
+}
+},
+{
+"id" : 137,
+"uid" : "(V(A,CI))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [138]
+}
+},
+{
+"id" : 138,
+"uid" : "V(A,CI)",
+"datatypename" : "probe",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [139],
+"nature" : [25]
+}
+},
+{
+"id" : 139,
+"uid" : "A,CI",
+"datatypename" : "branch",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"pnode" : [140],
+"nnode" : [141],
+"discipline" : []
+}
+},
+{
+"id" : 140,
+"uid" : "A",
+"datatypename" : "node",
+"attributes" : {},
+"parameters" : {
+"name" : "A",
+"direction" : "inout",
+"location" : "external"
+},
+"references" : {
+"module" : [2],
+"discipline" : [21]
+}
+},
+{
+"id" : 141,
+"uid" : "CI",
+"datatypename" : "node",
+"attributes" : {},
+"parameters" : {
+"name" : "CI",
+"direction" : "inout",
+"location" : "internal"
+},
+"references" : {
+"module" : [2],
+"discipline" : [21]
+}
+},
+{
+"id" : 142,
+"uid" : "Vd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Vd",
+"f" : "diode.va",
+"l" : "29",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 143,
+"uid" : "Vr=(V(CI,C));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [144],
+"rhs" : [149],
+"lexval" : [153]
+}
+},
+{
+"id" : 144,
+"uid" : "Vr",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [145]
+}
+},
+{
+"id" : 145,
+"uid" : "Vr",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [146],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [143],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [144, 147, 148]
+}
+},
+{
+"id" : 146,
+"uid" : "Vr",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Vr",
+"f" : "diode.va",
+"l" : "22",
+"c" : "10"
+},
+"references" : {}
+},
+{
+"id" : 147,
+"uid" : "Vr",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [145]
+}
+},
+{
+"id" : 148,
+"uid" : "Vr",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [145]
+}
+},
+{
+"id" : 149,
+"uid" : "(V(CI,C))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [150]
+}
+},
+{
+"id" : 150,
+"uid" : "V(CI,C)",
+"datatypename" : "probe",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [151],
+"nature" : [25]
+}
+},
+{
+"id" : 151,
+"uid" : "CI,C",
+"datatypename" : "branch",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"pnode" : [141],
+"nnode" : [152],
+"discipline" : []
+}
+},
+{
+"id" : 152,
+"uid" : "C",
+"datatypename" : "node",
+"attributes" : {},
+"parameters" : {
+"name" : "C",
+"direction" : "inout",
+"location" : "external"
+},
+"references" : {
+"module" : [2],
+"discipline" : [21]
+}
+},
+{
+"id" : 153,
+"uid" : "Vr",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Vr",
+"f" : "diode.va",
+"l" : "30",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 154,
+"uid" : "Id=(((Is*pow((Tdev/Tnom),zetais))*(limexp((Vd/(N*VT)))-1)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [155],
+"rhs" : [160],
+"lexval" : [228]
+}
+},
+{
+"id" : 155,
+"uid" : "Id",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [156]
+}
+},
+{
+"id" : 156,
+"uid" : "Id",
+"datatypename" : "variableprototype",
+"attributes" : {
+"ibm" : "retrieve"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [157],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [154],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [155, 158, 159]
+}
+},
+{
+"id" : 157,
+"uid" : "Id",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Id",
+"f" : "diode.va",
+"l" : "23",
+"c" : "10"
+},
+"references" : {}
+},
+{
+"id" : 158,
+"uid" : "Id",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [156]
+}
+},
+{
+"id" : 159,
+"uid" : "Id",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [156]
+}
+},
+{
+"id" : 160,
+"uid" : "(((Is*pow((Tdev/Tnom),zetais))*(limexp((Vd/(N*VT)))-1)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [161]
+}
+},
+{
+"id" : 161,
+"uid" : "((Is*pow((Tdev/Tnom),zetais))*(limexp((Vd/(N*VT)))-1))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [162],
+"arg2" : [208]
+}
+},
+{
+"id" : 162,
+"uid" : "(Is*pow((Tdev/Tnom),zetais))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [163],
+"arg2" : [176]
+}
+},
+{
+"id" : 163,
+"uid" : "Is",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [164]
+}
+},
+{
+"id" : 164,
+"uid" : "Is",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Saturation current",
+"units" : "A"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [165],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [166],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [169],
+"instance" : [163]
+}
+},
+{
+"id" : 165,
+"uid" : "Is",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Is",
+"f" : "diode.va",
+"l" : "10",
+"c" : "55"
+},
+"references" : {}
+},
+{
+"id" : 166,
+"uid" : "(1e-14)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [167]
+}
+},
+{
+"id" : 167,
+"uid" : "1e-14",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [168]
+}
+},
+{
+"id" : 168,
+"uid" : "1e-14",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-14",
+"f" : "diode.va",
+"l" : "10",
+"c" : "60"
+},
+"references" : {}
+},
+{
+"id" : 169,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [170],
+"supexpr" : [173]
+}
+},
+{
+"id" : 170,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [171]
+}
+},
+{
+"id" : 171,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [172]
+}
+},
+{
+"id" : 172,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "10",
+"c" : "72"
+},
+"references" : {}
+},
+{
+"id" : 173,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [174]
+}
+},
+{
+"id" : 174,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [175]
+}
+},
+{
+"id" : 175,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "10",
+"c" : "74"
+},
+"references" : {}
+},
+{
+"id" : 176,
+"uid" : "pow((Tdev/Tnom),zetais)",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "1"
+},
+"references" : {
+"lexval" : [177],
+"definition" : [],
+"arguments" : [178, 194]
+}
+},
+{
+"id" : 177,
+"uid" : "pow",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pow",
+"f" : "diode.va",
+"l" : "31",
+"c" : "11"
+},
+"references" : {}
+},
+{
+"id" : 178,
+"uid" : "(Tdev/Tnom)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [11],
+"arg2" : [179]
+}
+},
+{
+"id" : 179,
+"uid" : "Tnom",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [180]
+}
+},
+{
+"id" : 180,
+"uid" : "Tnom",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Reference temperature",
+"units" : "K"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [181],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [182],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [185],
+"instance" : [179, 192, 193]
+}
+},
+{
+"id" : 181,
+"uid" : "Tnom",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Tnom",
+"f" : "diode.va",
+"l" : "20",
+"c" : "58"
+},
+"references" : {}
+},
+{
+"id" : 182,
+"uid" : "(300)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [183]
+}
+},
+{
+"id" : 183,
+"uid" : "300",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [184]
+}
+},
+{
+"id" : 184,
+"uid" : "300",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "300",
+"f" : "diode.va",
+"l" : "20",
+"c" : "65"
+},
+"references" : {}
+},
+{
+"id" : 185,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [186],
+"supexpr" : [189]
+}
+},
+{
+"id" : 186,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [187]
+}
+},
+{
+"id" : 187,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [188]
+}
+},
+{
+"id" : 188,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "20",
+"c" : "75"
+},
+"references" : {}
+},
+{
+"id" : 189,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [190]
+}
+},
+{
+"id" : 190,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [191]
+}
+},
+{
+"id" : 191,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "20",
+"c" : "77"
+},
+"references" : {}
+},
+{
+"id" : 192,
+"uid" : "Tnom",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [180]
+}
+},
+{
+"id" : 193,
+"uid" : "Tnom",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [180]
+}
+},
+{
+"id" : 194,
+"uid" : "zetais",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [195]
+}
+},
+{
+"id" : 195,
+"uid" : "zetais",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Temperature coefficient of Is"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [196],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [197],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [200],
+"instance" : [194]
+}
+},
+{
+"id" : 196,
+"uid" : "zetais",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "zetais",
+"f" : "diode.va",
+"l" : "19",
+"c" : "56"
+},
+"references" : {}
+},
+{
+"id" : 197,
+"uid" : "(0.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [198]
+}
+},
+{
+"id" : 198,
+"uid" : "0.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [199]
+}
+},
+{
+"id" : 199,
+"uid" : "0.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.0",
+"f" : "diode.va",
+"l" : "19",
+"c" : "65"
+},
+"references" : {}
+},
+{
+"id" : 200,
+"uid" : "from [((-10)):(10)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [201],
+"supexpr" : [205]
+}
+},
+{
+"id" : 201,
+"uid" : "((-10))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [202]
+}
+},
+{
+"id" : 202,
+"uid" : "(-10)",
+"datatypename" : "mapply_unary",
+"attributes" : {},
+"parameters" : {
+"name" : "minus"
+},
+"references" : {
+"arg1" : [203]
+}
+},
+{
+"id" : 203,
+"uid" : "10",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [204]
+}
+},
+{
+"id" : 204,
+"uid" : "10",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "10",
+"f" : "diode.va",
+"l" : "19",
+"c" : "76"
+},
+"references" : {}
+},
+{
+"id" : 205,
+"uid" : "(10)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [206]
+}
+},
+{
+"id" : 206,
+"uid" : "10",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [207]
+}
+},
+{
+"id" : 207,
+"uid" : "10",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "10",
+"f" : "diode.va",
+"l" : "19",
+"c" : "79"
+},
+"references" : {}
+},
+{
+"id" : 208,
+"uid" : "(limexp((Vd/(N*VT)))-1)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [209],
+"arg2" : [226]
+}
+},
+{
+"id" : 209,
+"uid" : "limexp((Vd/(N*VT)))",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "2"
+},
+"references" : {
+"lexval" : [210],
+"definition" : [],
+"arguments" : [211]
+}
+},
+{
+"id" : 210,
+"uid" : "limexp",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "limexp",
+"f" : "diode.va",
+"l" : "31",
+"c" : "36"
+},
+"references" : {}
+},
+{
+"id" : 211,
+"uid" : "(Vd/(N*VT))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [134],
+"arg2" : [212]
+}
+},
+{
+"id" : 212,
+"uid" : "(N*VT)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [213],
+"arg2" : [34]
+}
+},
+{
+"id" : 213,
+"uid" : "N",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [214]
+}
+},
+{
+"id" : 214,
+"uid" : "N",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Emission coefficient"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [215],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [216],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [219],
+"instance" : [213]
+}
+},
+{
+"id" : 215,
+"uid" : "N",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "N",
+"f" : "diode.va",
+"l" : "13",
+"c" : "47"
+},
+"references" : {}
+},
+{
+"id" : 216,
+"uid" : "(1.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [217]
+}
+},
+{
+"id" : 217,
+"uid" : "1.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [218]
+}
+},
+{
+"id" : 218,
+"uid" : "1.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1.0",
+"f" : "diode.va",
+"l" : "13",
+"c" : "51"
+},
+"references" : {}
+},
+{
+"id" : 219,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [220],
+"supexpr" : [223]
+}
+},
+{
+"id" : 220,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [221]
+}
+},
+{
+"id" : 221,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [222]
+}
+},
+{
+"id" : 222,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "13",
+"c" : "61"
+},
+"references" : {}
+},
+{
+"id" : 223,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [224]
+}
+},
+{
+"id" : 224,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [225]
+}
+},
+{
+"id" : 225,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "13",
+"c" : "63"
+},
+"references" : {}
+},
+{
+"id" : 226,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [227]
+}
+},
+{
+"id" : 227,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "31",
+"c" : "60"
+},
+"references" : {}
+},
+{
+"id" : 228,
+"uid" : "Id",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Id",
+"f" : "diode.va",
+"l" : "31",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 229,
+"uid" : "rs_t=((Rs*pow((Tdev/Tnom),zetars)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [230],
+"rhs" : [235],
+"lexval" : [267]
+}
+},
+{
+"id" : 230,
+"uid" : "rs_t",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [231]
+}
+},
+{
+"id" : 231,
+"uid" : "rs_t",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [232],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [229],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [230, 233, 234]
+}
+},
+{
+"id" : 232,
+"uid" : "rs_t",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "rs_t",
+"f" : "diode.va",
+"l" : "25",
+"c" : "27"
+},
+"references" : {}
+},
+{
+"id" : 233,
+"uid" : "rs_t",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [231]
+}
+},
+{
+"id" : 234,
+"uid" : "rs_t",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [231]
+}
+},
+{
+"id" : 235,
+"uid" : "((Rs*pow((Tdev/Tnom),zetars)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [236]
+}
+},
+{
+"id" : 236,
+"uid" : "(Rs*pow((Tdev/Tnom),zetars))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [237],
+"arg2" : [250]
+}
+},
+{
+"id" : 237,
+"uid" : "Rs",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [238]
+}
+},
+{
+"id" : 238,
+"uid" : "Rs",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Ohmic res",
+"units" : "Ohm"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [239],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [240],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [243],
+"instance" : [237]
+}
+},
+{
+"id" : 239,
+"uid" : "Rs",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Rs",
+"f" : "diode.va",
+"l" : "11",
+"c" : "49"
+},
+"references" : {}
+},
+{
+"id" : 240,
+"uid" : "(0.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [241]
+}
+},
+{
+"id" : 241,
+"uid" : "0.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [242]
+}
+},
+{
+"id" : 242,
+"uid" : "0.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.0",
+"f" : "diode.va",
+"l" : "11",
+"c" : "54"
+},
+"references" : {}
+},
+{
+"id" : 243,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [244],
+"supexpr" : [247]
+}
+},
+{
+"id" : 244,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [245]
+}
+},
+{
+"id" : 245,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [246]
+}
+},
+{
+"id" : 246,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "11",
+"c" : "64"
+},
+"references" : {}
+},
+{
+"id" : 247,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [248]
+}
+},
+{
+"id" : 248,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [249]
+}
+},
+{
+"id" : 249,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "11",
+"c" : "66"
+},
+"references" : {}
+},
+{
+"id" : 250,
+"uid" : "pow((Tdev/Tnom),zetars)",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "3"
+},
+"references" : {
+"lexval" : [251],
+"definition" : [],
+"arguments" : [252, 253]
+}
+},
+{
+"id" : 251,
+"uid" : "pow",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pow",
+"f" : "diode.va",
+"l" : "32",
+"c" : "11"
+},
+"references" : {}
+},
+{
+"id" : 252,
+"uid" : "(Tdev/Tnom)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [12],
+"arg2" : [192]
+}
+},
+{
+"id" : 253,
+"uid" : "zetars",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [254]
+}
+},
+{
+"id" : 254,
+"uid" : "zetars",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Temperature coefficient of ohmic res"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [255],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [256],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [259],
+"instance" : [253]
+}
+},
+{
+"id" : 255,
+"uid" : "zetars",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "zetars",
+"f" : "diode.va",
+"l" : "12",
+"c" : "63"
+},
+"references" : {}
+},
+{
+"id" : 256,
+"uid" : "(0.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [257]
+}
+},
+{
+"id" : 257,
+"uid" : "0.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [258]
+}
+},
+{
+"id" : 258,
+"uid" : "0.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.0",
+"f" : "diode.va",
+"l" : "12",
+"c" : "72"
+},
+"references" : {}
+},
+{
+"id" : 259,
+"uid" : "from [((-10)):(10)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [260],
+"supexpr" : [264]
+}
+},
+{
+"id" : 260,
+"uid" : "((-10))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [261]
+}
+},
+{
+"id" : 261,
+"uid" : "(-10)",
+"datatypename" : "mapply_unary",
+"attributes" : {},
+"parameters" : {
+"name" : "minus"
+},
+"references" : {
+"arg1" : [262]
+}
+},
+{
+"id" : 262,
+"uid" : "10",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [263]
+}
+},
+{
+"id" : 263,
+"uid" : "10",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "10",
+"f" : "diode.va",
+"l" : "12",
+"c" : "83"
+},
+"references" : {}
+},
+{
+"id" : 264,
+"uid" : "(10)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [265]
+}
+},
+{
+"id" : 265,
+"uid" : "10",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [266]
+}
+},
+{
+"id" : 266,
+"uid" : "10",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "10",
+"f" : "diode.va",
+"l" : "12",
+"c" : "86"
+},
+"references" : {}
+},
+{
+"id" : 267,
+"uid" : "rs_t",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "rs_t",
+"f" : "diode.va",
+"l" : "32",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 268,
+"uid" : "rth_t=((Rth*pow((Tdev/Tnom),zetarth)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [269],
+"rhs" : [273],
+"lexval" : [305]
+}
+},
+{
+"id" : 269,
+"uid" : "rth_t",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [270]
+}
+},
+{
+"id" : 270,
+"uid" : "rth_t",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [271],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [268],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [269, 272]
+}
+},
+{
+"id" : 271,
+"uid" : "rth_t",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "rth_t",
+"f" : "diode.va",
+"l" : "25",
+"c" : "33"
+},
+"references" : {}
+},
+{
+"id" : 272,
+"uid" : "rth_t",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [270]
+}
+},
+{
+"id" : 273,
+"uid" : "((Rth*pow((Tdev/Tnom),zetarth)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [274]
+}
+},
+{
+"id" : 274,
+"uid" : "(Rth*pow((Tdev/Tnom),zetarth))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [275],
+"arg2" : [288]
+}
+},
+{
+"id" : 275,
+"uid" : "Rth",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [276]
+}
+},
+{
+"id" : 276,
+"uid" : "Rth",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Thermal resistance",
+"units" : "K/W"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [277],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [278],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [281],
+"instance" : [275]
+}
+},
+{
+"id" : 277,
+"uid" : "Rth",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Rth",
+"f" : "diode.va",
+"l" : "17",
+"c" : "57"
+},
+"references" : {}
+},
+{
+"id" : 278,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [279]
+}
+},
+{
+"id" : 279,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [280]
+}
+},
+{
+"id" : 280,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "17",
+"c" : "63"
+},
+"references" : {}
+},
+{
+"id" : 281,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [282],
+"supexpr" : [285]
+}
+},
+{
+"id" : 282,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [283]
+}
+},
+{
+"id" : 283,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [284]
+}
+},
+{
+"id" : 284,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "17",
+"c" : "71"
+},
+"references" : {}
+},
+{
+"id" : 285,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [286]
+}
+},
+{
+"id" : 286,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [287]
+}
+},
+{
+"id" : 287,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "17",
+"c" : "73"
+},
+"references" : {}
+},
+{
+"id" : 288,
+"uid" : "pow((Tdev/Tnom),zetarth)",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "4"
+},
+"references" : {
+"lexval" : [289],
+"definition" : [],
+"arguments" : [290, 291]
+}
+},
+{
+"id" : 289,
+"uid" : "pow",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pow",
+"f" : "diode.va",
+"l" : "33",
+"c" : "13"
+},
+"references" : {}
+},
+{
+"id" : 290,
+"uid" : "(Tdev/Tnom)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [13],
+"arg2" : [193]
+}
+},
+{
+"id" : 291,
+"uid" : "zetarth",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [292]
+}
+},
+{
+"id" : 292,
+"uid" : "zetarth",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Temperature coefficient of thermal res"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [293],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [294],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [297],
+"instance" : [291]
+}
+},
+{
+"id" : 293,
+"uid" : "zetarth",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "zetarth",
+"f" : "diode.va",
+"l" : "18",
+"c" : "65"
+},
+"references" : {}
+},
+{
+"id" : 294,
+"uid" : "(0.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [295]
+}
+},
+{
+"id" : 295,
+"uid" : "0.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [296]
+}
+},
+{
+"id" : 296,
+"uid" : "0.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.0",
+"f" : "diode.va",
+"l" : "18",
+"c" : "75"
+},
+"references" : {}
+},
+{
+"id" : 297,
+"uid" : "from [((-10)):(10)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [298],
+"supexpr" : [302]
+}
+},
+{
+"id" : 298,
+"uid" : "((-10))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [299]
+}
+},
+{
+"id" : 299,
+"uid" : "(-10)",
+"datatypename" : "mapply_unary",
+"attributes" : {},
+"parameters" : {
+"name" : "minus"
+},
+"references" : {
+"arg1" : [300]
+}
+},
+{
+"id" : 300,
+"uid" : "10",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [301]
+}
+},
+{
+"id" : 301,
+"uid" : "10",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "10",
+"f" : "diode.va",
+"l" : "18",
+"c" : "86"
+},
+"references" : {}
+},
+{
+"id" : 302,
+"uid" : "(10)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [303]
+}
+},
+{
+"id" : 303,
+"uid" : "10",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [304]
+}
+},
+{
+"id" : 304,
+"uid" : "10",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "10",
+"f" : "diode.va",
+"l" : "18",
+"c" : "89"
+},
+"references" : {}
+},
+{
+"id" : 305,
+"uid" : "rth_t",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "rth_t",
+"f" : "diode.va",
+"l" : "33",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 306,
+"uid" : "pterm=(((Id*Vd)+(pow(Vr,2.0)/rs_t)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [307],
+"rhs" : [311],
+"lexval" : [319]
+}
+},
+{
+"id" : 307,
+"uid" : "pterm",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [308]
+}
+},
+{
+"id" : 308,
+"uid" : "pterm",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [309],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [306],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [307, 310]
+}
+},
+{
+"id" : 309,
+"uid" : "pterm",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pterm",
+"f" : "diode.va",
+"l" : "25",
+"c" : "21"
+},
+"references" : {}
+},
+{
+"id" : 310,
+"uid" : "pterm",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [308]
+}
+},
+{
+"id" : 311,
+"uid" : "(((Id*Vd)+(pow(Vr,2.0)/rs_t)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [312]
+}
+},
+{
+"id" : 312,
+"uid" : "((Id*Vd)+(pow(Vr,2.0)/rs_t))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addp"
+},
+"references" : {
+"arg1" : [313],
+"arg2" : [314]
+}
+},
+{
+"id" : 313,
+"uid" : "(Id*Vd)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [158],
+"arg2" : [135]
+}
+},
+{
+"id" : 314,
+"uid" : "(pow(Vr,2.0)/rs_t)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [315],
+"arg2" : [233]
+}
+},
+{
+"id" : 315,
+"uid" : "pow(Vr,2.0)",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "5"
+},
+"references" : {
+"lexval" : [316],
+"definition" : [],
+"arguments" : [147, 317]
+}
+},
+{
+"id" : 316,
+"uid" : "pow",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pow",
+"f" : "diode.va",
+"l" : "35",
+"c" : "17"
+},
+"references" : {}
+},
+{
+"id" : 317,
+"uid" : "2.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [318]
+}
+},
+{
+"id" : 318,
+"uid" : "2.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "2.0",
+"f" : "diode.va",
+"l" : "35",
+"c" : "24"
+},
+"references" : {}
+},
+{
+"id" : 319,
+"uid" : "pterm",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pterm",
+"f" : "diode.va",
+"l" : "35",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 320,
+"uid" : "Qd=((((Cj0*Vj)*(1-pow((1-(Vd/Vj)),(1-M))))/(1-M)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [321],
+"rhs" : [326],
+"lexval" : [358]
+}
+},
+{
+"id" : 321,
+"uid" : "Qd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [322]
+}
+},
+{
+"id" : 322,
+"uid" : "Qd",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [323],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [320],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [321, 324, 325]
+}
+},
+{
+"id" : 323,
+"uid" : "Qd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Qd",
+"f" : "diode.va",
+"l" : "22",
+"c" : "14"
+},
+"references" : {}
+},
+{
+"id" : 324,
+"uid" : "Qd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [322]
+}
+},
+{
+"id" : 325,
+"uid" : "Qd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [322]
+}
+},
+{
+"id" : 326,
+"uid" : "((((Cj0*Vj)*(1-pow((1-(Vd/Vj)),(1-M))))/(1-M)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [327]
+}
+},
+{
+"id" : 327,
+"uid" : "(((Cj0*Vj)*(1-pow((1-(Vd/Vj)),(1-M))))/(1-M))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [328],
+"arg2" : [355]
+}
+},
+{
+"id" : 328,
+"uid" : "((Cj0*Vj)*(1-pow((1-(Vd/Vj)),(1-M))))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [329],
+"arg2" : [343]
+}
+},
+{
+"id" : 329,
+"uid" : "(Cj0*Vj)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [330],
+"arg2" : [73]
+}
+},
+{
+"id" : 330,
+"uid" : "Cj0",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [331]
+}
+},
+{
+"id" : 331,
+"uid" : "Cj0",
+"datatypename" : "variableprototype",
+"attributes" : {
+"desc" : "Junction capacitance",
+"units" : "F"
+},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : true,
+"output" : false,
+"vcount" : "0"
+},
+"references" : {
+"module" : [2],
+"lexval" : [332],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [333],
+"vlast" : [],
+"arraydefault" : [],
+"alias" : [],
+"range" : [336],
+"instance" : [330]
+}
+},
+{
+"id" : 332,
+"uid" : "Cj0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Cj0",
+"f" : "diode.va",
+"l" : "14",
+"c" : "57"
+},
+"references" : {}
+},
+{
+"id" : 333,
+"uid" : "(0.0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [334]
+}
+},
+{
+"id" : 334,
+"uid" : "0.0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [335]
+}
+},
+{
+"id" : 335,
+"uid" : "0.0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0.0",
+"f" : "diode.va",
+"l" : "14",
+"c" : "63"
+},
+"references" : {}
+},
+{
+"id" : 336,
+"uid" : "from [(0):(+inf)]",
+"datatypename" : "range",
+"attributes" : {},
+"parameters" : {
+"name" : "",
+"infboundtype" : "range_bound_include",
+"supboundtype" : "range_bound_include",
+"type" : "include"
+},
+"references" : {
+"module" : [2],
+"infexpr" : [337],
+"supexpr" : [340]
+}
+},
+{
+"id" : 337,
+"uid" : "(0)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [338]
+}
+},
+{
+"id" : 338,
+"uid" : "0",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [339]
+}
+},
+{
+"id" : 339,
+"uid" : "0",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "0",
+"f" : "diode.va",
+"l" : "14",
+"c" : "73"
+},
+"references" : {}
+},
+{
+"id" : 340,
+"uid" : "(+inf)",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : true,
+"infinity" : "plus"
+},
+"references" : {
+"tree" : [341]
+}
+},
+{
+"id" : 341,
+"uid" : "+inf",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [342]
+}
+},
+{
+"id" : 342,
+"uid" : "+inf",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "+inf",
+"f" : "diode.va",
+"l" : "14",
+"c" : "75"
+},
+"references" : {}
+},
+{
+"id" : 343,
+"uid" : "(1-pow((1-(Vd/Vj)),(1-M)))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [344],
+"arg2" : [346]
+}
+},
+{
+"id" : 344,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [345]
+}
+},
+{
+"id" : 345,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "44",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 346,
+"uid" : "pow((1-(Vd/Vj)),(1-M))",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "8"
+},
+"references" : {
+"lexval" : [347],
+"definition" : [],
+"arguments" : [348, 352]
+}
+},
+{
+"id" : 347,
+"uid" : "pow",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "pow",
+"f" : "diode.va",
+"l" : "44",
+"c" : "18"
+},
+"references" : {}
+},
+{
+"id" : 348,
+"uid" : "(1-(Vd/Vj))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [349],
+"arg2" : [351]
+}
+},
+{
+"id" : 349,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [350]
+}
+},
+{
+"id" : 350,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "44",
+"c" : "22"
+},
+"references" : {}
+},
+{
+"id" : 351,
+"uid" : "(Vd/Vj)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [136],
+"arg2" : [74]
+}
+},
+{
+"id" : 352,
+"uid" : "(1-M)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [353],
+"arg2" : [99]
+}
+},
+{
+"id" : 353,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [354]
+}
+},
+{
+"id" : 354,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "44",
+"c" : "31"
+},
+"references" : {}
+},
+{
+"id" : 355,
+"uid" : "(1-M)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [356],
+"arg2" : [100]
+}
+},
+{
+"id" : 356,
+"uid" : "1",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "i"
+},
+"references" : {
+"lexval" : [357]
+}
+},
+{
+"id" : 357,
+"uid" : "1",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1",
+"f" : "diode.va",
+"l" : "44",
+"c" : "38"
+},
+"references" : {}
+},
+{
+"id" : 358,
+"uid" : "Qd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Qd",
+"f" : "diode.va",
+"l" : "44",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 359,
+"uid" : "Cd=(ddx(Qd,V(A,GND)));",
+"datatypename" : "assignment",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [360],
+"rhs" : [363],
+"lexval" : [368]
+}
+},
+{
+"id" : 360,
+"uid" : "Cd",
+"datatypename" : "variable",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"prototype" : [361]
+}
+},
+{
+"id" : 361,
+"uid" : "Cd",
+"datatypename" : "variableprototype",
+"attributes" : {},
+"parameters" : {
+"sizetype" : "scalar",
+"parametertype" : "model",
+"type" : "real",
+"input" : false,
+"output" : false,
+"vcount" : "1"
+},
+"references" : {
+"module" : [2],
+"lexval" : [362],
+"block" : [2],
+"maxsize" : [],
+"minsize" : [],
+"default" : [],
+"vlast" : [359],
+"arraydefault" : [],
+"alias" : [],
+"range" : [],
+"instance" : [360]
+}
+},
+{
+"id" : 362,
+"uid" : "Cd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Cd",
+"f" : "diode.va",
+"l" : "24",
+"c" : "6"
+},
+"references" : {}
+},
+{
+"id" : 363,
+"uid" : "(ddx(Qd,V(A,GND)))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [364]
+}
+},
+{
+"id" : 364,
+"uid" : "ddx(Qd,V(A,GND))",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "9"
+},
+"references" : {
+"lexval" : [365],
+"definition" : [],
+"arguments" : [324, 366]
+}
+},
+{
+"id" : 365,
+"uid" : "ddx",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "ddx",
+"f" : "diode.va",
+"l" : "45",
+"c" : "6"
+},
+"references" : {}
+},
+{
+"id" : 366,
+"uid" : "V(A,GND)",
+"datatypename" : "probe",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [367],
+"nature" : [25]
+}
+},
+{
+"id" : 367,
+"uid" : "A,GND",
+"datatypename" : "branch",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"pnode" : [140],
+"nnode" : [28],
+"discipline" : []
+}
+},
+{
+"id" : 368,
+"uid" : "Cd",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "Cd",
+"f" : "diode.va",
+"l" : "45",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 369,
+"uid" : "I(A,CI)<+(((Id+ddt(Qd))+($simparam(\"gmin\")*V(A,CI))));",
+"datatypename" : "contribution",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [370],
+"rhs" : [371],
+"lexval" : [380],
+"branchalias" : [381]
+}
+},
+{
+"id" : 370,
+"uid" : "I(A,CI)",
+"datatypename" : "source",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [139],
+"nature" : [22],
+"discipline" : [],
+"probe" : []
+}
+},
+{
+"id" : 371,
+"uid" : "(((Id+ddt(Qd))+($simparam(\"gmin\")*V(A,CI))))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [372]
+}
+},
+{
+"id" : 372,
+"uid" : "((Id+ddt(Qd))+($simparam(\"gmin\")*V(A,CI)))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addp"
+},
+"references" : {
+"arg1" : [373],
+"arg2" : [376]
+}
+},
+{
+"id" : 373,
+"uid" : "(Id+ddt(Qd))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addp"
+},
+"references" : {
+"arg1" : [159],
+"arg2" : [374]
+}
+},
+{
+"id" : 374,
+"uid" : "ddt(Qd)",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "10"
+},
+"references" : {
+"lexval" : [375],
+"definition" : [],
+"arguments" : [325]
+}
+},
+{
+"id" : 375,
+"uid" : "ddt",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "ddt",
+"f" : "diode.va",
+"l" : "46",
+"c" : "20"
+},
+"references" : {}
+},
+{
+"id" : 376,
+"uid" : "($simparam(\"gmin\")*V(A,CI))",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multtime"
+},
+"references" : {
+"arg1" : [377],
+"arg2" : [138]
+}
+},
+{
+"id" : 377,
+"uid" : "$simparam(\"gmin\")",
+"datatypename" : "function",
+"attributes" : {},
+"parameters" : {
+"unique_id" : "11"
+},
+"references" : {
+"lexval" : [378],
+"definition" : [],
+"arguments" : [379]
+}
+},
+{
+"id" : 378,
+"uid" : "$simparam",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "$simparam",
+"f" : "diode.va",
+"l" : "46",
+"c" : "30"
+},
+"references" : {}
+},
+{
+"id" : 379,
+"uid" : "\"gmin\"",
+"datatypename" : "string",
+"attributes" : {},
+"parameters" : {
+"value" : "gmin"
+},
+"references" : {}
+},
+{
+"id" : 380,
+"uid" : "I",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "I",
+"f" : "diode.va",
+"l" : "46",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 381,
+"uid" : "br_a_ci",
+"datatypename" : "branchalias",
+"attributes" : {},
+"parameters" : {
+"name" : "br_a_ci"
+},
+"references" : {
+"module" : [2],
+"branch" : [139]
+}
+},
+{
+"id" : 382,
+"uid" : "I(dT,GND)<+(((V(dT,GND)/rth_t)-pterm));",
+"datatypename" : "contribution",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [383],
+"rhs" : [384],
+"lexval" : [387],
+"branchalias" : [388]
+}
+},
+{
+"id" : 383,
+"uid" : "I(dT,GND)",
+"datatypename" : "source",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [19],
+"nature" : [22],
+"discipline" : [],
+"probe" : []
+}
+},
+{
+"id" : 384,
+"uid" : "(((V(dT,GND)/rth_t)-pterm))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [385]
+}
+},
+{
+"id" : 385,
+"uid" : "((V(dT,GND)/rth_t)-pterm)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "addm"
+},
+"references" : {
+"arg1" : [386],
+"arg2" : [310]
+}
+},
+{
+"id" : 386,
+"uid" : "(V(dT,GND)/rth_t)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [18],
+"arg2" : [272]
+}
+},
+{
+"id" : 387,
+"uid" : "I",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "I",
+"f" : "diode.va",
+"l" : "47",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 388,
+"uid" : "br_sht",
+"datatypename" : "branchalias",
+"attributes" : {},
+"parameters" : {
+"name" : "br_sht"
+},
+"references" : {
+"module" : [2],
+"branch" : [19]
+}
+},
+{
+"id" : 389,
+"uid" : "I(CI,C)<+((Vr/rs_t));",
+"datatypename" : "contribution",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"lhs" : [390],
+"rhs" : [391],
+"lexval" : [393],
+"branchalias" : [394]
+}
+},
+{
+"id" : 390,
+"uid" : "I(CI,C)",
+"datatypename" : "source",
+"attributes" : {},
+"parameters" : {},
+"references" : {
+"module" : [2],
+"branch" : [151],
+"nature" : [22],
+"discipline" : [],
+"probe" : []
+}
+},
+{
+"id" : 391,
+"uid" : "((Vr/rs_t))",
+"datatypename" : "expression",
+"attributes" : {},
+"parameters" : {
+"hasspecialnumber" : false,
+"infinity" : false
+},
+"references" : {
+"tree" : [392]
+}
+},
+{
+"id" : 392,
+"uid" : "(Vr/rs_t)",
+"datatypename" : "mapply_binary",
+"attributes" : {},
+"parameters" : {
+"name" : "multdiv"
+},
+"references" : {
+"arg1" : [148],
+"arg2" : [234]
+}
+},
+{
+"id" : 393,
+"uid" : "I",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "I",
+"f" : "diode.va",
+"l" : "48",
+"c" : "1"
+},
+"references" : {}
+},
+{
+"id" : 394,
+"uid" : "br_ci_c",
+"datatypename" : "branchalias",
+"attributes" : {},
+"parameters" : {
+"name" : "br_ci_c"
+},
+"references" : {
+"module" : [2],
+"branch" : [151]
+}
+},
+{
+"id" : 395,
+"uid" : "0",
+"datatypename" : "nodealias",
+"attributes" : {},
+"parameters" : {
+"name" : "0"
+},
+"references" : {
+"module" : [2],
+"node" : [28]
+}
+},
+{
+"id" : 396,
+"uid" : "A",
+"datatypename" : "nodealias",
+"attributes" : {},
+"parameters" : {
+"name" : "A"
+},
+"references" : {
+"module" : [2],
+"node" : [140]
+}
+},
+{
+"id" : 397,
+"uid" : "C",
+"datatypename" : "nodealias",
+"attributes" : {},
+"parameters" : {
+"name" : "C"
+},
+"references" : {
+"module" : [2],
+"node" : [152]
+}
+},
+{
+"id" : 398,
+"uid" : "dT",
+"datatypename" : "nodealias",
+"attributes" : {},
+"parameters" : {
+"name" : "dT"
+},
+"references" : {
+"module" : [2],
+"node" : [20]
+}
+},
+{
+"id" : 399,
+"uid" : "logic",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "logic",
+"domain" : "discrete"
+},
+"references" : {
+"flow" : [],
+"potential" : []
+}
+},
+{
+"id" : 400,
+"uid" : "ddiscrete",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "ddiscrete",
+"domain" : "discrete"
+},
+"references" : {
+"flow" : [],
+"potential" : []
+}
+},
+{
+"id" : 401,
+"uid" : "voltage",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "voltage",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [],
+"potential" : [25]
+}
+},
+{
+"id" : 402,
+"uid" : "current",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "current",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [22],
+"potential" : []
+}
+},
+{
+"id" : 403,
+"uid" : "magnetic",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "magnetic",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [404],
+"potential" : [407]
+}
+},
+{
+"id" : 404,
+"uid" : "Phi",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Phi",
+"name" : "Flux",
+"ddt_name" : "Voltage",
+"idt_name" : "",
+"units" : "Wb"
+},
+"references" : {
+"abstol" : [405],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 405,
+"uid" : "1e-9",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [406]
+}
+},
+{
+"id" : 406,
+"uid" : "1e-9",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-9",
+"f" : "disciplines.vams",
+"l" : "80",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 407,
+"uid" : "MMF",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "MMF",
+"name" : "Magneto_Motive_Force",
+"ddt_name" : "",
+"idt_name" : "",
+"units" : "A*turn"
+},
+"references" : {
+"abstol" : [408],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 408,
+"uid" : "1e-12",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [409]
+}
+},
+{
+"id" : 409,
+"uid" : "1e-12",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-12",
+"f" : "disciplines.vams",
+"l" : "108",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 410,
+"uid" : "thermal",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "thermal",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [411],
+"potential" : [414]
+}
+},
+{
+"id" : 411,
+"uid" : "Pwr",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Pwr",
+"name" : "Power",
+"ddt_name" : "",
+"idt_name" : "",
+"units" : "W"
+},
+"references" : {
+"abstol" : [412],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 412,
+"uid" : "1e-9",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [413]
+}
+},
+{
+"id" : 413,
+"uid" : "1e-9",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-9",
+"f" : "disciplines.vams",
+"l" : "138",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 414,
+"uid" : "Temp",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Temp",
+"name" : "Temperature",
+"ddt_name" : "",
+"idt_name" : "",
+"units" : "K"
+},
+"references" : {
+"abstol" : [415],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 415,
+"uid" : "1e-4",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [416]
+}
+},
+{
+"id" : 416,
+"uid" : "1e-4",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-4",
+"f" : "disciplines.vams",
+"l" : "127",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 417,
+"uid" : "kinematic",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "kinematic",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [418],
+"potential" : [421]
+}
+},
+{
+"id" : 418,
+"uid" : "F",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "F",
+"name" : "Force",
+"ddt_name" : "",
+"idt_name" : "",
+"units" : "N"
+},
+"references" : {
+"abstol" : [419],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 419,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [420]
+}
+},
+{
+"id" : 420,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "207",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 421,
+"uid" : "Pos",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Pos",
+"name" : "Position",
+"ddt_name" : "Velocity",
+"idt_name" : "",
+"units" : "m"
+},
+"references" : {
+"abstol" : [422],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 422,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [423]
+}
+},
+{
+"id" : 423,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "158",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 424,
+"uid" : "kinematic_v",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "kinematic_v",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [418],
+"potential" : [425]
+}
+},
+{
+"id" : 425,
+"uid" : "Vel",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Vel",
+"name" : "Velocity",
+"ddt_name" : "Acceleration",
+"idt_name" : "Position",
+"units" : "m/s"
+},
+"references" : {
+"abstol" : [426],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 426,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [427]
+}
+},
+{
+"id" : 427,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "171",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 428,
+"uid" : "rotational",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "rotational",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [429],
+"potential" : [432]
+}
+},
+{
+"id" : 429,
+"uid" : "Tau",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Tau",
+"name" : "Angular_Force",
+"ddt_name" : "",
+"idt_name" : "",
+"units" : "N*m"
+},
+"references" : {
+"abstol" : [430],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 430,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [431]
+}
+},
+{
+"id" : 431,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "269",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 432,
+"uid" : "Theta",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Theta",
+"name" : "Angle",
+"ddt_name" : "Angular_Velocity",
+"idt_name" : "",
+"units" : "rads"
+},
+"references" : {
+"abstol" : [433],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 433,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [434]
+}
+},
+{
+"id" : 434,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "233",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 435,
+"uid" : "rotational_omega",
+"datatypename" : "discipline",
+"attributes" : {},
+"parameters" : {
+"name" : "rotational_omega",
+"domain" : "continuous"
+},
+"references" : {
+"flow" : [429],
+"potential" : [436]
+}
+},
+{
+"id" : 436,
+"uid" : "Omega",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Omega",
+"name" : "Angular_Velocity",
+"ddt_name" : "Angular_Acceleration",
+"idt_name" : "Angle",
+"units" : "rads/s"
+},
+"references" : {
+"abstol" : [437],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 437,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [438]
+}
+},
+{
+"id" : 438,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "246",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 439,
+"uid" : "Q",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Q",
+"name" : "Charge",
+"ddt_name" : "Current",
+"idt_name" : "",
+"units" : "coul"
+},
+"references" : {
+"abstol" : [440],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 440,
+"uid" : "1e-14",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [441]
+}
+},
+{
+"id" : 441,
+"uid" : "1e-14",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-14",
+"f" : "disciplines.vams",
+"l" : "56",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 442,
+"uid" : "Acc",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Acc",
+"name" : "Acceleration",
+"ddt_name" : "Impulse",
+"idt_name" : "Velocity",
+"units" : "m/s^2"
+},
+"references" : {
+"abstol" : [443],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 443,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [444]
+}
+},
+{
+"id" : 444,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "184",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 445,
+"uid" : "Imp",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Imp",
+"name" : "Impulse",
+"ddt_name" : "",
+"idt_name" : "Acceleration",
+"units" : "m/s^3"
+},
+"references" : {
+"abstol" : [446],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 446,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [447]
+}
+},
+{
+"id" : 447,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "196",
+"c" : "16"
+},
+"references" : {}
+},
+{
+"id" : 448,
+"uid" : "Alpha",
+"datatypename" : "nature",
+"attributes" : {},
+"parameters" : {
+"access" : "Alpha",
+"name" : "Angular_Acceleration",
+"ddt_name" : "",
+"idt_name" : "Angular_Velocity",
+"units" : "rads/s^2"
+},
+"references" : {
+"abstol" : [449],
+"base" : [],
+"ddt_nature" : [],
+"idt_nature" : []
+}
+},
+{
+"id" : 449,
+"uid" : "1e-6",
+"datatypename" : "number",
+"attributes" : {},
+"parameters" : {
+"scalingunit" : "1",
+"cast" : "d"
+},
+"references" : {
+"lexval" : [450]
+}
+},
+{
+"id" : 450,
+"uid" : "1e-6",
+"datatypename" : "lexval",
+"attributes" : {},
+"parameters" : {
+"string" : "1e-6",
+"f" : "disciplines.vams",
+"l" : "258",
+"c" : "16"
+},
+"references" : {}
+}
+]

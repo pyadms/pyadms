@@ -1,5 +1,8 @@
+# Copyright 2023 DEVSIM LLC
+#
+# SPDX-License-Identifier: Apache-2.0
+
 import json
-from . import adms_implicit
 
 class admst_reference:
     def __init__(self, index):

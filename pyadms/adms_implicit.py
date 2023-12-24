@@ -1,3 +1,7 @@
+# Copyright 2023 DEVSIM LLC
+#
+# This file is a derived work from adms.implicit.xml and subject to its license terms.
+# It is mostly used as a reference to navigate with the visitor pattern being used for some processing later.
 
 class dependency_visitor:
     def __init__(self):

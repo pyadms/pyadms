@@ -17,5 +17,3 @@ Copyright (C) 2023 DEVSIM LLC
 
 Original code copyright the original authors.  The NOTICE file has more license and copyright information.
 
-Please see the INSTALL file for build instructions.  The NOTICE file has more license and copyright information.
-

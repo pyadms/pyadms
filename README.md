@@ -1,4 +1,4 @@
-# PyADMS - Python Automatic device model synthesizer
+# PyADMS - Python Automatic Device Model Synthesizer
 
 Thie is Verilog-AMS to JSON Automatic Device Model Synthesizer.  Additional processing is down via Python scripts to create source code for integration into circuit simulators.
 

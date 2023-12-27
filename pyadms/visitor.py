@@ -102,15 +102,16 @@ class dependency_visitor:
     def visit_conditional(self, conditional):
         conditional.If().visit(self)
         conditional.Then().visit(self)
-        conditional.Else().visit(self)
+        if conditional.Else is not None:
+            conditional.Else().visit(self)
 
     def visit_contribution(self, contribution):
         self.globalcontribution = contribution
         contribution.rhs().visit(self)
         self.globalcontribution = None
         contribution.lhs().probe
-        for probe in contribution.rhs().probe:
-            contribution.lhs().probe.append(probe)
+        #for probe in contribution.rhs().probe:
+        #    contribution.lhs().probe.append(probe)
         contribution.dependency = 'nonlinear'
 
     def visit_assignment(self, assignment):
@@ -127,7 +128,8 @@ class dependency_visitor:
             lhs.variable = []
 
     def visit_block(self, block):
-        if name in  ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step,'):
+        block.name = block.lexval
+        if block.name in  ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step,'):
             self.globalpartitionning = name
 
         for item in block.item.get_list():

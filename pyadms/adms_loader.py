@@ -328,6 +328,9 @@ class module(admst):
             self.move_up_reference(x)
 
 class nature(admst):
+
+    __slots__ = ('access', 'name', 'ddt_name', 'idt_name', 'units', 'abstol', 'base', 'ddt_nature', 'idt_nature',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ['access', 'name', 'ddt_name', 'idt_name', 'units']:
@@ -336,10 +339,16 @@ class nature(admst):
             self.move_up_reference(x, True)
 
 class nilled(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
 class node(admst):
+
+    __slots__ = ('name', 'direction', 'location', 'module', 'discipline', 'grounded')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ['name', 'direction', 'location']:
@@ -348,6 +357,9 @@ class node(admst):
             self.move_up_reference(x, True)
 
 class nodealias(admst):
+
+    __slots__ = ('name', 'module', 'node')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
@@ -355,6 +367,9 @@ class nodealias(admst):
             self.move_up_reference(x, True)
 
 class number(admst):
+
+    __slots__ = ('scalingunit', 'cast', 'lexval',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ['scalingunit', 'cast']:
@@ -362,12 +377,18 @@ class number(admst):
         self.move_up_reference('lexval', True)
 
 class probe(admst):
+
+    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
 
 class range(admst):
+
+    __slots__ = ('module', 'infexpr', 'supexpr', 'name', 'infboundtype', 'supboundtype', 'type',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'infexpr', 'supexpr'):
@@ -376,15 +397,21 @@ class range(admst):
             self.move_up_parameter(x)
 
 class simulator(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
 class source(admst):
+
+    __slots__ = ('module', 'branch', 'nature', 'probe', 'discipline', 'grounded')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
-        self.probe = admst_reference_list([])
+        #self.probe = admst_reference_list([])
 
 class string(admst):
 
@@ -395,33 +422,28 @@ class string(admst):
         self.move_up_parameter('value')
 
 class variable(admst):
+
+    __slots__ = ('prototype', 'probe', 'variable')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('prototype', True)
         self.probe = admst_reference_list([])
 
 class variableprototype(admst):
+
+    __slots__ = ('instance', 'range', 'default', 'parametertype')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('instance')
         self.move_up_reference('range', False)
         self.move_up_reference('default', True)
-        self.dependency = None
-        self.input = None
-        self.setinmodel = False
-        self.usedinmodel = False
-        self.setininstance = False
-        self.usedininstance = False
-        self.setininitial_step = False
-        self.usedininitial_step = False
-        self.setinevaluate = False
-        self.usedinevaluate = False
-        self.setinnoise = False
-        self.usedinnoise = False
-        self.setinfinal = False
-        self.usedinfinal = False
 
 class whileloop(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.references['While'] = self.references.pop('while')

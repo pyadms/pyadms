@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 class dependency_visitor:
+    __slots__ = ()
+
     def __init__(self):
         pass
 
@@ -106,7 +108,7 @@ class dependency_visitor:
             conditional.Else().visit(self)
 
     def visit_contribution(self, contribution):
-        self.globalcontribution = contribution
+        #self.globalcontribution = contribution
         contribution.rhs().visit(self)
         #self.globalcontribution = None
         #contribution.lhs().probe

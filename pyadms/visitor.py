@@ -108,11 +108,11 @@ class dependency_visitor:
     def visit_contribution(self, contribution):
         self.globalcontribution = contribution
         contribution.rhs().visit(self)
-        self.globalcontribution = None
-        contribution.lhs().probe
+        #self.globalcontribution = None
+        #contribution.lhs().probe
         #for probe in contribution.rhs().probe:
         #    contribution.lhs().probe.append(probe)
-        contribution.dependency = 'nonlinear'
+        #contribution.dependency = 'nonlinear'
 
     def visit_assignment(self, assignment):
         ldn = assignment.get_datatypename()

@@ -5,6 +5,9 @@
 import json
 
 class admst_reference:
+
+    __slots__ = ('index')
+
     def __init__(self, index):
         self.index = index
 
@@ -12,6 +15,9 @@ class admst_reference:
         return admst.all_data[self.index]
 
 class admst_reference_list:
+
+    __slots__ = ('reference_list')
+
     def __init__(self, reference_list):
         self.reference_list = reference_list
         if not all(isinstance(x, int) for x in self.reference_list):
@@ -59,9 +65,11 @@ class admst:
     module_ = None
     simulator_ = None
 
+    __slots__ = ('datatypename', 'id', 'uid', 'attributes', 'parameters', 'references', 'kwargs',)
+
     def __init__(self, **kwargs):
         for x in ['datatypename', 'id', 'uid', 'attributes', 'parameters', 'references']:
-            self.__dict__[x] = kwargs[x]
+            setattr(self, x, kwargs[x])
             del kwargs[x]
         self.kwargs = kwargs
 
@@ -72,7 +80,7 @@ class admst:
         return admst.all_data[admst.simulator_]
 
     def move_up_parameter(self, kw):
-        self.__dict__[kw] = self.parameters.pop(kw)
+        setattr(self, kw, self.parameters.pop(kw))
         if len(self.parameters) == 0:
             self.parameters = None
 
@@ -82,11 +90,11 @@ class admst:
             if slen > 1:
                 raise RuntimeError(f"not expecting moving up only 1 reference for {kw}")
             elif slen == 0:
-                self.__dict__[kw] = None
+                setattr(self, kw, None)
             else:
-                self.__dict__[kw] = admst_reference(self.references.pop(kw)[0])
+                setattr(self, kw, admst_reference(self.references.pop(kw)[0]))
         else:
-            self.__dict__[kw] = admst_reference_list(self.references.pop(kw))
+            setattr(self, kw, admst_reference_list(self.references.pop(kw)))
         if len(self.references) == 0:
             self.references = None
 
@@ -103,21 +111,33 @@ class admst:
         return admst_reference_list([])
 
 class admsmain(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
 class analog(admst):
+
+    __slots__ = ('code',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('code', True)
 
 class assignment(admst):
+
+    __slots__ = ('module', 'lhs', 'rhs', 'lexval',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'lhs', 'rhs', 'lexval'):
             self.move_up_reference(x, True)
 
 class block(admst):
+
+    __slots__ = ('module', 'lexval', 'block', 'item', 'name')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # this is the parent block of this block
@@ -126,18 +146,27 @@ class block(admst):
         self.move_up_reference('item')
 
 class blockvariable(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('block', True)
         self.move_up_reference('variable', False)
 
 class branch(admst):
+
+    __slots__ = ('module', 'pnode', 'nnode', 'discipline', 'grounded')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'pnode', 'nnode', 'discipline'):
             self.move_up_reference(x, True)
 
 class branchalias(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
@@ -145,6 +174,9 @@ class branchalias(admst):
             self.move_up_reference(x, True)
 
 class conditional(admst):
+
+    __slots__ = ('module', 'If', 'Then', 'Else')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -155,12 +187,18 @@ class conditional(admst):
             self.move_up_reference(x, True)
 
 class contribution(admst):
+
+    __slots__ = ('module', 'lhs', 'rhs', 'branchalias')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'lhs', 'rhs', 'branchalias'):
             self.move_up_reference(x, True)
 
 class discipline(admst):
+
+    __slots__ = ('name', 'domain', 'flow', 'potential',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ['name', 'domain']:
@@ -169,12 +207,18 @@ class discipline(admst):
             self.move_up_reference(x, True)
 
 class expression(admst):
+
+    __slots__ = ('tree',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('tree',):
             self.move_up_reference(x, True)
 
 class function(admst):
+
+    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('unique_id')
@@ -183,35 +227,77 @@ class function(admst):
         self.move_up_reference('arguments')
 
 class lexval(admst):
+
+    __slots__ = ('string',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('string')
 
 class mapply_binary(admst):
+
+    __slots__ = ('args', 'name')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2']])
         self.move_up_parameter('name')
 
 class mapply_ternary(admst):
+
+    __slots__ = ('args', 'name')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2', 'arg3']])
         self.move_up_parameter('name')
 
 class mapply_unary(admst):
+
+    __slots__ = ('args', 'name')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references[x][0] for x in ['arg1']])
         self.move_up_parameter('name')
 
 class attribute(admst):
+
+    __slots__ = tuple()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
         self.move_up_parameter('value')
 
 class module(admst):
+
+    __slots__ = (
+        'name',
+        "analog",
+        "node",
+        "nodealias",
+        "branch",
+        "branchalias",
+        "analogfunction",
+        "instance",
+        "variable",
+        "block",
+        "blockvariable",
+        "assignment",
+        "callfunction",
+        "contribution",
+        "conditional",
+        "case",
+        "forloop",
+        "whileloop",
+        "expression",
+        "probe",
+        "source",
+        "range",
+        "attribute",
+    )
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
@@ -301,6 +387,9 @@ class source(admst):
         self.probe = admst_reference_list([])
 
 class string(admst):
+
+    __slots__ = ('value',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('value')

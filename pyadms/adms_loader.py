@@ -4,9 +4,10 @@
 
 import json
 
+
 class admst_reference:
 
-    __slots__ = ('index')
+    __slots__ = ('index',)
 
     def __init__(self, index):
         self.index = index
@@ -14,23 +15,24 @@ class admst_reference:
     def __call__(self):
         return admst.all_data[self.index]
 
+
 class admst_reference_list:
 
-    __slots__ = ('reference_list')
+    __slots__ = ('reference_list',)
 
     def __init__(self, reference_list):
         self.reference_list = reference_list
         if not all(isinstance(x, int) for x in self.reference_list):
             raise RuntimeError("mismatch type")
 
-    def append(self, x, ignore_duplicate = False):
-        #print(type(x))
+    def append(self, x, ignore_duplicate=False):
+        # print(type(x))
         if isinstance(x, int):
             y = x
         elif isinstance(x, admst):
             y = x.id
         else:
-            #print(type(x))
+            # print(type(x))
             raise RuntimeError("mismatch type")
 
         if ignore_duplicate:
@@ -40,7 +42,7 @@ class admst_reference_list:
         else:
             self.reference_list.append(y)
 
-    def extend(self, other, ignore_duplicate = False):
+    def extend(self, other, ignore_duplicate=False):
         if not isinstance(other, admst_reference_list):
             raise RuntimeError("mismatch type")
 
@@ -60,6 +62,7 @@ class admst_reference_list:
     def get_head(self):
         return self.get_item(0)
 
+
 class admst:
     all_data = None
     module_ = None
@@ -73,16 +76,18 @@ class admst:
             del kwargs[x]
         self.kwargs = kwargs
 
+    @staticmethod
     def get_module():
         return admst.all_data[admst.module_]
 
+    @staticmethod
     def get_simulator():
         return admst.all_data[admst.simulator_]
 
     def move_up_parameter(self, kw):
         setattr(self, kw, self.parameters.pop(kw))
-        if len(self.parameters) == 0:
-            self.parameters = None
+        # if len(self.parameters) == 0:
+        #     self.parameters = None
 
     def move_up_reference(self, kw, single=False):
         if single:
@@ -95,17 +100,15 @@ class admst:
                 setattr(self, kw, admst_reference(self.references.pop(kw)[0]))
         else:
             setattr(self, kw, admst_reference_list(self.references.pop(kw)))
-        if len(self.references) == 0:
-            self.references = None
+        # if len(self.references) == 0:
+        #     self.references = None
 
     def visit_implemented(self, visitor, *arg, **kwarg):
-        return getattr(visitor, 'visit_' + self.__class__.__name__)(self)
+        return getattr(visitor, 'visit_' + self.__class__.__name__)(self, *arg, **kwarg)
 
     def visit(self, visitor, *arg, **kwarg):
         return self.visit_implemented(visitor, *arg, **kwarg)
 
-    def create_reference_list(self):
-        return admst_reference_list([])
 
 class admsmain(admst):
 
@@ -113,6 +116,7 @@ class admsmain(admst):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
 
 class analog(admst):
 
@@ -122,6 +126,7 @@ class analog(admst):
         super().__init__(**kwargs)
         self.move_up_reference('code', True)
 
+
 class assignment(admst):
 
     __slots__ = ('module', 'lhs', 'rhs', 'lexval',)
@@ -130,6 +135,7 @@ class assignment(admst):
         super().__init__(**kwargs)
         for x in ('module', 'lhs', 'rhs', 'lexval'):
             self.move_up_reference(x, True)
+
 
 class block(admst):
 
@@ -142,6 +148,7 @@ class block(admst):
             self.move_up_reference(x, True)
         self.move_up_reference('item')
 
+
 class blockvariable(admst):
 
     __slots__ = ('block', 'variableprototype',)
@@ -150,6 +157,7 @@ class blockvariable(admst):
         super().__init__(**kwargs)
         self.move_up_reference('block', True)
         self.move_up_reference('variableprototype', False)
+
 
 class branch(admst):
 
@@ -160,6 +168,7 @@ class branch(admst):
         for x in ('module', 'pnode', 'nnode', 'discipline'):
             self.move_up_reference(x, True)
 
+
 class branchalias(admst):
 
     __slots__ = ('module', 'branch', 'name',)
@@ -169,6 +178,7 @@ class branchalias(admst):
         self.move_up_parameter('name')
         for x in ('module', 'branch'):
             self.move_up_reference(x, True)
+
 
 class conditional(admst):
 
@@ -183,6 +193,7 @@ class conditional(admst):
         for x in ('module', 'If', 'Then', 'Else'):
             self.move_up_reference(x, True)
 
+
 class contribution(admst):
 
     __slots__ = ('module', 'lhs', 'rhs', 'branchalias')
@@ -191,6 +202,7 @@ class contribution(admst):
         super().__init__(**kwargs)
         for x in ('module', 'lhs', 'rhs', 'branchalias'):
             self.move_up_reference(x, True)
+
 
 class discipline(admst):
 
@@ -203,6 +215,7 @@ class discipline(admst):
         for x in ('flow', 'potential'):
             self.move_up_reference(x, True)
 
+
 class expression(admst):
 
     __slots__ = ('tree',)
@@ -211,6 +224,7 @@ class expression(admst):
         super().__init__(**kwargs)
         for x in ('tree',):
             self.move_up_reference(x, True)
+
 
 class function(admst):
 
@@ -222,6 +236,7 @@ class function(admst):
         for x in ('lexval', 'definition'):
             self.move_up_reference(x, True)
         self.move_up_reference('arguments')
+
 
 class lexval(admst):
 
@@ -235,6 +250,7 @@ class lexval(admst):
         self.move_up_parameter('c')
         self.fl = f'{self.f}:{self.l}'
 
+
 class mapply_binary(admst):
 
     __slots__ = ('args', 'name')
@@ -243,6 +259,7 @@ class mapply_binary(admst):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2']])
         self.move_up_parameter('name')
+
 
 class mapply_ternary(admst):
 
@@ -253,6 +270,7 @@ class mapply_ternary(admst):
         self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2', 'arg3']])
         self.move_up_parameter('name')
 
+
 class mapply_unary(admst):
 
     __slots__ = ('args', 'name')
@@ -262,6 +280,7 @@ class mapply_unary(admst):
         self.args = admst_reference_list([self.references[x][0] for x in ['arg1']])
         self.move_up_parameter('name')
 
+
 class attribute(admst):
 
     __slots__ = tuple()
@@ -270,6 +289,7 @@ class attribute(admst):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
         self.move_up_parameter('value')
+
 
 class module(admst):
 
@@ -325,8 +345,18 @@ class module(admst):
             "source",
             "variableprototype",
             "whileloop",
-            ]:
+        ]:
             self.move_up_reference(x)
+
+
+class callfunction(admst):
+
+    __slots__ = tuple()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        raise RuntimeError('callfunction needs to be implemented')
+
 
 class nature(admst):
 
@@ -339,12 +369,14 @@ class nature(admst):
         for x in ('abstol', 'base', 'ddt_nature', 'idt_nature'):
             self.move_up_reference(x, True)
 
+
 class nilled(admst):
 
     __slots__ = tuple()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
 
 class node(admst):
 
@@ -357,6 +389,7 @@ class node(admst):
         for x in ('module', 'discipline'):
             self.move_up_reference(x, True)
 
+
 class nodealias(admst):
 
     __slots__ = ('name', 'module', 'node')
@@ -366,6 +399,7 @@ class nodealias(admst):
         self.move_up_parameter('name')
         for x in ('module', 'node'):
             self.move_up_reference(x, True)
+
 
 class number(admst):
 
@@ -377,6 +411,7 @@ class number(admst):
             self.move_up_parameter(x)
         self.move_up_reference('lexval', True)
 
+
 class probe(admst):
 
     __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded')
@@ -386,7 +421,8 @@ class probe(admst):
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
 
-class range(admst):
+
+class Range(admst):
 
     __slots__ = ('module', 'infexpr', 'supexpr', 'name', 'infboundtype', 'supboundtype', 'type',)
 
@@ -397,12 +433,14 @@ class range(admst):
         for x in ('name', 'infboundtype', 'supboundtype', 'type'):
             self.move_up_parameter(x)
 
+
 class simulator(admst):
 
     __slots__ = tuple()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
 
 class source(admst):
 
@@ -412,7 +450,7 @@ class source(admst):
         super().__init__(**kwargs)
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
-        #self.probe = admst_reference_list([])
+
 
 class string(admst):
 
@@ -422,6 +460,7 @@ class string(admst):
         super().__init__(**kwargs)
         self.move_up_parameter('value')
 
+
 class variable(admst):
 
     __slots__ = ('variableprototype', 'probe', 'variable')
@@ -430,6 +469,7 @@ class variable(admst):
         super().__init__(**kwargs)
         self.move_up_reference('variableprototype', True)
         self.probe = admst_reference_list([])
+
 
 class variableprototype(admst):
 
@@ -442,54 +482,73 @@ class variableprototype(admst):
         self.move_up_reference('default', True)
         self.setin = admst_reference_list([])
 
-    def setinblock(self, block):
-        self.setin.append(block, True)
+    def setinblock(self, b):
+        self.setin.append(b, True)
+
 
 class whileloop(admst):
 
-    __slots__ = tuple()
+    __slots__ = ('While', 'whileblock',)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.references['While'] = self.references.pop('while')
         for x in ('While', 'whileblock',):
             self.move_up_reference(x, True)
 
+
+class forloop(admst):
+
+    __slots__ = tuple()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+
+class array(admst):
+
+    __slots__ = tuple()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+
 constructor_table = {
-    'admsmain' : globals()['admsmain'],
-    'analog' : globals()['analog'],
-    'assignment' : globals()['assignment'],
-    'attribute' : globals()['attribute'],
-    'block' : globals()['block'],
-    'blockvariable' : globals()['blockvariable'],
-    'branch' : globals()['branch'],
-    'branchalias' : globals()['branchalias'],
-    'conditional' : globals()['conditional'],
-    'contribution' : globals()['contribution'],
-    'discipline' : globals()['discipline'],
-    'expression' : globals()['expression'],
-    'function' : globals()['function'],
-    'lexval' : globals()['lexval'],
-    'mapply_binary' : globals()['mapply_binary'],
-    'mapply_ternary' : globals()['mapply_ternary'],
-    'mapply_unary' : globals()['mapply_unary'],
-    'module' : globals()['module'],
-    'nature' : globals()['nature'],
-    'nilled' : globals()['nilled'],
-    'node' : globals()['node'],
-    'nodealias' : globals()['nodealias'],
-    'number' : globals()['number'],
-    'probe' : globals()['probe'],
-    'range' : globals()['range'],
-    'simulator' : globals()['simulator'],
-    'source' : globals()['source'],
-    'string' : globals()['string'],
-    'variable' : globals()['variable'],
-    'variableprototype' : globals()['variableprototype'],
-    'whileloop' : globals()['whileloop'],
+    'admsmain': globals()['admsmain'],
+    'analog': globals()['analog'],
+    'assignment': globals()['assignment'],
+    'attribute': globals()['attribute'],
+    'block': globals()['block'],
+    'blockvariable': globals()['blockvariable'],
+    'branch': globals()['branch'],
+    'branchalias': globals()['branchalias'],
+    'conditional': globals()['conditional'],
+    'contribution': globals()['contribution'],
+    'discipline': globals()['discipline'],
+    'expression': globals()['expression'],
+    'function': globals()['function'],
+    'lexval': globals()['lexval'],
+    'mapply_binary': globals()['mapply_binary'],
+    'mapply_ternary': globals()['mapply_ternary'],
+    'mapply_unary': globals()['mapply_unary'],
+    'module': globals()['module'],
+    'nature': globals()['nature'],
+    'nilled': globals()['nilled'],
+    'node': globals()['node'],
+    'nodealias': globals()['nodealias'],
+    'number': globals()['number'],
+    'probe': globals()['probe'],
+    'range': globals()['Range'],
+    'simulator': globals()['simulator'],
+    'source': globals()['source'],
+    'string': globals()['string'],
+    'variable': globals()['variable'],
+    'variableprototype': globals()['variableprototype'],
+    'whileloop': globals()['whileloop'],
 }
 
+
 def load_json(fname):
-    dataarray = None
 
     with open(fname) as inputfile:
         data = json.load(inputfile)
@@ -500,15 +559,14 @@ def load_json(fname):
         dtname = x['datatypename']
         admst.all_data[x['id']] = constructor_table[dtname](**x)
         if dtname == 'module':
-            if admst.module_ == None:
+            if admst.module_ is None:
                 admst.module_ = x['id']
             else:
                 raise RuntimeError("Expecting only 1 module")
         elif dtname == 'simulator':
-            if admst.simulator_ == None:
+            if admst.simulator_ is None:
                 admst.simulator_ = x['id']
             else:
                 raise RuntimeError("Expecting only 1 module")
 
     return admst
-

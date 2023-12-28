@@ -60,7 +60,7 @@ class dependency_visitor:
 
     def visit_variable(self, variable):
         if self.partition:
-            variable.prototype().setinblock(self.partition)
+            variable.variableprototype().setinblock(self.partition)
 
     def visit_mapply_unary(self, unary):
         args = list(unary.args.get_list())

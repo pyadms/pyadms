@@ -437,7 +437,7 @@ std::string s_variable::get_uid_implemented()
 void s_variable::get_reference_list_implemented(references_list_t &rlist)
 {
   rlist = {
-    mytup1{"prototype", create_adms_list(_prototype)},
+    mytup1{"variableprototype", create_adms_list(_prototype)},
   };
 }
 

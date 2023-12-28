@@ -424,11 +424,11 @@ class string(admst):
 
 class variable(admst):
 
-    __slots__ = ('prototype', 'probe', 'variable')
+    __slots__ = ('variableprototype', 'probe', 'variable')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.move_up_reference('prototype', True)
+        self.move_up_reference('variableprototype', True)
         self.probe = admst_reference_list([])
 
 class variableprototype(admst):

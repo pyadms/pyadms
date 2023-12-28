@@ -104,9 +104,6 @@ class admst:
     def visit(self, visitor, *arg, **kwarg):
         return self.visit_implemented(visitor, *arg, **kwarg)
 
-    def get_datatypename(self):
-        return self.__class__.__name__
-
     def create_reference_list(self):
         return admst_reference_list([])
 

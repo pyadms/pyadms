@@ -140,7 +140,7 @@ class dependency_visitor:
         #contribution.dependency = 'nonlinear'
 
     def visit_assignment(self, assignment):
-        ldn = assignment.get_datatypename()
+        ldn = assignment.datatypename
         if ldn == 'array':
             lhs = assignment.lhs().variable()
         else:

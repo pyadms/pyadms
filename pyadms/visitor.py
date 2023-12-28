@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 class dependency_visitor:
-    __slots__ = ()
+    __slots__ = ('partition',)
 
     def __init__(self):
-        pass
+        self.partition = None
 
     def visit_module(self, module):
         for node in module.node.get_list():
@@ -130,12 +130,22 @@ class dependency_visitor:
             lhs.variable = []
 
     def visit_block(self, block):
-        block.name = block.lexval
-        if block.name in  ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step,'):
-            self.globalpartitionning = name
+        block.name = block.lexval().string
+
+        #if self.partition is not None:
+        #    print(str(self.partition.lexval().fl))
+        #    print(str(block.lexval().fl))
+        #    raise RuntimeError(f'new block evaluated while processing another')
+
+        if block.name in  ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step', ''):
+            self.partition = block
+        else:
+            raise RuntimeError(f'unexpected block name: {block.name}')
 
         for item in block.item.get_list():
             item.visit(self)
+
+        self.partition = None
 
     def visit_nilled(self, nilled):
         pass

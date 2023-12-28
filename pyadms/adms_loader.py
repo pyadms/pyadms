@@ -228,11 +228,15 @@ class function(admst):
 
 class lexval(admst):
 
-    __slots__ = ('string',)
+    __slots__ = ('string', 'f', 'l', 'c', 'fl')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('string')
+        self.move_up_parameter('f')
+        self.move_up_parameter('l')
+        self.move_up_parameter('c')
+        self.fl = f'{self.f}:{self.l}'
 
 class mapply_binary(admst):
 

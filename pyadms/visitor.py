@@ -61,6 +61,8 @@ class dependency_visitor:
         pass
 
     def visit_variable(self, variable: adms_loader.variable):
+        if variable.variableprototype().name is None:
+            variable.variableprototype().name = variable.variableprototype().lexval().string
         if self.partition:
             # print(f'variable "{variable.variableprototype().name}" is set in "{self.partition.name}"')
             variable.variableprototype().setinblock(self.partition)

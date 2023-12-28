@@ -283,7 +283,7 @@ class mapply_unary(admst):
 
 class attribute(admst):
 
-    __slots__ = tuple()
+    __slots__ = ('name', 'value',)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

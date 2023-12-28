@@ -159,10 +159,13 @@ class dependency_visitor:
     def visit_block(self, block: adms_loader.block):
         block.name = block.lexval().string
 
-        if block.name in ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step', ''):
+        if block.name in ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step'):
             self.partition = block
+        elif block.name == '':
+            self.partition = None
         else:
-            raise RuntimeError(f'unexpected block name: {block.name}')
+            print(f'unexpected block name: {block.name}')
+            # raise RuntimeError(f'unexpected block name: {block.name}')
 
         for item in block.item.get_list():
             item.visit(self)
@@ -173,4 +176,8 @@ class dependency_visitor:
         pass
 
     def visit_blockvariable(self, blockvariable: adms_loader.blockvariable):
-        pass
+        # this is a list for multiple declarations in the same statement
+        for vp in blockvariable.variableprototype.get_list():
+            if vp.name is None:
+                vp.name = vp.lexval().string
+        

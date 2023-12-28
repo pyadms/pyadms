@@ -28,7 +28,7 @@ struct s_analogfunction : public s_adms {
   p_lexval _lexval;
   admse _type;
   p_adms _tree;
-  variableprototype_list _variable;
+  variableprototype_list _variableprototype;
   attribute_list         _attribute;
 };
 std::string adms_analogfunction_uid (p_analogfunction myanalogfunction);

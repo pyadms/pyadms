@@ -26,7 +26,7 @@ struct s_module : public s_adms {
   branchalias_list    _branchalias;
   analogfunction_list _analogfunction;
   instance_list       _instance;
-  variableprototype_list       _variable;
+  variableprototype_list       _variableprototype;
   p_analog _analog;
   block_list          _block;
   blockvariable_list  _blockvariable;

@@ -23,7 +23,7 @@ struct s_blockvariable : public s_math {
   void get_string_list_implemented(strings_list_t &slist);
 
   p_block _block;
-  variableprototype_list _variable;
+  variableprototype_list _variableprototype;
 };
 
 p_blockvariable adms_blockvariable_new (p_block myblock);
@@ -44,7 +44,7 @@ struct s_block : public s_math {
   p_adms _block;
   p_adms_list            _item;
   attribute_list         _attribute;
-  variableprototype_list _variable;
+  variableprototype_list _variableprototype;
 };
 p_block adms_block_new (p_module mymodule,p_lexval mylexval,p_adms myblock, p_adms_list myitem);
 void adms_block_list_variable_prepend_once_or_abort (p_block mymyblock,p_variableprototype myvariable);

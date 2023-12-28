@@ -115,7 +115,7 @@ p_instance adms_module_list_instance_prepend_by_id_once_or_abort (p_module mymym
 
 void adms_module_list_variable_prepend_once_or_abort (p_module mymymodule,p_variableprototype myvariable)
 {
-  myprepend_or_fail<s_variableprototype>(mymymodule->_variable,
+  myprepend_or_fail<s_variableprototype>(mymymodule->_variableprototype,
     [&](p_variableprototype m)->bool {return !adms_variableprototype_cmp(m, myvariable);},
     [&](void)->void {
       //delete myvariable;
@@ -130,7 +130,7 @@ p_variableprototype adms_module_list_variable_lookup_by_id (p_module mymymodule,
   p_variableprototype ret = nullptr;
   if (mymymodule)
   {
-    ret = mylookup_by_id<s_variableprototype>(mymymodule->_variable,
+    ret = mylookup_by_id<s_variableprototype>(mymymodule->_variableprototype,
       [&](p_variableprototype m)->bool {
         return (m->_module==mymodule)&&
            !m->_lexval->_string.compare(mylexval->_string)&&
@@ -205,7 +205,7 @@ void s_module::get_reference_list_implemented(references_list_t &rlist)
   push_back_mytup1(rlist, "branchalias", _branchalias);
   push_back_mytup1(rlist, "analogfunction", _analogfunction);
   push_back_mytup1(rlist, "instance", _instance);
-  push_back_mytup1(rlist, "variable", _variable);
+  push_back_mytup1(rlist, "variableprototype", _variableprototype);
   push_back_mytup1(rlist, "block", _block);
   push_back_mytup1(rlist, "blockvariable", _blockvariable);
   push_back_mytup1(rlist, "assignment", _assignment);

@@ -25,7 +25,7 @@ int adms_analogfunction_cmp (p_analogfunction myanalogfunction,p_analogfunction 
 
 void adms_analogfunction_list_variable_prepend_once_or_abort (p_analogfunction mymyanalogfunction,p_variableprototype myvariable)
 {
-  myprepend_or_fail<s_variableprototype>(mymyanalogfunction->_variable,
+  myprepend_or_fail<s_variableprototype>(mymyanalogfunction->_variableprototype,
     [&](p_variableprototype m)->bool {return !adms_variableprototype_cmp(m, myvariable);},
     [&](void)->void {
       adms_message_fatal("analogfunction=[%s] variable=[%s] already defined\n",
@@ -39,7 +39,7 @@ p_variableprototype adms_analogfunction_list_variable_lookup_by_id (p_analogfunc
   p_variableprototype ret = nullptr;
   if (mymyanalogfunction)
   {
-    return mylookup_by_id<s_variableprototype>( mymyanalogfunction->_variable,
+    return mylookup_by_id<s_variableprototype>( mymyanalogfunction->_variableprototype,
       [&](p_variableprototype m)->bool {
         return (m->_module==mymodule)&&
            !m->_lexval->_string.compare(mylexval->_string)&&
@@ -71,7 +71,7 @@ void s_analogfunction::get_reference_list_implemented(references_list_t &rlist)
     mytup1{"tree", p_adms_list{_tree}},
   };
 
-  push_back_mytup1(rlist, "variable", _variable);
+  push_back_mytup1(rlist, "variableprototype", _variableprototype);
 }
 
 void s_analogfunction::get_attribute_list_implemented(attributes_list_t &alist)

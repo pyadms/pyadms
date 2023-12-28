@@ -33,7 +33,7 @@ class dependency_visitor:
         for analog in module.analog.get_list():
             analog.code().visit(self)
 
-        for v in module.variable.get_list():
+        for v in module.variableprototype.get_list():
             if 'type' in v.attributes:
                 if v.attributes['type'] == 'instance':
                     v.parametertype = 'instance'

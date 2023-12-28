@@ -24,9 +24,9 @@ std::string s_blockvariable::get_uid_implemented()
 {
   std::string myuid;
   myuid += "real ";
-  for (auto v : _variable) {
+  for (auto v : _variableprototype) {
     myuid += v->get_uid();
-    if (v != _variable.back())
+    if (v != _variableprototype.back())
     {
       myuid += ",";
     }
@@ -40,7 +40,7 @@ void s_blockvariable::get_reference_list_implemented(references_list_t &rlist)
   rlist = {
     mytup1{"block", create_adms_list(_block)},
   };
-  push_back_mytup1(rlist, "variable", _variable);
+  push_back_mytup1(rlist, "variableprototype", _variableprototype);
 }
 
 void s_blockvariable::get_attribute_list_implemented(attributes_list_t &alist)
@@ -55,7 +55,7 @@ void s_blockvariable::get_string_list_implemented(strings_list_t &slist)
 /* ------- block -------------- */
 void adms_block_list_variable_prepend_once_or_abort (p_block mymyblock,p_variableprototype myvariable)
 {
-  myprepend_or_fail<s_variableprototype>(mymyblock->_variable,
+  myprepend_or_fail<s_variableprototype>(mymyblock->_variableprototype,
     [&](p_variableprototype m)->bool {
       return !adms_variableprototype_cmp(m, myvariable);
     },
@@ -101,7 +101,7 @@ void s_block::get_reference_list_implemented(references_list_t &rlist)
     mytup1{"block", create_adms_list(_block)},
   };
   push_back_mytup1(rlist, "item", _item);
-  push_back_mytup1(rlist, "variable", _variable);
+  push_back_mytup1(rlist, "variableprototype", _variableprototype);
 }
 
 void s_block::get_attribute_list_implemented(attributes_list_t &alist)

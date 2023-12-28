@@ -147,12 +147,12 @@ class block(admst):
 
 class blockvariable(admst):
 
-    __slots__ = tuple()
+    __slots__ = ('block', 'variableprototype',)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('block', True)
-        self.move_up_reference('variable', False)
+        self.move_up_reference('variableprototype', False)
 
 class branch(admst):
 
@@ -165,7 +165,7 @@ class branch(admst):
 
 class branchalias(admst):
 
-    __slots__ = tuple()
+    __slots__ = ('module', 'branch', 'name',)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -273,29 +273,29 @@ class attribute(admst):
 class module(admst):
 
     __slots__ = (
-        'name',
         "analog",
-        "node",
-        "nodealias",
-        "branch",
-        "branchalias",
         "analogfunction",
-        "instance",
-        "variable",
+        "assignment",
+        "attribute",
         "block",
         "blockvariable",
-        "assignment",
+        "branch",
+        "branchalias",
         "callfunction",
-        "contribution",
-        "conditional",
         "case",
-        "forloop",
-        "whileloop",
+        "conditional",
+        "contribution",
         "expression",
+        "forloop",
+        "instance",
+        'name',
+        "node",
+        "nodealias",
         "probe",
-        "source",
         "range",
-        "attribute",
+        "source",
+        "variableprototype",
+        "whileloop",
     )
 
     def __init__(self, **kwargs):
@@ -303,27 +303,27 @@ class module(admst):
         self.move_up_parameter('name')
         for x in [
             "analog",
-            "node",
-            "nodealias",
-            "branch",
-            "branchalias",
             "analogfunction",
-            "instance",
-            "variable",
+            "assignment",
+            "attribute",
             "block",
             "blockvariable",
-            "assignment",
+            "branch",
+            "branchalias",
             "callfunction",
-            "contribution",
-            "conditional",
             "case",
-            "forloop",
-            "whileloop",
+            "conditional",
+            "contribution",
             "expression",
+            "forloop",
+            "instance",
+            "node",
+            "nodealias",
             "probe",
-            "source",
             "range",
-            "attribute",
+            "source",
+            "variableprototype",
+            "whileloop",
             ]:
             self.move_up_reference(x)
 

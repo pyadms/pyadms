@@ -76,7 +76,7 @@ node_list              gNodeList;
 attribute_list         gAttributeList;
 attribute_list         gGlobalAttributeList;
 p_adms_list            gBlockList;
-variableprototype_list gBlockVariableList;
+variableprototype_list gBlockVariablePrototypeList;
 p_branchalias          gBranchAlias;
 int uid;
 } mc;
@@ -141,7 +141,7 @@ static p_variable variable_recursive_lookup_by_id (p_adms myadms,p_lexval mylexv
     p_block b = dynamic_cast<p_block>(myadms);
     assert(b);
     
-    for (auto l : b->_variable)
+    for (auto l : b->_variableprototype)
     {
       if (l->_lexval->_string == mylexval->_string)
       {
@@ -1302,7 +1302,7 @@ R_l__expression
 R_analogcode__atomic
         : R_d__attribute__0 R_d__blockvariable
           {
-            for (auto lv : $2->get_p<p_blockvariable>()->_variable)
+            for (auto lv : $2->get_p<p_blockvariable>()->_variableprototype)
             {
               extend_list_by_copy(lv->_attribute, mc.gAttributeList);
             }
@@ -1475,39 +1475,39 @@ R_d__blockvariable
           {
             p_blockvariable myblockvariable=adms_blockvariable_new(dynamic_cast<p_block>(mc.gBlockList.back())); 
             mc.gModule->_blockvariable.push_back(myblockvariable); 
-            for(auto l : mc.gBlockVariableList)
+            for(auto l : mc.gBlockVariablePrototypeList)
             {
               dynamic_cast<p_variableprototype>(l)->_type=admse_integer;
             }
             $$=adms_yaccval_new("unknown source file");
-            myblockvariable->_variable=mc.gBlockVariableList;
-            mc.gBlockVariableList.clear();
+            myblockvariable->_variableprototype=mc.gBlockVariablePrototypeList;
+            mc.gBlockVariablePrototypeList.clear();
             $$->set_p(myblockvariable);
           }
         | tk_real R_l__blockvariable ';'
           {
             p_blockvariable myblockvariable=adms_blockvariable_new(dynamic_cast<p_block>(mc.gBlockList.back())); 
             mc.gModule->_blockvariable.push_back(myblockvariable); 
-            for (auto l : mc.gBlockVariableList)
+            for (auto l : mc.gBlockVariablePrototypeList)
             {
               l->_type=admse_real;
             }
             $$=adms_yaccval_new("unknown source file");
-            myblockvariable->_variable=mc.gBlockVariableList;
-            mc.gBlockVariableList.clear();
+            myblockvariable->_variableprototype=mc.gBlockVariablePrototypeList;
+            mc.gBlockVariablePrototypeList.clear();
             $$->set_p(myblockvariable);
           }
         | tk_string R_l__blockvariable ';'
           {
             p_blockvariable myblockvariable=adms_blockvariable_new(dynamic_cast<p_block>(mc.gBlockList.back())); 
             mc.gModule->_blockvariable.push_back(myblockvariable); 
-            for (auto l : mc.gBlockVariableList)
+            for (auto l : mc.gBlockVariablePrototypeList)
             {
               l->_type=admse_string;
             }
             $$=adms_yaccval_new("unknown source file");
-            myblockvariable->_variable=mc.gBlockVariableList;
-            mc.gBlockVariableList.clear();
+            myblockvariable->_variableprototype=mc.gBlockVariablePrototypeList;
+            mc.gBlockVariablePrototypeList.clear();
             $$->set_p(myblockvariable);
           }
         ;
@@ -1524,7 +1524,7 @@ R_s__blockvariable
           {
             p_variableprototype myvariableprototype=new_variable($1);
             adms_block_list_variable_prepend_once_or_abort(dynamic_cast<p_block>(mc.gBlockList.back()),myvariableprototype); 
-            mc.gBlockVariableList.push_back(myvariableprototype);
+            mc.gBlockVariablePrototypeList.push_back(myvariableprototype);
           }
         | tk_ident '[' tk_number ':' tk_number ']'
           {

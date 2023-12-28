@@ -62,6 +62,7 @@ class dependency_visitor:
 
     def visit_variable(self, variable: adms_loader.variable):
         if self.partition:
+            # print(f'variable "{variable.variableprototype().name}" is set in "{self.partition.name}"')
             variable.variableprototype().setinblock(self.partition)
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):

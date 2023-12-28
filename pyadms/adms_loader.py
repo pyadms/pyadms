@@ -473,13 +473,14 @@ class variable(admst):
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('instance')
         self.move_up_reference('range', False)
         self.move_up_reference('default', True)
+        self.name = self.uid
         self.setin = admst_reference_list([])
 
     def setinblock(self, b):

@@ -217,7 +217,7 @@ class expression(admst):
 
 class function(admst):
 
-    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments',)
+    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -372,7 +372,7 @@ class nodealias(admst):
 
 class number(admst):
 
-    __slots__ = ('scalingunit', 'cast', 'lexval',)
+    __slots__ = ('value', 'scalingunit', 'cast', 'lexval', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -419,7 +419,7 @@ class source(admst):
 
 class string(admst):
 
-    __slots__ = ('value',)
+    __slots__ = ('value', 'dependency',)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -436,18 +436,21 @@ class variable(admst):
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('instance')
         self.move_up_reference('range', False)
         self.move_up_reference('default', True)
+        self.setin = admst_reference_list([])
+
+    def setinblock(self, block):
+        self.setin.append(block, True)
 
 class whileloop(admst):
 
     __slots__ = tuple()
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.references['While'] = self.references.pop('while')

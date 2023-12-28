@@ -50,7 +50,7 @@ class dependency_visitor:
                 default.visit(self)
 
     def visit_expression(self, expression):
-        pass
+        expression.tree().visit(self)
 
     def visit_probe(self, probe):
         pass
@@ -59,9 +59,11 @@ class dependency_visitor:
         pass
 
     def visit_variable(self, variable):
-        pass
+        if self.partition:
+            variable.prototype().setinblock(self.partition)
 
     def visit_mapply_unary(self, unary):
+        args = list(unary.args.get_list())
         args[0].visit(self)
 
     def visit_mapply_binary(self, binary):
@@ -79,6 +81,27 @@ class dependency_visitor:
         args = list(function.arguments.get_list())
         for arg in args:
             arg.visit(self)
+
+    scalingunits = {
+      '1' : '',
+      'E' : 'e+18',
+      'P' : 'e+15',
+      'T' : 'e+12',
+      'G' : 'e+9',
+      'M' : 'e+6',
+      'k' : 'e+3',
+      'h' : 'e+2',
+      'D' : 'e+1',
+      'd' : 'e-1',
+      'c' : 'e-2',
+      'm' : 'e-3',
+      'u' : 'e-6',
+      'n' : 'e-9',
+      'A' : 'e-10',
+      'p' : 'e-12',
+      'f' : 'e-15',
+      'a' : 'e-18',
+    }
 
     def visit_number(self, number):
         number.dependency = 'constant'

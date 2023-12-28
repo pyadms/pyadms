@@ -6,6 +6,3 @@ admst = pyadms.adms_loader.load_json(sys.argv[1])
 dv = visitor.dependency_visitor()
 admst.get_module().visit(dv)
 
-
-
-

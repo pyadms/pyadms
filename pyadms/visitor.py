@@ -5,10 +5,10 @@ import adms_loader
 
 
 class dependency_visitor:
-    __slots__ = ('partition',)
+    __slots__ = ('globalpartition', 'globalassignment', 'globalexpression',)
 
     def __init__(self):
-        self.partition = None
+        self.globalpartition = None
 
     def visit_module(self, module: adms_loader.module):
         for node in module.node.get_list():
@@ -63,10 +63,14 @@ class dependency_visitor:
                 default.visit(self)
 
     def visit_expression(self, expression: adms_loader.expression):
-        expression.tree().visit(self)
+        self.globalexpression = expression
+        tree = expression.tree()
+        tree.visit(self)
+        self.globalexpression = None
+        expression.dependency = tree.dependency
 
     def visit_probe(self, probe: adms_loader.probe):
-        pass
+        probe.dependency = 'linear'
 
     def visit_array(self, array: adms_loader.array):
         pass
@@ -74,9 +78,9 @@ class dependency_visitor:
     def visit_variable(self, variable: adms_loader.variable):
         if variable.variableprototype().name is None:
             variable.variableprototype().name = variable.variableprototype().lexval().string
-        if self.partition:
-            # print(f'variable "{variable.variableprototype().name}" is set in "{self.partition.name}"')
-            variable.variableprototype().setinblock(self.partition)
+        if self.globalpartition:
+            # print(f'variable "{variable.variableprototype().name}" is set in "{self.globalpartition.name}"')
+            variable.variableprototype().setinblock(self.globalpartition)
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
@@ -155,14 +159,16 @@ class dependency_visitor:
         # contribution.dependency = 'nonlinear'
 
     def visit_assignment(self, assignment: adms_loader.assignment):
-        ldn = assignment.datatypename
+        ldn = assignment.lhs().datatypename
         if ldn == 'array':
             lhs = assignment.lhs().variable()
         else:
             lhs = assignment.lhs()
 
         rhs = assignment.rhs()
+        self.globalassignment = assignment
         rhs.visit(self)
+        self.globalassignment = None
 
         if not hasattr(lhs, 'variable'):
             lhs.variable = []
@@ -171,9 +177,9 @@ class dependency_visitor:
         block.name = block.lexval().string
 
         if block.name in ('initial_model', 'initial_instance', 'initial_step', 'noise', 'final_step'):
-            self.partition = block
+            self.globalpartition = block
         elif block.name == '':
-            self.partition = None
+            self.globalpartition = None
         else:
             print(f'unexpected block name: {block.name}')
             # raise RuntimeError(f'unexpected block name: {block.name}')
@@ -181,7 +187,7 @@ class dependency_visitor:
         for item in block.item.get_list():
             item.visit(self)
 
-        self.partition = None
+        self.globalpartition = None
 
     def visit_nilled(self, nilled: adms_loader.nilled):
         pass

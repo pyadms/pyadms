@@ -254,7 +254,7 @@ class lexval(admst):
 
 class mapply_binary(admst):
 
-    __slots__ = ('args', 'name')
+    __slots__ = ('args', 'name', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -415,7 +415,7 @@ class number(admst):
 
 class probe(admst):
 
-    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded')
+    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

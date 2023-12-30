@@ -161,12 +161,13 @@ class blockvariable(admst):
 
 class branch(admst):
 
-    __slots__ = ('module', 'pnode', 'nnode', 'discipline', 'grounded')
+    __slots__ = ('module', 'node', 'discipline', 'grounded')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        for x in ('module', 'pnode', 'nnode', 'discipline'):
+        for x in ('module', 'discipline'):
             self.move_up_reference(x, True)
+        self.node = admst_reference_list([self.references.pop(x)[0] for x in ['pnode', 'nnode']])
 
 
 class branchalias(admst):
@@ -257,7 +258,7 @@ class mapply_binary(admst):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2']])
+        self.args = admst_reference_list([self.references.pop(x)[0] for x in ['arg1', 'arg2']])
         self.move_up_parameter('name')
 
 
@@ -267,7 +268,7 @@ class mapply_ternary(admst):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.args = admst_reference_list([self.references[x][0] for x in ['arg1', 'arg2', 'arg3']])
+        self.args = admst_reference_list([self.references.pop(x)[0] for x in ['arg1', 'arg2', 'arg3']])
         self.move_up_parameter('name')
 
 
@@ -277,7 +278,7 @@ class mapply_unary(admst):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.args = admst_reference_list([self.references[x][0] for x in ['arg1']])
+        self.args = admst_reference_list([self.references.pop(x)[0] for x in ['arg1']])
         self.move_up_parameter('name')
 
 

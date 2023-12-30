@@ -18,8 +18,19 @@ class dependency_visitor:
                 node.grounded = False
 
         for branch in module.branch.get_list():
-            branch.discipline = branch.pnode().discipline
-            branch.grounded = branch.nnode().grounded
+            nlist = list(branch.node.get_list())
+            if nlist[0].discipline is None:
+                branch.discipline = nlist[1].discipline
+            elif nlist[1].discipline is None:
+                branch.discipline = nlist[0].discipline
+            elif nlist[0].discipline().name == nlist[1].discipline().name:
+                branch.discipline = nlist[0].discipline
+            else:
+                raise RuntimeError('discipliine mismatch')
+            # print(branch.uid)
+            # print(nlist[0].discipline)
+            # print(nlist[1].discipline)
+            branch.grounded = any([n.grounded for n in nlist])
 
         for source in module.source.get_list():
             source.discipline = source.branch().discipline

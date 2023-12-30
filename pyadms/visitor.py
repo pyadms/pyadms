@@ -19,10 +19,10 @@ class dependency_visitor:
 
         for branch in module.branch.get_list():
             nlist = list(branch.node.get_list())
-            if nlist[0].discipline is None:
-                branch.discipline = nlist[1].discipline
-            elif nlist[1].discipline is None:
+            if nlist[1].discipline is None:
                 branch.discipline = nlist[0].discipline
+            elif nlist[0].discipline is None:
+                branch.discipline = nlist[1].discipline
             elif nlist[0].discipline().name == nlist[1].discipline().name:
                 branch.discipline = nlist[0].discipline
             else:

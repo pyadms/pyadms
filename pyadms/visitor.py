@@ -90,6 +90,20 @@ class dependency_visitor:
         args = list(binary.args.get_list())
         for arg in args:
             arg.visit(self)
+        deps = [b.dependency for b in binary.args.get_list()]
+        name = binary.name
+        if all([d=='constant' for d in deps]):
+            binary.dependency = 'constant'
+        elif any([d=='nonlinear' for d in deps]):
+            binary.dependency = 'nonlinear'
+        elif name == 'addp':
+            if any([d=='linear' for d in deps]):
+                binary.dependency = 'linear'
+            else:
+                raise RuntimeError(f"unexpected mapply_binary dependency for {name}")
+        else:
+            raise RuntimeError(f"unexpected mapply_binary function {name}")
+
 
     def visit_mapply_ternary(self, ternary: adms_loader.mapply_ternary):
         args = list(ternary.args.get_list())
@@ -101,6 +115,12 @@ class dependency_visitor:
         args = list(function.arguments.get_list())
         for arg in args:
             arg.visit(self)
+        deps = [f.dependency for f in args]
+        # print(function.name)
+        if (all(d == 'constant' for d in deps)):
+            function.dependency = 'constant'
+        else:
+            function.dependency = 'nonlinear'
 
     scalingunits = {
       '1': '',

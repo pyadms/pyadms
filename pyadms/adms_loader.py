@@ -219,7 +219,7 @@ class discipline(admst):
 
 class expression(admst):
 
-    __slots__ = ('tree',)
+    __slots__ = ('tree', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -229,7 +229,7 @@ class expression(admst):
 
 class function(admst):
 
-    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name')
+    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -95,7 +95,7 @@ class dependency_visitor:
         args = list(unary.args.get_list())
         args[0].visit(self)
         name = unary.name
-        if name == 'minus':
+        if name in ('minus', 'plus', 'not'):
             unary.dependency = args[0].dependency
         else:
             raise RuntimeError(f"unexpected mapply_unary function {name}")
@@ -192,15 +192,17 @@ class dependency_visitor:
         string.dependency = 'constant'
 
     def visit_callfunction(self, callfunction: adms_loader.callfunction):
+        raise RuntimeError('callfunction not implemented')
         pass
 
     def visit_whileloop(self, whileloop: adms_loader.whileloop):
         While = whileloop.While()
         While.visit(self)
-        whileloop.While.visit(self)
+        whileloop.While().visit(self)
         whileloop.whileblock().visit(self)
 
     def visit_forloop(self, forloop: adms_loader.forloop):
+        raise RuntimeError('forloop not implemented')
         pass
 
     def visit_conditional(self, conditional: adms_loader.conditional):

@@ -295,57 +295,57 @@ class attribute(admst):
 class module(admst):
 
     __slots__ = (
-        "analog",
-        "analogfunction",
-        "assignment",
-        "attribute",
-        "block",
-        "blockvariable",
-        "branch",
-        "branchalias",
-        "callfunction",
-        "case",
-        "conditional",
-        "contribution",
-        "expression",
-        "forloop",
-        "instance",
+        'analog',
+        'analogfunction',
+        'assignment',
+        'attribute',
+        'block',
+        'blockvariable',
+        'branch',
+        'branchalias',
+        'callfunction',
+        'case',
+        'conditional',
+        'contribution',
+        'expression',
+        'forloop',
+        'instance',
         'name',
-        "node",
-        "nodealias",
-        "probe",
-        "range",
-        "source",
-        "variableprototype",
-        "whileloop",
+        'node',
+        'nodealias',
+        'probe',
+        'range',
+        'source',
+        'variableprototype',
+        'whileloop',
     )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
         for x in [
-            "analog",
-            "analogfunction",
-            "assignment",
-            "attribute",
-            "block",
-            "blockvariable",
-            "branch",
-            "branchalias",
-            "callfunction",
-            "case",
-            "conditional",
-            "contribution",
-            "expression",
-            "forloop",
-            "instance",
-            "node",
-            "nodealias",
-            "probe",
-            "range",
-            "source",
-            "variableprototype",
-            "whileloop",
+            'analog',
+            'analogfunction',
+            'assignment',
+            'attribute',
+            'block',
+            'blockvariable',
+            'branch',
+            'branchalias',
+            'callfunction',
+            'case',
+            'conditional',
+            'contribution',
+            'expression',
+            'forloop',
+            'instance',
+            'node',
+            'nodealias',
+            'probe',
+            'range',
+            'source',
+            'variableprototype',
+            'whileloop',
         ]:
             self.move_up_reference(x)
 
@@ -474,7 +474,7 @@ class variable(admst):
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'output')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

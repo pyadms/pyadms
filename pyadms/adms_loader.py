@@ -323,7 +323,7 @@ class module(admst):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
-        for x in [
+        for x in (
             'analog',
             'analogfunction',
             'assignment',
@@ -346,9 +346,16 @@ class module(admst):
             'source',
             'variableprototype',
             'whileloop',
-        ]:
+        ):
             self.move_up_reference(x)
 
+class analogfunction(admst):
+
+    __slots__ = ('name', 'tree')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.move_up_reference('tree', True)
 
 class callfunction(admst):
 
@@ -519,6 +526,7 @@ class array(admst):
 constructor_table = {
     'admsmain': globals()['admsmain'],
     'analog': globals()['analog'],
+    'analogfunction': globals()['analogfunction'],
     'assignment': globals()['assignment'],
     'attribute': globals()['attribute'],
     'block': globals()['block'],

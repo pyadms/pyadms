@@ -127,6 +127,8 @@ class dependency_visitor:
                 binary.dependency = deps[0]
             else:
                 binary.dependency = 'nonlinear'
+        elif name in ('gt', 'gt_equ', 'lt', 'lt_equ',):
+            binary.dependency = 'constant'
         else:
             raise RuntimeError(f"unexpected mapply_binary function {name}")
 
@@ -135,6 +137,18 @@ class dependency_visitor:
         args = list(ternary.args.get_list())
         for arg in args:
             arg.visit(self)
+        deps = [b.dependency for b in ternary.args.get_list()]
+        name = ternary.name
+
+        if name == 'conditional':
+            if any([d=='nonlinear' for d in deps]):
+                ternary.dependency = 'nonlinear'
+            elif any([d=='linear' for d in deps]):
+                ternary.dependency = 'linear'
+            else:
+                ternary.dependency = 'constant'
+        else:
+            raise RuntimeError(f"unexpected mapply_ternary function {name}")
 
     def visit_function(self, function: adms_loader.function):
         function.name = function.lexval().string

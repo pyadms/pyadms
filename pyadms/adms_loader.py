@@ -264,7 +264,7 @@ class mapply_binary(admst):
 
 class mapply_ternary(admst):
 
-    __slots__ = ('args', 'name')
+    __slots__ = ('args', 'name', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -1,5 +1,6 @@
-import adms_loader
-import visitor as visitor
+import pyadms
+from pyadms import adms_loader
+from pyadms import visitor
 import sys
 
 admst = adms_loader.load_json(sys.argv[1])

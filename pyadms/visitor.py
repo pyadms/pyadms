@@ -1,7 +1,7 @@
 # Copyright 2023 DEVSIM LLC
 #
 # SPDX-License-Identifier: Apache-2.0
-import adms_loader
+from . import adms_loader
 
 
 class dependency_visitor:

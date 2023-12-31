@@ -76,15 +76,29 @@ class dependency_visitor:
         pass
 
     def visit_variable(self, variable: adms_loader.variable):
-        if variable.variableprototype().name is None:
-            variable.variableprototype().name = variable.variableprototype().lexval().string
+        # TODO: it may be necessary to do this on an additional pass if we want to know about all assignments to this variable, even if it happens later.
+        vp = variable.variableprototype()
+        if vp.name is None:
+            vp.name = vp.lexval().string
+        variable.name = vp.name
+
+        # TODO: should check if model or instance parameter since it has no assignments
+        if not hasattr(vp, 'dependency'):
+            vp.dependency = 'constant'
+        variable.dependency = vp.dependency
+
         if self.globalpartition:
-            # print(f'variable "{variable.variableprototype().name}" is set in "{self.globalpartition.name}"')
-            variable.variableprototype().setinblock(self.globalpartition)
+            # print(f'variable "{vp.name}" is set in "{self.globalpartition.name}"')
+            vp.setinblock(self.globalpartition)
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
         args[0].visit(self)
+        name = unary.name
+        if name == 'minus':
+            unary.dependency = args[0].dependency
+        else:
+            raise RuntimeError(f"unexpected mapply_unary function {name}")
 
     def visit_mapply_binary(self, binary: adms_loader.mapply_binary):
         args = list(binary.args.get_list())
@@ -96,11 +110,23 @@ class dependency_visitor:
             binary.dependency = 'constant'
         elif any([d=='nonlinear' for d in deps]):
             binary.dependency = 'nonlinear'
-        elif name == 'addp':
+        elif name in ('addp', 'addm'):
             if any([d=='linear' for d in deps]):
                 binary.dependency = 'linear'
             else:
                 raise RuntimeError(f"unexpected mapply_binary dependency for {name}")
+        elif name == 'multtime':
+            if deps[0] == 'constant':
+                binary.dependency = deps[1]
+            elif deps[1] == 'constant':
+                binary.dependency = deps[0]
+            else:
+                binary.dependency = 'nonlinear'
+        elif name == 'multdiv':
+            if deps[1] == 'constant':
+                binary.dependency = deps[0]
+            else:
+                binary.dependency = 'nonlinear'
         else:
             raise RuntimeError(f"unexpected mapply_binary function {name}")
 
@@ -182,6 +208,7 @@ class dependency_visitor:
         ldn = assignment.lhs().datatypename
         if ldn == 'array':
             lhs = assignment.lhs().variable()
+            raise RuntimeError("ARRAY not implemented yet")
         else:
             lhs = assignment.lhs()
 
@@ -190,8 +217,16 @@ class dependency_visitor:
         rhs.visit(self)
         self.globalassignment = None
 
-        if not hasattr(lhs, 'variable'):
-            lhs.variable = []
+        vp = lhs.variableprototype()
+        if not hasattr(vp, 'dependency'):
+            vp.dependency = rhs.dependency
+        elif (vp.dependency == rhs.dependency) or (vp.dependency == 'nonlinear'):
+            pass
+        elif (vp.dependency == 'linear') and (rhs.dependency in ('linear', 'nonlinear')):
+            vp.dependency = rhs.dependency
+        else:
+            vp.dependency = 'constant'
+        lhs.visit(self)
 
     def visit_block(self, block: adms_loader.block):
         block.name = block.lexval().string

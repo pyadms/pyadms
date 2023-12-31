@@ -274,7 +274,7 @@ class mapply_ternary(admst):
 
 class mapply_unary(admst):
 
-    __slots__ = ('args', 'name')
+    __slots__ = ('args', 'name', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -464,7 +464,7 @@ class string(admst):
 
 class variable(admst):
 
-    __slots__ = ('variableprototype', 'probe', 'variable')
+    __slots__ = ('variableprototype', 'probe', 'variable', 'name', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -474,7 +474,7 @@ class variable(admst):
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

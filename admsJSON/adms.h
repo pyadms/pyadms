@@ -7,27 +7,14 @@ Copyright (C) 2015  Luther T. Cat
 Original code copyright the original authors.
 ***/
 
-
-/* ------- code automatically created by ./mkelements.pl -------------- */
-
 #ifndef ADMS_H
 #define ADMS_H
 #include <string>
 #include <list>
-#include <utility>
-#include <functional>
 #include <algorithm>
 #include <iterator>
 #include <limits>
 
-#ifdef _WIN32
-#include <io.h>
-#define F_OK    0       /* Test for existence.  */
-#define YY_NO_UNISTD_H
-#else
-#include <unistd.h>
-#endif
-#include <sys/stat.h>
 #define ADMS_PATH_SEPARATOR "/"
 #define PACKAGE_NAME "adms"
 #define PACKAGE_VERSION "2.3.0"

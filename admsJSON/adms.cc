@@ -31,7 +31,14 @@ Original code copyright the original authors.
 #include <limits>
 #include <map>
 
-
+#ifdef _WIN32
+#include <io.h>
+#define F_OK    0       /* Test for existence.  */
+#define YY_NO_UNISTD_H
+#else
+#include <unistd.h>
+#endif
+#include <sys/stat.h>
 
 void s_adms::get_reference_list(references_list_t &rlist)
 {

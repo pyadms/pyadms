@@ -183,7 +183,7 @@ static std::map<admse, std::string>  m= {
 template <typename T>
 void push_back_mytup1(references_list_t &rlist, std::string name, std::list<T> &list)
 {
-  p_adms_list x;
+  adms_list x;
   std::copy(list.begin(), list.end(), std::back_inserter(x));
   rlist.push_back(mytup1{name, x});
 }

@@ -53,7 +53,6 @@ admse_variableprototype,
 admse_source,
 admse_range,
 admse_analog,
-
 admse_string,
 admse_mapply_unary,
 admse_mapply_binary,
@@ -106,180 +105,72 @@ admse_plus,
 admse_minus,
 };
 
+
+/*
 struct        s_adms;
 typedef       s_adms *p_adms;
-//typedef const s_adms   *p_kadms;
-typedef std::list<p_adms> p_adms_list;
+typedef std::list<p_adms> adms_list;
+*/
 
-struct s_simulator;
-typedef struct s_simulator *p_simulator;
-struct s_admsmain;
-typedef s_admsmain *p_admsmain;
-
-struct s_list;
-typedef s_list *p_list;
-
-struct s_nature;
-typedef s_nature *p_nature;
-typedef std::list<p_nature> nature_list;
-
-struct s_discipline;
-typedef s_discipline *p_discipline;
-typedef std::list<p_discipline> discipline_list;
-
-struct  s_module;
-typedef s_module *p_module;
-typedef std::list<p_module> module_list;
-
-struct s_analogfunction;
-typedef s_analogfunction *p_analogfunction;
-typedef std::list<p_analogfunction> analogfunction_list;
-
-struct s_nodealias;
-typedef s_nodealias *p_nodealias;
-typedef std::list<p_nodealias> nodealias_list;
-
-struct s_node;
-typedef s_node *p_node;
-typedef std::list<p_node> node_list;
-
-struct s_branchalias;
-typedef s_branchalias *p_branchalias;
-typedef std::list<p_branchalias> branchalias_list;
-
-struct s_branch;
-typedef s_branch *p_branch;
-typedef std::list<p_branch> branch_list;
-
-struct s_variableprototype;
-typedef s_variableprototype *p_variableprototype;
-typedef std::list<p_variableprototype> variableprototype_list;
-
-struct s_source;
-typedef s_source *p_source;
-typedef std::list<p_source> source_list;
-
-struct s_range;
-typedef s_range *p_range;
-typedef std::list<p_range> range_list;
-
-struct s_analog;
-typedef s_analog *p_analog;
-
-struct s_text;
-typedef s_text *p_text;
-
-struct s_path;
-typedef s_path *p_path;
-
-struct s_ptraverse;
-typedef s_ptraverse *p_ptraverse;
-
-struct s_pparse;
-typedef s_pparse *p_pparse;
-
-struct s_attribute;
-typedef s_attribute *p_attribute;
-typedef std::list<p_attribute> attribute_list;
-
-struct s_lexval;
-typedef s_lexval *p_lexval;
-
-struct s_yaccval;
-typedef s_yaccval *p_yaccval;
-
-/* math */
-struct s_math;
-typedef s_math *p_math;
-
-struct s_string;
-typedef s_string *p_string;
-typedef std::list<p_string> string_list;
-
-struct s_mapply_unary;
-typedef s_mapply_unary *p_mapply_unary;
-
-struct s_mapply_binary;
-typedef s_mapply_binary *p_mapply_binary;
-
-struct s_mapply_ternary;
-typedef s_mapply_ternary *p_mapply_ternary;
-
-struct s_number;
-typedef s_number *p_number;
-
-struct s_function;
-typedef s_function *p_function;
-
-struct s_variable;
-typedef s_variable *p_variable;
-typedef std::list<p_variable> variable_list;
-
-struct s_array;
-typedef s_array *p_array;
-
-struct s_probe;
-typedef s_probe *p_probe;
-typedef std::list<p_probe> probe_list;
-
-struct s_expression;
-typedef s_expression *p_expression;
-typedef std::list<p_expression> expression_list;
-
-struct s_instance;
-typedef s_instance *p_instance;
-typedef std::list<p_instance> instance_list;
+#define LIST_OF_VARIABLES \
+DO2(admsmain) \
+DO2(analog) \
+DO2(lexval) \
+DO2(simulator) \
+DO2(yaccval) \
+DO4(adms) \
+DO4(analogfunction) \
+DO4(attribute) \
+DO4(branch) \
+DO4(branchalias) \
+DO4(discipline) \
+DO4(module) \
+DO4(nature) \
+DO4(node) \
+DO4(nodealias) \
+DO4(range) \
+DO4(source) \
+DO4(variableprototype) \
+/* math */ \
+DO2(array) \
+DO2(caseitem) \
+DO2(function) \
+DO2(mapply_binary) \
+DO2(mapply_ternary) \
+DO2(mapply_unary) \
+DO2(math) \
+DO2(nilled) \
+DO2(number) \
+DO4(assignment) \
+DO4(block) \
+DO4(blockvariable) \
+DO4(callfunction) \
+DO4(case) \
+DO4(conditional) \
+DO4(contribution) \
+DO4(expression) \
+DO4(forloop) \
+DO4(instance) \
+DO4(instancenode) \
+DO4(instanceparameter) \
+DO4(probe) \
+DO4(string) \
+DO4(variable) \
+DO4(whileloop)
 
 
-struct s_instanceparameter;
-typedef s_instanceparameter *p_instanceparameter;
-typedef std::list<p_instanceparameter> instanceparameter_list;
-
-struct s_instancenode;
-typedef s_instancenode *p_instancenode;
-typedef std::list<p_instancenode> instancenode_list;
-
-struct s_nilled;
-typedef s_nilled *p_nilled;
-
-struct s_assignment;
-typedef s_assignment *p_assignment;
-typedef std::list<p_assignment> assignment_list;
-
-struct s_contribution;
-typedef s_contribution *p_contribution;
-typedef std::list<p_contribution> contribution_list;
-
-struct s_conditional;
-typedef s_conditional *p_conditional;
-typedef std::list<p_conditional> conditional_list;
-
-struct s_forloop;
-typedef s_forloop *p_forloop;
-typedef std::list<p_forloop> forloop_list;
-
-struct s_whileloop;
-typedef s_whileloop *p_whileloop;
-typedef std::list<p_whileloop> whileloop_list;
-
-struct s_case;
-typedef s_case *p_case;
-typedef std::list<p_case> case_list;
-
-struct s_caseitem;
-typedef s_caseitem *p_caseitem;
-
-struct s_blockvariable;
-typedef s_blockvariable *p_blockvariable;
-typedef std::list<p_blockvariable> blockvariable_list;
-
-struct s_block;
-typedef s_block *p_block;
-typedef std::list<p_block> block_list;
-
-struct s_callfunction;
-typedef s_callfunction *p_callfunction;
-typedef std::list<p_callfunction> callfunction_list;
+#define DO2(a) \
+struct s_ ## a; \
+typedef s_ ## a *p_ ## a;
+#define DO3(a) DO2(a) \
+typedef std::list<p_ ## a> p_ ## a ## _list;
+#define DO4(a) DO2(a) \
+typedef std::list<p_ ## a> a ## _list;
+LIST_OF_VARIABLES
+#undef DO2
+#undef DO3
+#undef NLINE
+#undef LIST_OF_VARIABLES
 
 int admsmain(std::string xcode,std::string xflag,std::string vacode);
 

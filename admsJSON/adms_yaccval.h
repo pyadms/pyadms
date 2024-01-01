@@ -30,7 +30,7 @@ struct s_yaccval : public s_adms {
   std::string get_uid_implemented();
   std::string _filename;
   p_adms      _usrdata;
-  p_adms_list _usrlist;
+  adms_list _usrlist;
 };
 p_yaccval adms_yaccval_new (std::string myfilename);
 #endif

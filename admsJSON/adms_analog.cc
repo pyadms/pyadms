@@ -24,7 +24,7 @@ std::string s_analog::get_uid_implemented()
 void s_analog::get_reference_list_implemented(references_list_t &rlist)
 {
   rlist = {
-    mytup1{"code", p_adms_list{_code}},
+    mytup1{"code", adms_list{_code}},
   };
 }
 

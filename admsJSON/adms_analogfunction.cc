@@ -66,9 +66,9 @@ std::string s_analogfunction::get_uid_implemented()
 void s_analogfunction::get_reference_list_implemented(references_list_t &rlist)
 {
   rlist = {
-    mytup1{"module", p_adms_list{_module}},
-    mytup1{"lexval", p_adms_list{_lexval}},
-    mytup1{"tree", p_adms_list{_tree}},
+    mytup1{"module", adms_list{_module}},
+    mytup1{"lexval", adms_list{_lexval}},
+    mytup1{"tree", adms_list{_tree}},
   };
 
   push_back_mytup1(rlist, "variableprototype", _variableprototype);

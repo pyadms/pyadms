@@ -68,7 +68,7 @@ void adms_block_list_variable_prepend_once_or_abort (p_block mymyblock,p_variabl
   );
 }
 
-p_block adms_block_new (p_module mymodule,p_lexval mylexval,p_adms myblock,p_adms_list myitem)
+p_block adms_block_new (p_module mymodule,p_lexval mylexval,p_adms myblock,adms_list myitem)
 {
   p_block mynewblock = new s_block(mymodule, mylexval, myblock, myitem);
   return mynewblock;

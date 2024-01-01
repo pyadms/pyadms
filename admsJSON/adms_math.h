@@ -120,7 +120,7 @@ struct s_function : public s_math {
   p_lexval _lexval;
   int _unique_id;
   p_analogfunction _definition;
-  p_adms_list _arguments;
+  adms_list _arguments;
 };
 p_function adms_function_new (p_lexval mylexval,int myunique_id);
 
@@ -310,7 +310,7 @@ struct s_case : public s_math {
 
   p_module _module;
   p_expression _case;
-  p_adms_list _caseitem;
+  adms_list _caseitem;
 };
 
 p_case adms_case_new (p_module mymodule,p_expression mycase);
@@ -327,7 +327,7 @@ struct s_caseitem : public s_math {
 
   p_adms _code;
   admse _defaultcase;
-  p_adms_list _condition;
+  adms_list _condition;
 };
 
 p_caseitem adms_caseitem_new (p_adms mycode);

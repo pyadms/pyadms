@@ -45,7 +45,7 @@ struct s_variableprototype : public s_adms {
   p_expression _default;
   int _vcount;
   p_assignment _vlast;
-  p_adms_list    _arraydefault;
+  adms_list    _arraydefault;
   attribute_list _attribute;
   string_list _alias;
   range_list _range;

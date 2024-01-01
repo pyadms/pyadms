@@ -30,7 +30,7 @@ p_blockvariable adms_blockvariable_new (p_block myblock);
 
 /* ------- block -------------- */
 struct s_block : public s_math {
-  s_block (p_module mymodule,p_lexval mylexval,p_adms myblock,p_adms_list myitem)
+  s_block (p_module mymodule,p_lexval mylexval,p_adms myblock,adms_list myitem)
     : s_math(admse_block), _module(mymodule), _lexval(mylexval), _block(myblock), _item(myitem) {}
 
   std::string get_uid_implemented();
@@ -42,11 +42,11 @@ struct s_block : public s_math {
   p_lexval _lexval;
   /// can be block, module or analog function
   p_adms _block;
-  p_adms_list            _item;
+  adms_list            _item;
   attribute_list         _attribute;
   variableprototype_list _variableprototype;
 };
-p_block adms_block_new (p_module mymodule,p_lexval mylexval,p_adms myblock, p_adms_list myitem);
+p_block adms_block_new (p_module mymodule,p_lexval mylexval,p_adms myblock, adms_list myitem);
 void adms_block_list_variable_prepend_once_or_abort (p_block mymyblock,p_variableprototype myvariable);
 
 #endif

@@ -47,20 +47,8 @@ class dependency_visitor:
             analog.code().visit(self)
 
         for v in module.variableprototype.get_list():
-            if 'type' in v.attributes:
-                if v.attributes['type'] == 'instance':
-                    v.parametertype = 'instance'
-            elif 'ask' in v.attributes:
-                if v.attributes['ask'] == 'yes':
-                    v.output = True
-                elif v.attributes['ask'] == 'no':
-                    v.output = False
-                else:
-                    raise RuntimeError('not valid type')
+            v.visit(self)
 
-            if v.default is not None:
-                default = v.default()
-                default.visit(self)
 
     def visit_expression(self, expression: adms_loader.expression):
         self.globalexpression = expression
@@ -100,6 +88,18 @@ class dependency_visitor:
                 prototype.type = prototype.attributes['type']
                 if prototype.type not in ('instance', 'model'):
                     raise RuntimeError(f'{prototype.name} has an invalid type {prototype.parametertype}')
+        if not hasattr(prototype, 'output'):
+            prototype.output = False
+            if 'ask' in prototype.attributes:
+                ask = prototype.attributes['ask']
+                if ask == 'yes':
+                    prototype.output = True
+                elif ask == 'no':
+                    prototype.output = False
+                else:
+                    raise RuntimeError(f'not valid ask {ask}')
+        if hasattr(prototype, 'default') and prototype.default is not None:
+            prototype.default().visit(self)
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
@@ -274,8 +274,5 @@ class dependency_visitor:
         pass
 
     def visit_blockvariable(self, blockvariable: adms_loader.blockvariable):
-        # this is a list for multiple declarations in the same statement
         for vp in blockvariable.variableprototype.get_list():
-            if vp.name is None:
-                vp.name = vp.lexval().string
-        
+            vp.visit(self)

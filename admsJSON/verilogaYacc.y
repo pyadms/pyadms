@@ -75,7 +75,7 @@ range_list             gRangeList;
 node_list              gNodeList;
 attribute_list         gAttributeList;
 attribute_list         gGlobalAttributeList;
-p_adms_list            gBlockList;
+adms_list            gBlockList;
 variableprototype_list gBlockVariablePrototypeList;
 p_branchalias          gBranchAlias;
 int uid;
@@ -1452,7 +1452,7 @@ R_d__block
 R_d__block__begin
         : R_d__attribute__0 tk_begin
           {
-            p_block myblock=adms_block_new(mc.gModule,$2, ((!mc.gBlockList.empty())?(mc.gBlockList.back()):nullptr), p_adms_list());
+            p_block myblock=adms_block_new(mc.gModule,$2, ((!mc.gBlockList.empty())?(mc.gBlockList.back()):nullptr), adms_list());
             $$=adms_yaccval_new("unknown source file");
             myblock->_lexval->_string="";
             mc.gBlockList.push_back(myblock);
@@ -2212,7 +2212,7 @@ R_e__atomic
         | tk_dollar_ident '(' R_l__enode ')'
           {
             p_function myfunction=adms_function_new($1,mc.uid++);
-            p_adms_list myArgs=$3->_usrlist;
+            adms_list myArgs=$3->_usrlist;
             $$=adms_yaccval_new("unknown source file");
             myfunction->_arguments=myArgs;
             $$->set_p(myfunction);
@@ -2221,7 +2221,7 @@ R_e__atomic
           {
             std::string mylexval1=$1->_string;
             std::string myfunctionname=mylexval1;
-            p_adms_list myArgs=$3->_usrlist;
+            adms_list myArgs=$3->_usrlist;
             int narg=myArgs.size();
             p_probe myprobe=nullptr;
             p_nature mynature=adms_admsmain_list_nature_lookup_by_id(root(),myfunctionname);

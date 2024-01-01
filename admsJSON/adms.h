@@ -22,74 +22,78 @@ Original code copyright the original authors.
 #define ADMS_COMPILER "N/A" 
 #define ADMS_OS "N/A" 
 
+#define ADMSE_VARIABLE_LIST \
+DO(simulator) \
+DO(admsmain) \
+DO(list) \
+DO(nature) \
+DO(discipline) \
+DO(module) \
+DO(analogfunction) \
+DO(nodealias) \
+DO(node) \
+DO(branchalias) \
+DO(branch) \
+DO(variableprototype) \
+DO(source) \
+DO(range) \
+DO(analog) \
+DO(string) \
+DO(mapply_unary) \
+DO(mapply_binary) \
+DO(mapply_ternary) \
+DO(number) \
+DO(function) \
+DO(variable) \
+DO(array) \
+DO(probe) \
+DO(expression) \
+DO(instance) \
+DO(instanceparameter) \
+DO(instancenode) \
+DO(nilled) \
+DO(assignment) \
+DO(contribution) \
+DO(conditional) \
+DO(forloop) \
+DO(whileloop) \
+DO(case) \
+DO(caseitem) \
+DO(blockvariable) \
+DO(block) \
+DO(callfunction) \
+DO(attribute) \
+DO(lexval) \
+DO(yaccval) \
+DO(input) \
+DO(output) \
+DO(yes) \
+DO(no) \
+DO(continuous) \
+DO(discrete) \
+DO(real) \
+DO(integer) \
+DO(inout) \
+DO(internal) \
+DO(ground) \
+DO(external) \
+DO(scalar) \
+DO(model) \
+DO(range_bound_include) \
+DO(range_bound_exclude) \
+DO(range_bound_value) \
+DO(include) \
+DO(include_value) \
+DO(exclude) \
+DO(exclude_value) \
+DO(plus) \
+DO(minus)
 
 // update for get_admse_string
 enum admse {
-admse_simulator,
-admse_admsmain,
-admse_list,
-admse_nature,
-admse_discipline,
-admse_module,
-admse_analogfunction,
-admse_nodealias,
-admse_node,
-admse_branchalias,
-admse_branch,
-admse_variableprototype,
-admse_source,
-admse_range,
-admse_analog,
-admse_string,
-admse_mapply_unary,
-admse_mapply_binary,
-admse_mapply_ternary,
-admse_number,
-admse_function,
-admse_variable,
-admse_array,
-admse_probe,
-admse_expression,
-admse_instance,
-admse_instanceparameter,
-admse_instancenode,
-admse_nilled,
-admse_assignment,
-admse_contribution,
-admse_conditional,
-admse_forloop,
-admse_whileloop,
-admse_case,
-admse_caseitem,
-admse_blockvariable,
-admse_block,
-admse_callfunction,
-admse_attribute,
-admse_lexval,
-admse_yaccval,
-admse_input,
-admse_output,
-admse_yes,
-admse_no,
-admse_continuous,
-admse_discrete,
-admse_real,
-admse_integer,
-admse_inout,
-admse_internal,
-admse_ground,
-admse_external,
-admse_scalar,
-admse_model,
-admse_range_bound_include,
-admse_range_bound_exclude,
-admse_range_bound_value,
-admse_include,
-admse_include_value,
-admse_exclude,
-admse_exclude_value,
-admse_plus,
-admse_minus,
+#define DO(a) admse_ ## a,
+ADMSE_VARIABLE_LIST
+#undef DO
 };
 
 

@@ -10,17 +10,23 @@ module.visit(dv)
 
 # external nodes
 print("\nEXTERNAL NODES")
-for n in module.node.get_list():
-    if n.grounded or (n.location == 'internal'):
-        continue
+external_nodes = [n for n in module.node.get_list() if n.location == 'external']
+for n in external_nodes:
     print(f' {n.name}')
 
+print("\nINTERNAL NODES")
+internal_nodes = [n for n in module.node.get_list() if n.location == 'internal']
+for n in internal_nodes:
+    print(f' {n.name}')
+
+model_parameters = [v for v in module.variableprototype.get_list() if v.type == 'model']
 # parameters
 print("\nMODEL PARAMETERS")
-for v in module.variableprototype.get_list():
-    if v.type == 'model':
-        print(v.name)
+for p in model_parameters:
+        print(f'{p.name}')
+
+instance_parameters = [v for v in module.variableprototype.get_list() if v.type == 'instance']
 print("\nINSTANCE PARAMETERS")
-for v in module.variableprototype.get_list():
-    if v.type == 'instance':
-        print(v.name)
+for p in instance_parameters:
+        print(f'{p.name}')
+

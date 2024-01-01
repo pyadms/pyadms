@@ -78,18 +78,28 @@ class dependency_visitor:
     def visit_variable(self, variable: adms_loader.variable):
         # TODO: it may be necessary to do this on an additional pass if we want to know about all assignments to this variable, even if it happens later.
         vp = variable.variableprototype()
-        if vp.name is None:
-            vp.name = vp.lexval().string
+        vp.visit(self)
         variable.name = vp.name
-
-        # TODO: should check if model or instance parameter since it has no assignments
-        if not hasattr(vp, 'dependency'):
-            vp.dependency = 'constant'
         variable.dependency = vp.dependency
 
         if self.globalpartition:
             # print(f'variable "{vp.name}" is set in "{self.globalpartition.name}"')
             vp.setinblock(self.globalpartition)
+
+    def visit_variableprototype(self, prototype: adms_loader.variableprototype):
+        if not hasattr(prototype, 'name'):
+            prototype.name = prototype.lexval().string
+        if not hasattr(prototype, 'dependency'):
+            prototype.dependency = 'constant'
+        if not hasattr(prototype, 'type'):
+            if prototype.parametertype == 'analogfunction':
+                prototype.type = prototype.parametertype
+            elif 'type' not in prototype.attributes:
+                prototype.type = 'model'
+            else:
+                prototype.type = prototype.attributes['type']
+                if prototype.type not in ('instance', 'model'):
+                    raise RuntimeError(f'{prototype.name} has an invalid type {prototype.parametertype}')
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())

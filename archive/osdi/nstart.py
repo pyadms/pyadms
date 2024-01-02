@@ -19,7 +19,7 @@ internal_nodes = [n for n in module.node.get_list() if n.location == 'internal']
 for n in internal_nodes:
     print(f' {n.name}')
 
-model_parameters = [v for v in module.variableprototype.get_list() if v.type == 'model']
+model_parameters = [v for v in module.variableprototype.get_list() if (v.type == 'model' and v.input == True)]
 # parameters
 print("\nMODEL PARAMETERS")
 for p in model_parameters:

@@ -481,7 +481,7 @@ class variable(admst):
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'output', 'type')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'input', 'output', 'type')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -491,6 +491,7 @@ class variableprototype(admst):
         self.move_up_reference('lexval', True)
         self.setin = admst_reference_list([])
         self.move_up_parameter('parametertype')
+        self.move_up_parameter('input')
 
     def setinblock(self, b):
         self.setin.append(b, True)

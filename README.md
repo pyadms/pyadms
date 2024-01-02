@@ -1,6 +1,6 @@
 # PyADMS - Python Automatic Device Model Synthesizer
 
-Thie is Verilog-AMS to JSON Automatic Device Model Synthesizer.  Additional processing is down via Python scripts to create source code for integration into circuit simulators.
+Thie is Verilog-AMS to JSON Automatic Device Model Synthesizer.  Additional processing is done via Python scripts to create source code for integration into circuit simulators.
 
 
 The files in the archive/xmlversion directory are forked from [https://github.com/upverter/ADMS](https://github.com/upverter/ADMS) which has been used as the basis for other circuit simulation projects.
@@ -13,7 +13,7 @@ Reference documentation in the docs directory are copyright the respective owner
 
 Verilog-A files processed through this systems are subject to the License terms of the original authors of those files.
 
-Copyright (C) 2023 DEVSIM LLC
+Copyright (C) 2023--2024 DEVSIM LLC
 
 Original code copyright the original authors.  The NOTICE file has more license and copyright information.
 

@@ -67,8 +67,8 @@ DO(lexval) \
 DO(yaccval) \
 DO(input) \
 DO(output) \
-DO(yes) \
-DO(no) \
+DO2(yes) \
+DO2(no) \
 DO(continuous) \
 DO(discrete) \
 DO(real) \
@@ -92,8 +92,10 @@ DO(minus)
 // update for get_admse_string
 enum admse {
 #define DO(a) admse_ ## a,
+#define DO2(a) DO(a)
 ADMSE_VARIABLE_LIST
 #undef DO
+#undef DO2
 };
 
 
@@ -160,6 +162,7 @@ typedef std::list<p_ ## a> a ## _list;
 LIST_OF_VARIABLES
 #undef DO2
 #undef DO3
+#undef DO4
 #undef NLINE
 #undef LIST_OF_VARIABLES
 

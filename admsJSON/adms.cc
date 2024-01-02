@@ -118,9 +118,17 @@ void push_back_attributes(attributes_list_t &alist, attribute_list &attribute)
 
 std::string get_admse_string(admse x) {
 static std::map<admse, std::string>  m= {
-#define DO(a) {admse_ ## a, #a},
+#define DO3(a) admse_ ## a
+#define DO4(a) #a
+#define DO5(a) DO4(a)
+#define DO(a) {DO3(a), DO4(a)},
+#define DO2(a) {DO3(a), DO5(DO3(a))},
 ADMSE_VARIABLE_LIST
 #undef DO
+#undef DO2
+#undef DO3
+#undef DO4
+#undef DO5
 };
   return m[x];
 }

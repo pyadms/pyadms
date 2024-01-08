@@ -16,14 +16,14 @@ class dependency_visitor:
         for node in module.node.get_list():
             if node.location == 'ground':
                 node.grounded = True
-            else:
+            elif node.location == 'external':
                 node.grounded = False
-                if node.location == 'external':
-                    module.external_nodes.append(node)
-                elif node.location == 'internal':
-                    module.internal_nodes.append(node)
-                else:
-                    raise RuntimeError(f"Unknown node location {node.location}")
+                module.external_nodes.append(node)
+            elif node.location == 'internal':
+                node.grounded = False
+                module.internal_nodes.append(node)
+            else:
+                raise RuntimeError(f"Unknown node location {node.location}")
 
         for branch in module.branch.get_list():
             nlist = list(branch.node.get_list())

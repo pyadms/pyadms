@@ -11,11 +11,19 @@ class dependency_visitor:
         self.globalpartition = None
 
     def visit_module(self, module: adms_loader.module):
+        module.internal_nodes = adms_loader.admst_reference_list([])
+        module.external_nodes = adms_loader.admst_reference_list([])
         for node in module.node.get_list():
             if node.location == 'ground':
                 node.grounded = True
             else:
                 node.grounded = False
+                if node.location == 'external':
+                    module.external_nodes.append(node)
+                elif node.location == 'internal':
+                    module.internal_nodes.append(node)
+                else:
+                    raise RuntimeError(f"Unknown node location {node.location}")
 
         for branch in module.branch.get_list():
             nlist = list(branch.node.get_list())
@@ -46,8 +54,14 @@ class dependency_visitor:
         for analog in module.analog.get_list():
             analog.code().visit(self)
 
+        module.model_parameters = adms_loader.admst_reference_list([])
+        module.instance_parameters = adms_loader.admst_reference_list([])
         for v in module.variableprototype.get_list():
             v.visit(self)
+            if v.type == 'model' and v.input == True:
+                module.model_parameters.append(v)
+            elif v.type == 'instance':
+                module.instance_parameters.append(v)
 
 
     def visit_expression(self, expression: adms_loader.expression):

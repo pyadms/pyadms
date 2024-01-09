@@ -70,6 +70,7 @@ class dependency_visitor:
         tree.visit(self)
         self.globalexpression = None
         expression.dependency = tree.dependency
+        expression.probes = tree.probes.copy()
 
     def visit_probe(self, probe: adms_loader.probe):
         probe.dependency = 'linear'
@@ -83,12 +84,14 @@ class dependency_visitor:
         vp.visit(self)
         variable.name = vp.name
         variable.dependency = vp.dependency
+        variable.probes.extend(vp.probes, True)
 
         if self.globalpartition:
             # print(f'variable "{vp.name}" is set in "{self.globalpartition.name}"')
             vp.setinblock(self.globalpartition)
 
     def visit_variableprototype(self, prototype: adms_loader.variableprototype):
+        # TODO: somehow collect probes from assignments
         if not hasattr(prototype, 'name'):
             prototype.name = prototype.lexval().string
         if not hasattr(prototype, 'dependency'):
@@ -118,6 +121,7 @@ class dependency_visitor:
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
         args[0].visit(self)
+        unary.probes.extend(unary.args, True)
         name = unary.name
         if name in ('minus', 'plus', 'not'):
             unary.dependency = args[0].dependency
@@ -128,6 +132,7 @@ class dependency_visitor:
         args = list(binary.args.get_list())
         for arg in args:
             arg.visit(self)
+            binary.probes.extend(arg.probes, True)
         deps = [b.dependency for b in binary.args.get_list()]
         name = binary.name
         if all([d=='constant' for d in deps]):
@@ -161,6 +166,7 @@ class dependency_visitor:
         args = list(ternary.args.get_list())
         for arg in args:
             arg.visit(self)
+            ternary.probes.extend(arg.probes)
         deps = [b.dependency for b in ternary.args.get_list()]
         name = ternary.name
 
@@ -179,6 +185,7 @@ class dependency_visitor:
         args = list(function.arguments.get_list())
         for arg in args:
             arg.visit(self)
+            function.probes.extend(arg.probes)
         deps = [f.dependency for f in args]
         # print(function.name)
         if (all(d == 'constant' for d in deps)):
@@ -234,10 +241,15 @@ class dependency_visitor:
         conditional.Then().visit(self)
         if conditional.Else is not None:
             conditional.Else().visit(self)
+        conditional.probes.extend(conditional.If().probes, True)
+        conditional.probes.extend(conditional.Then().probes, True)
+        if conditional.Else is not None:
+            conditional.probes.extend(conditional.Else().probes, True)
 
     def visit_contribution(self, contribution: adms_loader.contribution):
         # self.globalcontribution = contribution
         contribution.rhs().visit(self)
+        contribution.probes.extend(contribution.rhs().probes)
         # self.globalcontribution = None
         # contribution.lhs().probe
         # for probe in contribution.rhs().probe:
@@ -266,6 +278,13 @@ class dependency_visitor:
             vp.dependency = rhs.dependency
         else:
             vp.dependency = 'constant'
+
+        # this specific variableprototype is using these probes
+        vp.probes.extend(rhs.probes, True)
+        # this specific variable is using these probes
+        lhs.probes.extend(rhs.probes, True)
+        # this assignment statement has these probes
+        assignment.probes.extend(rhs.probes, True)
         lhs.visit(self)
 
     def visit_block(self, block: adms_loader.block):
@@ -281,6 +300,7 @@ class dependency_visitor:
 
         for item in block.item.get_list():
             item.visit(self)
+            block.probes.extend(item.probes)
 
         self.globalpartition = None
 
@@ -290,3 +310,5 @@ class dependency_visitor:
     def visit_blockvariable(self, blockvariable: adms_loader.blockvariable):
         for vp in blockvariable.variableprototype.get_list():
             vp.visit(self)
+            blockvariable.probes.extend(vp.probes)
+

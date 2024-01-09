@@ -18,10 +18,10 @@ class dependency_visitor:
                 node.grounded = True
             elif node.location == 'external':
                 node.grounded = False
-                module.external_nodes.append(node)
+                module.external_nodes.append(node, False)
             elif node.location == 'internal':
                 node.grounded = False
-                module.internal_nodes.append(node)
+                module.internal_nodes.append(node, False)
             else:
                 raise RuntimeError(f"Unknown node location {node.location}")
 
@@ -59,9 +59,9 @@ class dependency_visitor:
         for v in module.variableprototype.get_list():
             v.visit(self)
             if v.type == 'model' and v.input == True:
-                module.model_parameters.append(v)
+                module.model_parameters.append(v, False)
             elif v.type == 'instance':
-                module.instance_parameters.append(v)
+                module.instance_parameters.append(v, False)
 
 
     def visit_expression(self, expression: adms_loader.expression):
@@ -166,7 +166,7 @@ class dependency_visitor:
         args = list(ternary.args.get_list())
         for arg in args:
             arg.visit(self)
-            ternary.probes.extend(arg.probes)
+            ternary.probes.extend(arg.probes, True)
         deps = [b.dependency for b in ternary.args.get_list()]
         name = ternary.name
 
@@ -185,7 +185,7 @@ class dependency_visitor:
         args = list(function.arguments.get_list())
         for arg in args:
             arg.visit(self)
-            function.probes.extend(arg.probes)
+            function.probes.extend(arg.probes, True)
         deps = [f.dependency for f in args]
         # print(function.name)
         if (all(d == 'constant' for d in deps)):
@@ -249,7 +249,7 @@ class dependency_visitor:
     def visit_contribution(self, contribution: adms_loader.contribution):
         # self.globalcontribution = contribution
         contribution.rhs().visit(self)
-        contribution.probes.extend(contribution.rhs().probes)
+        contribution.probes.extend(contribution.rhs().probes, True)
         # self.globalcontribution = None
         # contribution.lhs().probe
         # for probe in contribution.rhs().probe:
@@ -300,7 +300,7 @@ class dependency_visitor:
 
         for item in block.item.get_list():
             item.visit(self)
-            block.probes.extend(item.probes)
+            block.probes.extend(item.probes, True)
 
         self.globalpartition = None
 

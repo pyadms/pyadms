@@ -25,7 +25,7 @@ class admst_reference_list:
         if not all(isinstance(x, int) for x in self.reference_list):
             raise RuntimeError("mismatch type")
 
-    def append(self, x, ignore_duplicate=False):
+    def append(self, x, ignore_duplicate):
         # print(type(x))
         if isinstance(x, int):
             y = x
@@ -42,7 +42,7 @@ class admst_reference_list:
         else:
             self.reference_list.append(y)
 
-    def extend(self, other, ignore_duplicate=False):
+    def extend(self, other, ignore_duplicate):
         if not isinstance(other, admst_reference_list):
             raise RuntimeError("mismatch type")
 

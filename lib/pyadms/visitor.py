@@ -26,7 +26,7 @@ class dependency_visitor:
                 raise RuntimeError(f"Unknown node location {node.location}")
 
         for branch in module.branch.get_list():
-            nlist = list(branch.node.get_list())
+            nlist = list(branch.nodes.get_list())
             if nlist[1].discipline is None:
                 branch.discipline = nlist[0].discipline
             elif nlist[0].discipline is None:
@@ -70,10 +70,12 @@ class dependency_visitor:
         tree.visit(self)
         self.globalexpression = None
         expression.dependency = tree.dependency
-        expression.probes = tree.probes.copy()
+        expression.probes.extend(tree.probes, True)
+        expression.nodes.extend(tree.nodes, True)
 
     def visit_probe(self, probe: adms_loader.probe):
         probe.dependency = 'linear'
+        probe.nodes.extend(probe.branch().nodes, True)
 
     def visit_array(self, array: adms_loader.array):
         pass
@@ -85,6 +87,7 @@ class dependency_visitor:
         variable.name = vp.name
         variable.dependency = vp.dependency
         variable.probes.extend(vp.probes, True)
+        variable.nodes.extend(vp.nodes, True)
 
         if self.globalpartition:
             # print(f'variable "{vp.name}" is set in "{self.globalpartition.name}"')
@@ -121,7 +124,8 @@ class dependency_visitor:
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
         args[0].visit(self)
-        unary.probes.extend(unary.args, True)
+        unary.probes.extend(args[0].probes, True)
+        unary.nodes.extend(args[0].nodes, True)
         name = unary.name
         if name in ('minus', 'plus', 'not'):
             unary.dependency = args[0].dependency
@@ -133,6 +137,7 @@ class dependency_visitor:
         for arg in args:
             arg.visit(self)
             binary.probes.extend(arg.probes, True)
+            binary.nodes.extend(arg.nodes, True)
         deps = [b.dependency for b in binary.args.get_list()]
         name = binary.name
         if all([d=='constant' for d in deps]):
@@ -167,6 +172,7 @@ class dependency_visitor:
         for arg in args:
             arg.visit(self)
             ternary.probes.extend(arg.probes, True)
+            ternary.nodes.extend(arg.nodes, True)
         deps = [b.dependency for b in ternary.args.get_list()]
         name = ternary.name
 
@@ -186,6 +192,7 @@ class dependency_visitor:
         for arg in args:
             arg.visit(self)
             function.probes.extend(arg.probes, True)
+            function.nodes.extend(arg.nodes, True)
         deps = [f.dependency for f in args]
         # print(function.name)
         if (all(d == 'constant' for d in deps)):
@@ -241,15 +248,16 @@ class dependency_visitor:
         conditional.Then().visit(self)
         if conditional.Else is not None:
             conditional.Else().visit(self)
-        conditional.probes.extend(conditional.If().probes, True)
-        conditional.probes.extend(conditional.Then().probes, True)
-        if conditional.Else is not None:
-            conditional.probes.extend(conditional.Else().probes, True)
+        for i in (conditional.If, conditional.Then, conditional.Else):
+            if i is not None:
+                conditional.probes.extend(i().probes, True)
+                conditional.nodes.extend(i().nodes, True)
 
     def visit_contribution(self, contribution: adms_loader.contribution):
         # self.globalcontribution = contribution
         contribution.rhs().visit(self)
         contribution.probes.extend(contribution.rhs().probes, True)
+        contribution.nodes.extend(contribution.rhs().nodes, True)
         # self.globalcontribution = None
         # contribution.lhs().probe
         # for probe in contribution.rhs().probe:
@@ -280,11 +288,11 @@ class dependency_visitor:
             vp.dependency = 'constant'
 
         # this specific variableprototype is using these probes
-        vp.probes.extend(rhs.probes, True)
         # this specific variable is using these probes
-        lhs.probes.extend(rhs.probes, True)
         # this assignment statement has these probes
-        assignment.probes.extend(rhs.probes, True)
+        for i in (vp, lhs, assignment):
+            i.probes.extend(rhs.probes, True)
+            i.nodes.extend(rhs.nodes, True)
         lhs.visit(self)
 
     def visit_block(self, block: adms_loader.block):
@@ -301,6 +309,7 @@ class dependency_visitor:
         for item in block.item.get_list():
             item.visit(self)
             block.probes.extend(item.probes, True)
+            block.nodes.extend(item.nodes, True)
 
         self.globalpartition = None
 
@@ -311,4 +320,5 @@ class dependency_visitor:
         for vp in blockvariable.variableprototype.get_list():
             vp.visit(self)
             blockvariable.probes.extend(vp.probes)
+            blockvariable.nodes.extend(vp.nodes)
 

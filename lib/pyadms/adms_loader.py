@@ -132,18 +132,19 @@ class analog(admst):
 
 class assignment(admst):
 
-    __slots__ = ('module', 'lhs', 'rhs', 'lexval', 'probes')
+    __slots__ = ('module', 'lhs', 'rhs', 'lexval', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'lhs', 'rhs', 'lexval'):
             self.move_up_reference(x, True)
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class block(admst):
 
-    __slots__ = ('module', 'lexval', 'block', 'item', 'name', 'probes')
+    __slots__ = ('module', 'lexval', 'block', 'item', 'name', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -152,27 +153,30 @@ class block(admst):
             self.move_up_reference(x, True)
         self.move_up_reference('item')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class blockvariable(admst):
 
-    __slots__ = ('block', 'variableprototype',)
+    __slots__ = ('block', 'variableprototype', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('block', True)
         self.move_up_reference('variableprototype', False)
+        self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class branch(admst):
 
-    __slots__ = ('module', 'node', 'discipline', 'grounded')
+    __slots__ = ('module', 'nodes', 'discipline', 'grounded')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'discipline'):
             self.move_up_reference(x, True)
-        self.node = admst_reference_list([self.references.pop(x)[0] for x in ['pnode', 'nnode']])
+        self.nodes = admst_reference_list([self.references.pop(x)[0] for x in ['pnode', 'nnode']])
 
 
 class branchalias(admst):
@@ -188,7 +192,7 @@ class branchalias(admst):
 
 class conditional(admst):
 
-    __slots__ = ('module', 'If', 'Then', 'Else', 'probes')
+    __slots__ = ('module', 'If', 'Then', 'Else', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -199,17 +203,19 @@ class conditional(admst):
         for x in ('module', 'If', 'Then', 'Else'):
             self.move_up_reference(x, True)
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class contribution(admst):
 
-    __slots__ = ('module', 'lhs', 'rhs', 'branchalias', 'probes')
+    __slots__ = ('module', 'lhs', 'rhs', 'branchalias', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'lhs', 'rhs', 'branchalias'):
             self.move_up_reference(x, True)
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class discipline(admst):
@@ -226,17 +232,19 @@ class discipline(admst):
 
 class expression(admst):
 
-    __slots__ = ('tree', 'dependency', 'probes',)
+    __slots__ = ('tree', 'dependency', 'probes', 'nodes',)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('tree',):
             self.move_up_reference(x, True)
+        self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class function(admst):
 
-    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name', 'dependency', 'probes')
+    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -245,6 +253,7 @@ class function(admst):
             self.move_up_reference(x, True)
         self.move_up_reference('arguments')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class lexval(admst):
@@ -262,35 +271,38 @@ class lexval(admst):
 
 class mapply_binary(admst):
 
-    __slots__ = ('args', 'name', 'dependency', 'probes')
+    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references.pop(x)[0] for x in ['arg1', 'arg2']])
         self.move_up_parameter('name')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class mapply_ternary(admst):
 
-    __slots__ = ('args', 'name', 'dependency', 'probes')
+    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references.pop(x)[0] for x in ['arg1', 'arg2', 'arg3']])
         self.move_up_parameter('name')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class mapply_unary(admst):
 
-    __slots__ = ('args', 'name', 'dependency', 'probes')
+    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.args = admst_reference_list([self.references.pop(x)[0] for x in ['arg1']])
         self.move_up_parameter('name')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class attribute(admst):
@@ -426,7 +438,7 @@ class nodealias(admst):
 
 class number(admst):
 
-    __slots__ = ('value', 'scalingunit', 'cast', 'lexval', 'dependency', 'probes')
+    __slots__ = ('value', 'scalingunit', 'cast', 'lexval', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -434,16 +446,18 @@ class number(admst):
             self.move_up_parameter(x)
         self.move_up_reference('lexval', True)
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 class probe(admst):
 
-    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded', 'dependency', 'probes')
+    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         for x in ('module', 'branch', 'nature'):
             self.move_up_reference(x, True)
         self.probes = admst_reference_list([self.id,])
+        self.nodes = admst_reference_list([])
 
 
 class Range(admst):
@@ -478,27 +492,29 @@ class source(admst):
 
 class string(admst):
 
-    __slots__ = ('value', 'dependency', 'probes')
+    __slots__ = ('value', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_parameter('value')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class variable(admst):
 
-    __slots__ = ('variableprototype', 'probes', 'variable', 'name', 'dependency')
+    __slots__ = ('variableprototype', 'variable', 'name', 'dependency', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('variableprototype', True)
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'input', 'output', 'type', 'probes')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'input', 'output', 'type', 'probes', 'nodes')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -510,6 +526,7 @@ class variableprototype(admst):
         self.move_up_parameter('parametertype')
         self.move_up_parameter('input')
         self.probes = admst_reference_list([])
+        self.nodes = admst_reference_list([])
 
     def setinblock(self, b):
         self.setin.append(b, True)

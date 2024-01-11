@@ -28,3 +28,10 @@ print("\nINSTANCE PARAMETERS")
 for p in module.instance_parameters.get_list():
         print(f'{p.name}')
 
+for i in module.analog().code().item.get_list():
+        if i.datatypename == 'block':
+            nprobe = len(list(i.probes.get_list()))
+            print(f'block "{i.name}" has {nprobe} probes')
+        else:
+            nprobe = len(list(i.probes.get_list()))
+            print(f'"{i.datatypename}" has {nprobe} probes')

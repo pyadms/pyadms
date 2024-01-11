@@ -351,7 +351,6 @@ class module(admst):
         super().__init__(**kwargs)
         self.move_up_parameter('name')
         for x in (
-            'analog',
             'analogfunction',
             'assignment',
             'attribute',
@@ -375,6 +374,7 @@ class module(admst):
             'whileloop',
         ):
             self.move_up_reference(x)
+        self.move_up_reference('analog', True)
 
 class analogfunction(admst):
 

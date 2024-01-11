@@ -51,8 +51,7 @@ class dependency_visitor:
         for analogfunction in module.analogfunction.get_list():
             analogfunction.tree().visit(self)
 
-        for analog in module.analog.get_list():
-            analog.code().visit(self)
+        module.analog().code().visit(self)
 
         module.model_parameters = adms_loader.admst_reference_list([])
         module.instance_parameters = adms_loader.admst_reference_list([])

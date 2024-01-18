@@ -281,6 +281,15 @@ class dependency_visitor:
             if i is not None:
                 conditional.probes.extend(i().probes, True)
                 conditional.nodes.extend(i().nodes, True)
+        conditional.has_ddt = False
+        conditional.has_resistive = False
+        for i in (conditional.Then, conditional.Else):
+            if i is None:
+                continue
+            if i().has_ddt:
+                conditional.has_ddt = True
+            if i().has_resistive:
+                conditional.has_resistive = True
 
     def visit_contribution(self, contribution: adms_loader.contribution):
         # self.globalcontribution = contribution
@@ -320,8 +329,10 @@ class dependency_visitor:
 
         if not hasattr(lhs, 'has_ddt') or not lhs.has_ddt:
             lhs.has_ddt = rhs.has_ddt
+            assignment.has_ddt = rhs.has_ddt
         if not hasattr(lhs, 'has_resistive') or not lhs.has_resistive:
             lhs.has_resistive = rhs.has_resistive
+            assignment.has_resistive = rhs.has_resistive
         if not hasattr(vp, 'has_ddt') or not vp.has_ddt:
             vp.has_ddt = rhs.has_ddt
         if not hasattr(vp, 'has_resistive') or not vp.has_resistive:
@@ -352,6 +363,8 @@ class dependency_visitor:
             block.nodes.extend(item.nodes, True)
 
         self.globalpartition = None
+        block.has_ddt = any([b.has_ddt for b in block.item.get_list()])
+        block.has_resistive = any([b.has_resistive for b in block.item.get_list()])
 
     def visit_nilled(self, nilled: adms_loader.nilled):
         pass

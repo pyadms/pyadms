@@ -132,7 +132,7 @@ class analog(admst):
 
 class assignment(admst):
 
-    __slots__ = ('module', 'lhs', 'rhs', 'lexval', 'probes', 'nodes')
+    __slots__ = ('module', 'lhs', 'rhs', 'lexval', 'probes', 'nodes', 'has_ddt', 'has_resistive')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -144,7 +144,7 @@ class assignment(admst):
 
 class block(admst):
 
-    __slots__ = ('module', 'lexval', 'block', 'item', 'name', 'probes', 'nodes')
+    __slots__ = ('module', 'lexval', 'block', 'item', 'name', 'probes', 'nodes', 'has_ddt', 'has_resistive')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -192,7 +192,7 @@ class branchalias(admst):
 
 class conditional(admst):
 
-    __slots__ = ('module', 'If', 'Then', 'Else', 'probes', 'nodes')
+    __slots__ = ('module', 'If', 'Then', 'Else', 'probes', 'nodes', 'has_ddt', 'has_resistive')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

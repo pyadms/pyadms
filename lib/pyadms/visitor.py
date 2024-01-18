@@ -71,10 +71,14 @@ class dependency_visitor:
         expression.dependency = tree.dependency
         expression.probes.extend(tree.probes, True)
         expression.nodes.extend(tree.nodes, True)
+        expression.has_ddt = tree.has_ddt
+        expression.has_resistive = tree.has_resistive
 
     def visit_probe(self, probe: adms_loader.probe):
         probe.dependency = 'linear'
         probe.nodes.extend(probe.branch().nodes, True)
+        probe.has_ddt = False
+        probe.has_resistive = True
 
     def visit_array(self, array: adms_loader.array):
         pass
@@ -87,6 +91,9 @@ class dependency_visitor:
         variable.dependency = vp.dependency
         variable.probes.extend(vp.probes, True)
         variable.nodes.extend(vp.nodes, True)
+        # TODO: is this really true, unless it is in the same block
+        variable.has_ddt = vp.has_ddt
+        variable.has_resistive = vp.has_resistive
 
         if self.globalpartition:
             # print(f'variable "{vp.name}" is set in "{self.globalpartition.name}"')
@@ -119,6 +126,10 @@ class dependency_visitor:
                     raise RuntimeError(f'not valid ask {ask}')
         if hasattr(prototype, 'default') and prototype.default is not None:
             prototype.default().visit(self)
+        if not hasattr(prototype, 'has_ddt'):
+            prototype.has_ddt = False
+        if not hasattr(prototype, 'has_resistive'):
+            prototype.has_resistive = False
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
@@ -130,6 +141,8 @@ class dependency_visitor:
             unary.dependency = args[0].dependency
         else:
             raise RuntimeError(f"unexpected mapply_unary function {name}")
+        unary.has_ddt = args[0].has_ddt
+        unary.has_resistive = args[0].has_resistive
 
     def visit_mapply_binary(self, binary: adms_loader.mapply_binary):
         args = list(binary.args.get_list())
@@ -164,6 +177,8 @@ class dependency_visitor:
             binary.dependency = 'constant'
         else:
             raise RuntimeError(f"unexpected mapply_binary function {name}")
+        binary.has_ddt = any([b.has_ddt for b in binary.args.get_list()])
+        binary.has_resistive = any([b.has_resistive for b in binary.args.get_list()])
 
 
     def visit_mapply_ternary(self, ternary: adms_loader.mapply_ternary):
@@ -184,6 +199,8 @@ class dependency_visitor:
                 ternary.dependency = 'constant'
         else:
             raise RuntimeError(f"unexpected mapply_ternary function {name}")
+        ternary.has_ddt = any([b.has_ddt for b in ternary.args.get_list()])
+        ternary.has_resistive = any([b.has_resistive for b in ternary.args.get_list()])
 
     def visit_function(self, function: adms_loader.function):
         function.name = function.lexval().string
@@ -198,6 +215,15 @@ class dependency_visitor:
             function.dependency = 'constant'
         else:
             function.dependency = 'nonlinear'
+        if function.name == 'ddt':
+            if any([b.has_ddt for b in function.arguments.get_list()]):
+                raise RuntimeError('cannot do ddt of ddt')
+            function.has_ddt = True
+            function.has_resistive = False
+        else:
+            # TODO: make sure that has_ddt is not somehow nested
+            function.has_ddt = any([b.has_ddt for b in function.arguments.get_list()])
+            function.has_resistive = any([b.has_resistive for b in function.arguments.get_list()])
 
     scalingunits = {
       '1': '',
@@ -224,9 +250,13 @@ class dependency_visitor:
         number.dependency = 'constant'
         scalingunit = self.scalingunits[number.scalingunit]
         number.value = number.lexval().string + scalingunit
+        number.has_ddt = False
+        number.has_resistive = True
 
     def visit_string(self, string: adms_loader.string):
         string.dependency = 'constant'
+        string.has_ddt = False
+        string.has_resistive = True
 
     def visit_callfunction(self, callfunction: adms_loader.callfunction):
         raise RuntimeError('callfunction not implemented')
@@ -257,6 +287,8 @@ class dependency_visitor:
         contribution.rhs().visit(self)
         contribution.probes.extend(contribution.rhs().probes, True)
         contribution.nodes.extend(contribution.rhs().nodes, True)
+        contribution.has_ddt = contribution.rhs().has_ddt
+        contribution.has_resistive = contribution.rhs().has_resistive
         # self.globalcontribution = None
         # contribution.lhs().probe
         # for probe in contribution.rhs().probe:
@@ -285,6 +317,15 @@ class dependency_visitor:
             vp.dependency = rhs.dependency
         else:
             vp.dependency = 'constant'
+
+        if not hasattr(lhs, 'has_ddt') or not lhs.has_ddt:
+            lhs.has_ddt = rhs.has_ddt
+        if not hasattr(lhs, 'has_resistive') or not lhs.has_resistive:
+            lhs.has_resistive = rhs.has_resistive
+        if not hasattr(vp, 'has_ddt') or not vp.has_ddt:
+            vp.has_ddt = rhs.has_ddt
+        if not hasattr(vp, 'has_resistive') or not vp.has_resistive:
+            vp.has_resistive = rhs.has_resistive
 
         # this specific variableprototype is using these probes
         # this specific variable is using these probes

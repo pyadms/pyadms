@@ -1,1 +1,2 @@
-adms_tests(psp102.va psp102_nqs.va)
+adms_tests(psp102.va)
+adms_tests(psp102_nqs.va)

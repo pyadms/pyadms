@@ -35,3 +35,6 @@ for i in module.analog().code().item.get_list():
         else:
             nprobe = len(list(i.probes.get_list()))
             print(f'"{i.datatypename}" has {nprobe} probes')
+        for j in ('has_resistive', 'has_ddt', 'has_noise'):
+            p = getattr(i, j)
+            print(f'"{j}={p}"')

@@ -132,7 +132,7 @@ class analog(admst):
 
 class assignment(admst):
 
-    __slots__ = ('module', 'lhs', 'rhs', 'lexval', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('module', 'lhs', 'rhs', 'lexval', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -144,7 +144,7 @@ class assignment(admst):
 
 class block(admst):
 
-    __slots__ = ('module', 'lexval', 'block', 'item', 'name', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('module', 'lexval', 'block', 'item', 'name', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -192,7 +192,7 @@ class branchalias(admst):
 
 class conditional(admst):
 
-    __slots__ = ('module', 'If', 'Then', 'Else', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('module', 'If', 'Then', 'Else', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -208,7 +208,7 @@ class conditional(admst):
 
 class contribution(admst):
 
-    __slots__ = ('module', 'lhs', 'rhs', 'branchalias', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('module', 'lhs', 'rhs', 'branchalias', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -232,7 +232,7 @@ class discipline(admst):
 
 class expression(admst):
 
-    __slots__ = ('tree', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive',)
+    __slots__ = ('tree', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise',)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -244,7 +244,7 @@ class expression(admst):
 
 class function(admst):
 
-    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('unique_id', 'lexval', 'definition', 'arguments', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -271,7 +271,7 @@ class lexval(admst):
 
 class mapply_binary(admst):
 
-    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -283,7 +283,7 @@ class mapply_binary(admst):
 
 class mapply_ternary(admst):
 
-    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -295,7 +295,7 @@ class mapply_ternary(admst):
 
 class mapply_unary(admst):
 
-    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('args', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -438,7 +438,7 @@ class nodealias(admst):
 
 class number(admst):
 
-    __slots__ = ('value', 'scalingunit', 'cast', 'lexval', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('value', 'scalingunit', 'cast', 'lexval', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -450,7 +450,7 @@ class number(admst):
 
 class probe(admst):
 
-    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('module', 'branch', 'nature', 'discipline', 'grounded', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -492,7 +492,7 @@ class source(admst):
 
 class string(admst):
 
-    __slots__ = ('value', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('value', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -503,7 +503,7 @@ class string(admst):
 
 class variable(admst):
 
-    __slots__ = ('variableprototype', 'variable', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('variableprototype', 'variable', 'name', 'dependency', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -514,7 +514,7 @@ class variable(admst):
 
 class variableprototype(admst):
 
-    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'input', 'output', 'type', 'probes', 'nodes', 'has_ddt', 'has_resistive')
+    __slots__ = ('instance', 'range', 'default', 'parametertype', 'setin', 'name', 'lexval', 'dependency', 'input', 'output', 'type', 'probes', 'nodes', 'has_ddt', 'has_resistive', 'has_noise')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

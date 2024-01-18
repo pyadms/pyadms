@@ -11,12 +11,7 @@ This product includes software developed at DEVSIM LLC (https://devsim.com).
 admsJSON
 --------
 
-Derivative work of ADMS and subject to the LGPL 2.1.
-
-ADMS
-----
-
-Files in the archive/xmlversion directory were forked from the ADMS project, and subject to the LGPL 2.1.
+Derivative work of ADMS project and subject to the LGPL 2.1.
 
 constants.vams
 --------------
@@ -52,3 +47,9 @@ Third Party Documentation
 -------------------------
 
 Files in archive/docs are copyrighted according to the notices in the files.
+
+Third Party Verilog-A Files
+---------------------------
+
+The Verilog-A files in the `test` folder are subject to the license terms of the original authors.
+

@@ -21,20 +21,24 @@ model_parameters = [v for v in module.variableprototype.get_list() if (v.type ==
 # parameters
 print("\nMODEL PARAMETERS")
 for p in module.model_parameters.get_list():
-        print(f'{p.name}')
+    print(f'{p.name}')
 
 instance_parameters = [v for v in module.variableprototype.get_list() if v.type == 'instance']
 print("\nINSTANCE PARAMETERS")
 for p in module.instance_parameters.get_list():
-        print(f'{p.name}')
+    print(f'{p.name}')
 
 for i in module.analog().code().item.get_list():
-        if i.datatypename == 'block':
-            nprobe = len(list(i.probes.get_list()))
-            print(f'block "{i.name}" has {nprobe} probes')
-        else:
-            nprobe = len(list(i.probes.get_list()))
-            print(f'"{i.datatypename}" has {nprobe} probes')
-        for j in ('has_resistive', 'has_ddt', 'has_noise'):
-            p = getattr(i, j)
-            print(f'"{j}={p}"')
+    if i.datatypename == 'block':
+        nprobe = len(list(i.probes.get_list()))
+        print(f'block "{i.name}" has {nprobe} probes')
+    else:
+        nprobe = len(list(i.probes.get_list()))
+        print(f'"{i.datatypename}" has {nprobe} probes')
+    for j in ('has_resistive', 'has_ddt', 'has_noise'):
+        p = getattr(i, j)
+        print(f'"{j}={p}"')
+
+print("\nANALOG FUNCTIONS")
+for i in module.analogfunction.get_list():
+    print(f'analog function {i.name}')

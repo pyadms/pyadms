@@ -49,7 +49,7 @@ class dependency_visitor:
             probe.grounded = probe.branch().grounded
 
         for analogfunction in module.analogfunction.get_list():
-            analogfunction.tree().visit(self)
+            analogfunction.visit(self)
 
         module.analog().code().visit(self)
 
@@ -61,6 +61,11 @@ class dependency_visitor:
                 module.model_parameters.append(v, False)
             elif v.type == 'instance':
                 module.instance_parameters.append(v, False)
+
+    def visit_analogfunction(self, analogfunction: adms_loader.analogfunction):
+        tree = analogfunction.tree()
+        tree.visit(self)
+        analogfunction.name = analogfunction.lexval().string
 
 
     def visit_expression(self, expression: adms_loader.expression):

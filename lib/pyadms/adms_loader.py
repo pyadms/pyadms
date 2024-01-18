@@ -378,11 +378,12 @@ class module(admst):
 
 class analogfunction(admst):
 
-    __slots__ = ('name', 'tree')
+    __slots__ = ('name', 'lexval', 'tree')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.move_up_reference('tree', True)
+        self.move_up_reference('lexval', True)
 
 class callfunction(admst):
 

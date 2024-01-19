@@ -42,3 +42,9 @@ for i in module.analog().code().item.get_list():
 print("\nANALOG FUNCTIONS")
 for i in module.analogfunction.get_list():
     print(f'analog function {i.name}')
+
+print("\nCONTRIBUTIONS")
+for i in module.contribution.get_list():
+    print(i.uid)
+    for j in i.nodes.get_list():
+        print(j.uid)

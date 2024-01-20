@@ -212,6 +212,10 @@ class dependency_visitor:
 
     def visit_function(self, function: adms_loader.function):
         function.name = function.lexval().string
+
+        if function.name in ('idt', '$idt'):
+            raise RuntimeError(f'{function.name} is not currently supported')
+
         args = list(function.arguments.get_list())
         for arg in args:
             arg.visit(self)
@@ -223,7 +227,8 @@ class dependency_visitor:
             function.dependency = 'constant'
         else:
             function.dependency = 'nonlinear'
-        if function.name == 'ddt':
+
+        if function.name in ('ddt', '$ddt'):
             if any([b.has_ddt for b in function.arguments.get_list()]):
                 raise RuntimeError('cannot do ddt of ddt')
             function.has_ddt = True
@@ -234,7 +239,6 @@ class dependency_visitor:
             for i in 'has_ddt', 'has_resistive', 'has_noise':
                 setattr(function, i, any([getattr(b, i) for b in function.arguments.get_list()]))
             function.has_ddx = True
-
         elif function.name in ('white_noise', 'flicker_noise'):
             if any([(b.has_noise or b.has_ddt or b.has_ddx) for b in function.arguments.get_list()]):
                 raise RuntimeError('cannot do noise or ddt or ddx of noise')

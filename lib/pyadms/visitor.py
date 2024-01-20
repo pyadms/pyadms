@@ -76,9 +76,8 @@ class dependency_visitor:
         expression.dependency = tree.dependency
         expression.probes.extend(tree.probes, True)
         expression.nodes.extend(tree.nodes, True)
-        expression.has_ddt = tree.has_ddt
-        expression.has_resistive = tree.has_resistive
-        expression.has_noise = tree.has_noise
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            setattr(expression, i, getattr(expression.tree(), i))
 
     def visit_probe(self, probe: adms_loader.probe):
         probe.dependency = 'linear'
@@ -86,6 +85,7 @@ class dependency_visitor:
         probe.has_ddt = False
         probe.has_resistive = True
         probe.has_noise = False
+        probe.has_ddx = False
 
     def visit_array(self, array: adms_loader.array):
         pass
@@ -98,10 +98,9 @@ class dependency_visitor:
         variable.dependency = vp.dependency
         variable.probes.extend(vp.probes, True)
         variable.nodes.extend(vp.nodes, True)
-        # TODO: is this really true, unless it is in the same block
-        variable.has_ddt = vp.has_ddt
-        variable.has_resistive = vp.has_resistive
-        variable.has_noise = vp.has_noise
+
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            setattr(variable, i, getattr(vp, i))
 
         if self.globalpartition:
             # print(f'variable "{vp.name}" is set in "{self.globalpartition.name}"')
@@ -134,12 +133,10 @@ class dependency_visitor:
                     raise RuntimeError(f'not valid ask {ask}')
         if hasattr(prototype, 'default') and prototype.default is not None:
             prototype.default().visit(self)
-        if not hasattr(prototype, 'has_ddt'):
-            prototype.has_ddt = False
-        if not hasattr(prototype, 'has_resistive'):
-            prototype.has_resistive = False
-        if not hasattr(prototype, 'has_noise'):
-            prototype.has_noise = False
+
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            if not hasattr(prototype, i):
+                setattr(prototype, i, False)
 
     def visit_mapply_unary(self, unary: adms_loader.mapply_unary):
         args = list(unary.args.get_list())
@@ -151,9 +148,9 @@ class dependency_visitor:
             unary.dependency = args[0].dependency
         else:
             raise RuntimeError(f"unexpected mapply_unary function {name}")
-        unary.has_ddt = args[0].has_ddt
-        unary.has_resistive = args[0].has_resistive
-        unary.has_noise = args[0].has_noise
+
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            setattr(unary, i, getattr(args[0], i))
 
     def visit_mapply_binary(self, binary: adms_loader.mapply_binary):
         args = list(binary.args.get_list())
@@ -184,14 +181,12 @@ class dependency_visitor:
                 binary.dependency = deps[0]
             else:
                 binary.dependency = 'nonlinear'
-        elif name in ('gt', 'gt_equ', 'lt', 'lt_equ',):
+        elif name in ('gt', 'gt_equ', 'lt', 'lt_equ'):
             binary.dependency = 'constant'
         else:
             raise RuntimeError(f"unexpected mapply_binary function {name}")
-        binary.has_ddt = any([b.has_ddt for b in binary.args.get_list()])
-        binary.has_resistive = any([b.has_resistive for b in binary.args.get_list()])
-        binary.has_noise = any([b.has_noise for b in binary.args.get_list()])
-
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            setattr(binary, i, any([getattr(b, i) for b in binary.args.get_list()]))
 
     def visit_mapply_ternary(self, ternary: adms_loader.mapply_ternary):
         args = list(ternary.args.get_list())
@@ -211,9 +206,9 @@ class dependency_visitor:
                 ternary.dependency = 'constant'
         else:
             raise RuntimeError(f"unexpected mapply_ternary function {name}")
-        ternary.has_ddt = any([b.has_ddt for b in ternary.args.get_list()])
-        ternary.has_resistive = any([b.has_resistive for b in ternary.args.get_list()])
-        ternary.has_noise = any([b.has_noise for b in ternary.args.get_list()])
+
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            setattr(ternary, i, any([getattr(b, i) for b in ternary.args.get_list()]))
 
     def visit_function(self, function: adms_loader.function):
         function.name = function.lexval().string
@@ -234,17 +229,22 @@ class dependency_visitor:
             function.has_ddt = True
             function.has_resistive = False
             function.has_noise = False
+            function.has_ddx = any([b.has_ddx for b in function.arguments.get_list()])
+        elif function.name == 'ddx':
+            for i in 'has_ddt', 'has_resistive', 'has_noise':
+                setattr(function, i, any([getattr(b, i) for b in function.arguments.get_list()]))
+            function.has_ddx = True
+
         elif function.name in ('white_noise', 'flicker_noise'):
-            if any([(b.has_noise or b.has_ddt) for b in function.arguments.get_list()]):
-                raise RuntimeError('cannot do noise or ddt of noise')
+            if any([(b.has_noise or b.has_ddt or b.has_ddx) for b in function.arguments.get_list()]):
+                raise RuntimeError('cannot do noise or ddt or ddx of noise')
             function.has_ddt = False
             function.has_resistive = False
             function.has_noise = True
+            function.has_ddx = False
         else:
-            # TODO: make sure that has_ddt is not somehow nested
-            function.has_ddt = any([b.has_ddt for b in function.arguments.get_list()])
-            function.has_resistive = any([b.has_resistive for b in function.arguments.get_list()])
-            function.has_noise = any([b.has_noise for b in function.arguments.get_list()])
+            for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+                setattr(function, i, any([getattr(b, i) for b in function.arguments.get_list()]))
 
     scalingunits = {
       '1': '',
@@ -274,12 +274,14 @@ class dependency_visitor:
         number.has_ddt = False
         number.has_resistive = True
         number.has_noise = False
+        number.has_ddx = False
 
     def visit_string(self, string: adms_loader.string):
         string.dependency = 'constant'
         string.has_ddt = False
         string.has_resistive = True
         string.has_noise = False
+        string.has_ddx = False
 
     def visit_callfunction(self, callfunction: adms_loader.callfunction):
         raise RuntimeError('callfunction not implemented')
@@ -300,31 +302,26 @@ class dependency_visitor:
         conditional.Then().visit(self)
         if conditional.Else is not None:
             conditional.Else().visit(self)
-        for i in (conditional.If, conditional.Then, conditional.Else):
+        for i in conditional.If, conditional.Then, conditional.Else:
             if i is not None:
                 conditional.probes.extend(i().probes, True)
                 conditional.nodes.extend(i().nodes, True)
-        conditional.has_ddt = False
-        conditional.has_resistive = False
-        conditional.has_noise = False
-        for i in (conditional.Then, conditional.Else):
-            if i is None:
-                continue
-            if i().has_ddt:
-                conditional.has_ddt = True
-            if i().has_resistive:
-                conditional.has_resistive = True
-            if i().has_noise:
-                conditional.has_noise = True
+
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddt', 'has_ddx':
+            setattr(conditional, i, False)
+            for j in conditional.Then, conditional.Else:
+                if j is None:
+                    continue
+                setattr(conditional, i, True)
 
     def visit_contribution(self, contribution: adms_loader.contribution):
         # self.globalcontribution = contribution
         contribution.rhs().visit(self)
         contribution.probes.extend(contribution.rhs().probes, True)
         contribution.nodes.extend(contribution.rhs().nodes, True)
-        contribution.has_ddt = contribution.rhs().has_ddt
-        contribution.has_resistive = contribution.rhs().has_resistive
-        contribution.has_noise = contribution.rhs().has_noise
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddt', 'has_ddx':
+            setattr(contribution, i, getattr(contribution.rhs(), i))
+
         # self.globalcontribution = None
         # contribution.lhs().probe
         # for probe in contribution.rhs().probe:
@@ -355,7 +352,7 @@ class dependency_visitor:
             vp.dependency = 'constant'
 
         for i in lhs, vp, assignment:
-            for j in ('has_ddt', 'has_resistive', 'has_noise'):
+            for j in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
                 if hasattr(i, j) and (getattr(i, j) == True):
                     continue
                 setattr(i, j, getattr(rhs, j))
@@ -363,7 +360,7 @@ class dependency_visitor:
         # this specific variableprototype is using these probes
         # this specific variable is using these probes
         # this assignment statement has these probes
-        for i in (vp, lhs, assignment):
+        for i in vp, lhs, assignment:
             i.probes.extend(rhs.probes, True)
             i.nodes.extend(rhs.nodes, True)
         lhs.visit(self)
@@ -385,9 +382,8 @@ class dependency_visitor:
             block.nodes.extend(item.nodes, True)
 
         self.globalpartition = None
-        block.has_ddt = any([b.has_ddt for b in block.item.get_list()])
-        block.has_resistive = any([b.has_resistive for b in block.item.get_list()])
-        block.has_noise = any([b.has_noise for b in block.item.get_list()])
+        for i in 'has_ddt', 'has_resistive', 'has_noise', 'has_ddx':
+            setattr(block, i, any([getattr(b, i) for b in block.item.get_list()]))
 
     def visit_nilled(self, nilled: adms_loader.nilled):
         pass

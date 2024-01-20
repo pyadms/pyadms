@@ -35,7 +35,7 @@ for i in module.analog().code().item.get_list():
     else:
         nprobe = len(list(i.probes.get_list()))
         print(f'"{i.datatypename}" has {nprobe} probes')
-    for j in ('has_resistive', 'has_ddt', 'has_noise'):
+    for j in ('has_resistive', 'has_ddt', 'has_noise', 'has_ddx'):
         p = getattr(i, j)
         print(f'"{j}={p}"')
 
@@ -46,5 +46,8 @@ for i in module.analogfunction.get_list():
 print("\nCONTRIBUTIONS")
 for i in module.contribution.get_list():
     print(i.uid)
+    for j in ('has_resistive', 'has_ddt', 'has_noise', 'has_ddx'):
+        p = getattr(i, j)
+        print(f'"{j}={p}"')
     for j in i.nodes.get_list():
         print(j.uid)

@@ -1,0 +1,7 @@
+idea
+
+visitor which keeps symbolic tokens with reference count
+if reference count is 1, then it is unique and left inline
+if reference count is >1, then it is reused
+
+handle constant folding and zero derivatives

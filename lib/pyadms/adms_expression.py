@@ -68,4 +68,5 @@ class numeric_constant(expression_base):
 # d_arg1, d_arg2, d_arg3 ... are derivatives with respect to each positional argument
 # use the chain rule to resolve derivatives with respect to arbitrary parameter
 # use None in position for which no derivative is exists
-
+# maybe: make it possible to substitute an expression for derivatives instead of function
+# maybe: use symdiff to generate expression functions

@@ -8,13 +8,12 @@ class expression_base:
     def __init__(self, **kwargs):
         pass
 
-
 class add(expression_base):
-    __slots__ = ('args')
+    __slots__ = ('args',)
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args):
         super().__init__(**kwargs)
-        self.args = kwargs['args']
+        self.args = args[:]
 
     def get_expression(self):
         e = [a.get_expression() for a in self.args]
@@ -29,9 +28,9 @@ class add(expression_base):
 class multiply(expression_base):
     __slots__ = ('args')
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args):
         super().__init__(**kwargs)
-        self.args = kwargs['args']
+        self.args = args
 
     def get_expression(self):
         t = [a.get_expression() for a in self.args]
@@ -50,4 +49,23 @@ class multiply(expression_base):
             le[i] = ld
             o.append(' * '.join(le))
         return ' * '.join(o)
+
+class numeric_constant(expression_base):
+    __slots = ('numeric_value', 'string_value')
+
+    def __init__(self, numeric_value, string_value)
+        self.numeric_value = numeric_value
+        self.string_value = string_value
+
+    def get_expression(self):
+        return self.string_value
+
+    def get_derivative(self, arg):
+        return None
+
+
+# implement derivative of generic function call here
+# d_arg1, d_arg2, d_arg3 ... are derivatives with respect to each positional argument
+# use the chain rule to resolve derivatives with respect to arbitrary parameter
+# use None in position for which no derivative is exists
 

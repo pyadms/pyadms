@@ -28,5 +28,8 @@ setup(
             'pyadms' : ['./admsJSON',],
         },
         distclass=BinaryDistribution,
+        data_files = [
+            ('pyadms_data/include', ['include/disciplines.vams','include/constants.vams',])
+        ]
         #include_package_data=True,
     )

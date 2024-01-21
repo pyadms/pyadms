@@ -3,5 +3,10 @@ import os
 import re
 
 setup(
-      packages=['pyadms',],
+        packages=['pyadms',],
+        entry_points = {
+            'console_scripts' : [
+                'nstart = pyadms.nstart:run'
+            ],
+        }
     )

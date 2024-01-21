@@ -20,8 +20,11 @@ setup(
                 'admsJSON = pyadms.admsJSON:run',
             ],
         },
-        package_data={
-            'pyadms' : ['../admsJSON',],
+        package_dir = {
+            '' : 'pyadms',
         },
+        #package_data={
+        #    'pyadms' : ['./admsJSON',],
+        #},
         distclass=BinaryDistribution,
     )

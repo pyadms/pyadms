@@ -4,7 +4,15 @@ language: cpp
 matrix:
   include:
   - os: osx
+    osx_image: xcode14.2
   - os: linux
+    dist: focal
+    services: docker
+    arch: amd64
+  - os: linux
+    dist: focal
+    services: docker
+    arch: arm64
 
 #before_install:
 

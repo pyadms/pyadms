@@ -4,6 +4,7 @@ language: cpp
 matrix:
   include:
   - os: osx
+    # run pip wheel twice, 1 for each platform
     osx_image: xcode14.2
   - os: linux
     dist: focal

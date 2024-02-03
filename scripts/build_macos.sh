@@ -10,5 +10,7 @@ source venv/bin/activate
 pip install wheel setuptools
 for i in arm64 x86_64; do
 j=$(python3 scripts/fix_macos_arch.py ${i});
+echo "plat-name ${j}"
 python3 setup.py bdist_wheel --plat-name ${j};
 done
+mv dist/*.whl .

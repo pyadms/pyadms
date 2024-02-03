@@ -89,7 +89,7 @@ build_script:
 #---------------------------------#
 
 artifacts:
-  - path: "*.whl"
+  - path: "%APPVEYOR_BUILD_FOLDER%/*.whl"
 
 #---------------------------------#
 #     deployment configuration    #

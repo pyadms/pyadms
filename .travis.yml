@@ -4,7 +4,6 @@ language: cpp
 matrix:
   include:
   - os: osx
-    # run pip wheel twice, 1 for each platform
     osx_image: xcode14.2
   - os: linux
     dist: focal
@@ -15,18 +14,30 @@ matrix:
     services: docker
     arch: arm64
 
+addons:
+  homebrew:
+    update: false
+
+#https://github.com/travis-ci/travis-ci/issues/6893
+if: tag IS present
+
+#https://docs.travis-ci.com/user/customizing-the-build/#git-clone-depth
+git:
+  depth: 3
+  submodules: false
+
 #before_install:
 
 #install:
 
 
 script:
-  - |
-    mkdir -p build;
-    cd build;
-    cmake -DCMAKE_BUILD_TYPE=RELEASE ..;
-    cmake --build . -- -j 2;
-    ctest;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      ./scripts/build_docker_manylinux2014.sh ${TRAVIS_TAG};
+    fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      ./scripts/build_macos.sh $COMPILER "${TRAVIS_TAG}";
+    fi
 
 #before_deploy:
 

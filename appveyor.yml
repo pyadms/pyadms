@@ -77,7 +77,6 @@ after_build:
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - scripts\build_vs.bat
-  - cd %APPVEYOR_BUILD_FOLDER%
 
 # to run your custom scripts instead of automatic tests
 # test_script:

@@ -8,6 +8,8 @@ mkdir -p build_macos
 # need to create pip package for each platform
 export PYTHON3_BIN=python3.7
 export PIP_BIN=/opt/python/cp37-cp37m/bin/pip
-${PIP_BIN} install wheel auditwheel
+${PIP_BIN} install wheel auditwheel setuptools
 ${PIP_BIN} wheel .
 for i in *.whl; do auditwheel repair ${i}; done
+rm *.whl
+mv wheelhouse/*.whl .

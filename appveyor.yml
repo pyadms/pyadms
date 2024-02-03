@@ -54,7 +54,7 @@ matrix:
 # TODO: best place for bison/flex
 install:
   - appveyor DownloadFile https://www.cygwin.com/setup-x86_64.exe
-  - setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P bison -P flex
+  - setup-x86_64.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P bison -P flex
 
 # to add several platforms to build matrix:
 platform:

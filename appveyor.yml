@@ -18,6 +18,40 @@ version: 1.{build}
 # Operating system (build VM template)
 image: Visual Studio 2022
 
+branches:
+  except:
+    - main
+
+#branches:
+# whitelist
+#only:
+#  - main
+
+# Do not build on tags (GitHub only)
+#skip_tags: true
+skip_non_tags: true
+
+# Skipping commits with particular message or from user
+#skip_commits:
+#  message: /Created.*\.(png|jpg|jpeg|bmp|gif)/       # Regex for matching commit message
+#  author: John        # Commit author's username, name, email or regexp maching one of these.
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Operating system (build VM template)
+image: Visual Studio 2022
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - git config --global core.autocrlf input
+
+# clone directory
+clone_folder: c:\projects\pyadms
+
+
 init:
   - git config --global core.autocrlf input
 
@@ -52,14 +86,36 @@ after_build:
 
 # to run your custom scripts instead of automatic MSBuild
 build_script:
-  - mkdir build
-  - cd build
-  - cmake -G "Visual Studio 17 2022" -A "x64" ..
-  - cmake --build . --config Release -- /m /nologo /verbosity:minimal
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - scripts\build_vs.bat
 
 # to run your custom scripts instead of automatic tests
 # test_script:
 #   - cd %APPVEYOR_BUILD_FOLDER%\build
 #   - SET CTEST_OUTPUT_ON_FAILURE=1
 #   - ctest -C Release
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+  - path: *.whl
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+deploy:
+  # Deploy to GitHub Releases
+  - provider: GitHub
+    auth_token:
+      secure: 2izP48RTHHbIC85OpS2qrBrddvOhGl0cwdacXO+rxdFgfKudYpwDtpuzoIliKdBm
+    #artifact: dist\*.zip
+    draft: true
+    prerelease: false
+    force_update: true
+    on:
+      appveyor_repo_tag: true      # deploy on tag push only
+      #branch: main                # release from main branch only
 

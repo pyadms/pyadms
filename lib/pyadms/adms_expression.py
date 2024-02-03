@@ -5,13 +5,13 @@
 # collect tokens into base
 class expression_base:
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         pass
 
 class add(expression_base):
     __slots__ = ('args',)
 
-    def __init__(self, *args):
+    def __init__(self, *args, **kwargs):
         super().__init__(**kwargs)
         self.args = args[:]
 

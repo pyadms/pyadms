@@ -36,13 +36,6 @@ skip_non_tags: true
 #  message: /Created.*\.(png|jpg|jpeg|bmp|gif)/       # Regex for matching commit message
 #  author: John        # Commit author's username, name, email or regexp maching one of these.
 
-#---------------------------------#
-#    environment configuration    #
-#---------------------------------#
-
-# Operating system (build VM template)
-image: Visual Studio 2022
-
 # scripts that are called at very beginning, before repo cloning
 init:
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -50,10 +43,6 @@ init:
 
 # clone directory
 clone_folder: c:\projects\pyadms
-
-
-init:
-  - git config --global core.autocrlf input
 
 matrix:
   allow_failures:

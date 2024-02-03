@@ -14,6 +14,7 @@ Original code copyright the original authors.
 #include <algorithm>
 #include <iterator>
 #include <limits>
+#include <functional>
 
 #define ADMS_PATH_SEPARATOR "/"
 #define PACKAGE_NAME "adms"

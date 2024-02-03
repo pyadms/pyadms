@@ -9,9 +9,6 @@ class BinaryDistribution(dist.Distribution):
     """Distribution which always forces a binary package with platform name"""
     def has_ext_modules(self):
         return True
-    def is_pure(self):
-        raise RuntimeError("HERE")
-        return False
 
 setup(
         packages=['pyadms',],
@@ -25,7 +22,7 @@ setup(
             '' : 'lib',
         },
         package_data={
-            'pyadms' : ['./admsJSON',],
+            'pyadms' : ['./admsJSON', './admsJSON.exe'],
         },
         distclass=BinaryDistribution,
         data_files = [

@@ -89,7 +89,7 @@ build_script:
 #---------------------------------#
 
 artifacts:
-  - path: "*.whl"
+  - path: "dist/*.whl"
 
 #---------------------------------#
 #     deployment configuration    #

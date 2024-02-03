@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 set -u
+yum install -y bison flex
 mkdir -p build_macos
 # automatically copied to lib directory
 (cd build_macos && cmake -DCMAKE_BUILD_TYPE=RELEASE .. && make -j4)

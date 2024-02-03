@@ -33,10 +33,10 @@ git:
 
 script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      ./scripts/build_docker_manylinux2014.sh;
+      bash ./scripts/build_docker_manylinux2014.sh;
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      ./scripts/build_macos.sh;
+      bash ./scripts/build_macos.sh;
     fi
 
 #before_deploy:

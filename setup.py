@@ -22,7 +22,7 @@ setup(
             '' : 'lib',
         },
         package_data={
-            'pyadms' : ['./admsJSON',],
+            'pyadms' : ['./admsJSON', './admsJSON.exe'],
         },
         distclass=BinaryDistribution,
         data_files = [

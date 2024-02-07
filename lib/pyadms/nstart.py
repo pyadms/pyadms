@@ -1,6 +1,7 @@
 import pyadms
 from pyadms import adms_loader
 from pyadms import adms_visitor
+from pyadms import adms_printer
 import sys
 
 def run():
@@ -52,6 +53,11 @@ def run():
             print(f'"{j}={p}"')
         for j in i.nodes.get_list():
             print(j.uid)
+
+
+    print('\n\nBEGIN PRINT\n')
+    printer = adms_printer.printer()
+    module.visit(printer)
 
 if __name__ == '__main__':
     run()

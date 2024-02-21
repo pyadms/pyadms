@@ -28,3 +28,16 @@ class printer:
             if not v.input:
                 print(f'{v.name}')
 
+        # Analog functions
+        for analogfunction in module.analogfunction.get_list():
+            analogfunction.visit(self)
+
+        # Block Items
+        print(f'\nVISIT MODULE CODE')
+        module.analog().code().visit(self)
+
+    def visit_block(self, block):
+        print(f'\nVISIT BLOCK "{block.name}"')
+
+        for item in block.item.get_list():
+            print(item.datatypename)

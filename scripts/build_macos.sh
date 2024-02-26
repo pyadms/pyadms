@@ -9,7 +9,7 @@ python3 -mvenv venv
 source venv/bin/activate
 pip install wheel setuptools
 # handle case where platforms still separate
-j=$(python3 scripts/fix_macos_arch.py universal2;
+j=$(python3 scripts/fix_macos_arch.py universal2)
 echo "plat-name ${j}"
 if [[ -n "$j" ]]; then
 python3 setup.py bdist_wheel --plat-name ${j};
